@@ -33,22 +33,21 @@
 		<div id="wrapper">
 			<div class="animate form">
 				<section class="login_content">
-			 		<form>
-						<h1>Crear cuenta</h1>
+			 		<form method="post" action="{{url('register')}}">
+			 		{{csrf_field()}}
+						<h1>Registro</h1>
 						<div>
-				  			<input type="text" class="form-control" placeholder="Nombre" required="" />
+				  			<input type="text" class="form-control" placeholder="Nombre de Usuario" required="" name="name" />
 						</div>
 						<div>
-				  			<input type="text" class="form-control" placeholder="Apellido" required="" />
+				  			<input type="email" class="form-control" placeholder="correo" required="" name="email"/>
 						</div>
 						<div>
-				  			<input type="email" class="form-control" placeholder="Correo" required="" />
+				  			<input type="password" class="form-control" placeholder="Contraseña" required="" name="password" />
 						</div>
 						<div>
-				  			<input type="password" class="form-control" placeholder="Contraseña" required="" />
-						</div>
-						<div>
-				  			<a class="btn btn-default submit" href="index.html">Registrar</a>
+							<button type="submit" class="btn btn-default submit" >Registrar</button>
+				  	
 						</div>
 						<div class="clearfix"></div>
 

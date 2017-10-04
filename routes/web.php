@@ -15,17 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login',	function()
+Route::get('login',function()
 {
 	return	view('auth.login');
 });
 
-Route::get('/register',	function()
-{
-	return	view('auth.register');
-});
-
-// Route User
+Route::get('register', 'Auth\RegisterController@index');
+Route::post('register', 'Auth\RegisterController@create');
 
 Route::get('/home',	function()
 {
@@ -38,3 +34,5 @@ Route::get('/home',	function()
 {
 	return	view('admin.home');
 });
+
+Route::resource('profiles','ProfileController');
