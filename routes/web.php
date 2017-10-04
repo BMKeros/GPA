@@ -14,3 +14,27 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/login',	function()
+{
+	return	view('auth.login');
+});
+
+Route::get('/register',	function()
+{
+	return	view('auth.register');
+});
+
+// Route User
+
+Route::get('/home',	function()
+{
+	return	view('user.home');
+});
+
+// Route Admin
+
+Route::get('/home',	function()
+{
+	return	view('admin.home');
+});
