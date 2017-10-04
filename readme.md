@@ -8,3 +8,8 @@
 
 
 #### GPA es un un sistema que se enfocara en la gestion de los productos alimenticios, mediante una plataforma web amigable. 
+
+
+-- Configuracion del entorno
+
+1) Renombrar el archivo .env.example por .env y reemplazar las variables de configuracion de base de datos y otros
