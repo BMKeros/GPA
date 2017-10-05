@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
+@section('title')
+Login
+@stop
 @include('layouts.head')
 
 <body style="background:#F7F7F7;">
