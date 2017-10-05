@@ -6,7 +6,6 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -21,7 +20,7 @@ class RegisterController extends Controller
     |
     */
 
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -38,7 +37,14 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected function redirectTo()
+    {
+        if (\Auth::user()->role->id == 1) {
+            return '/admin';
+        } else {
+            return '/user';
+        }
+    }
 
     /**
      * Create a new controller instance.
@@ -53,7 +59,7 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -65,25 +71,24 @@ class RegisterController extends Controller
         ]);
     }
 
-     /**
-    * Handle a registration request for the application.
-    *
-    * @param  array  $data
-    * @return App\User;
-    */
-    protected function create(array  $data)
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  array $data
+     * @return App\User;
+     */
+    protected function create(array $data)
     {
-       
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'rol_id'=> 2,
+            'role_id' => 2,
         ]);
 
 
     }
-
 
 
 }

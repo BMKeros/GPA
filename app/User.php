@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'rol_id'
+        'name', 'email', 'password', 'role_id'
     ];
 
     /**
@@ -28,8 +28,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function rol()
+    public function role()
     {
-        return $this->belongsTo('App\Rol');
+        return $this->belongsTo('App\Role');
     }
 }
