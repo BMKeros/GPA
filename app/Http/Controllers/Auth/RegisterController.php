@@ -40,9 +40,9 @@ class RegisterController extends Controller
     protected function redirectTo()
     {
         if (\Auth::user()->role->id == 1) {
-            return '/admin';
+            return '/admin/dashboard';
         } else {
-            return '/user';
+            return '/user/dashboard';
         }
     }
 
