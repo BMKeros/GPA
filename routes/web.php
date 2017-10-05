@@ -15,22 +15,16 @@ Route::get('/', function () {
     return redirect('login');
 });
 
-Route::get('login', function () {
-    return view('auth.login');
-});
-
 // Route User
-Route::get('/user', function () {
-    return view('user.home');
-});
+Route::get('/user/dashboard', function () {
+    return view('user.dashboard');
+})->name('user.dashboard');
 
 // Route Admin
-Route::get('/admin', function () {
-    return view('admin.home');
-});
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard');
+})->name('admin.dashboard');
 
 Route::resource('profiles', 'ProfileController');
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
