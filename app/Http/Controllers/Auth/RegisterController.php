@@ -80,7 +80,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
-        return "RegistroExitoso";
+        return view('auth.login');
     }
 
 
