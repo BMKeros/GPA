@@ -15,31 +15,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('login',function()
-{
-	return	view('auth.login');
+Route::get('login', function () {
+    return view('auth.login');
 });
 
-//Route::get('register', 'Auth\RegisterController@index');
-//Route::post('register', 'Auth\RegisterController@create');
-
-Route::get('/home',	function()
-{
-	return	view('user.home');
+// Route User
+Route::get('/user', function () {
+    return view('user.home');
 });
 
 // Route Admin
-
-Route::get('/home',	function()
-{
-	return	view('admin.home');
+Route::get('/admin', function () {
+    return view('admin.home');
 });
 
-Route::resource('profiles','ProfileController');
-Auth::routes();
-
+Route::resource('profiles', 'ProfileController');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
