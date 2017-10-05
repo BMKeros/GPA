@@ -8,7 +8,7 @@
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>@yield('content', 'default') | Title</title>
+	<title>@yield('title', 'default')</title>
 
 	<link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet">
 
