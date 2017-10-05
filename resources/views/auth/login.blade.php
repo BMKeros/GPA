@@ -19,7 +19,7 @@
 						<input type="password" class="form-control" placeholder="Contraseña" required="" />
 					</div>
 					<div>
-						<a class="btn btn-default submit" href="index.html">Entar</a>
+						<a class="btn btn-default submit" href="index.html">Entrar</a>
 						<a class="reset_pass" href="#">Olvidaste tu contraseña</a>
 					</div>
 					<div class="clearfix"></div>
