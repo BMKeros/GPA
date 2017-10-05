@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 
 Route::get('login', function () {
@@ -30,6 +30,7 @@ Route::get('/admin', function () {
 });
 
 Route::resource('profiles', 'ProfileController');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
