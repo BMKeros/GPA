@@ -22,7 +22,7 @@
 
         <span>Bienvenido,</span>
 
-        <h2>Frijol</h2>
+        <h2>{{ Auth::user()->name }}</h2>
 
       </div>
 
@@ -35,7 +35,7 @@
 
       <div class="menu_section">
 
-        <h3>Socio</h3>
+        <h3>Rol -> {{ Auth::user()->rol->name }}</h3>
 
         <ul class="nav side-menu">
 
