@@ -22,7 +22,7 @@
 
                 <span>Bienvenido,</span>
 
-                <h2>{{ Auth::user()->name }}</h2>
+                <h2>{{ ucfirst(Auth::user()->name) }}</h2>
 
             </div>
 
