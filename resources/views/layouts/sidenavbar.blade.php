@@ -35,7 +35,7 @@
 
             <div class="menu_section">
 
-                <h3>Rol -> {{ Auth::user()->Role->name }}</h3>
+                <h3>Rol -> {{ Auth::user()->role->name }}</h3>
                 <ul class="nav side-menu">
 
                 @yield('menu')
