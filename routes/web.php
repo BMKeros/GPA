@@ -20,8 +20,8 @@ Route::get('login',function()
 	return	view('auth.login');
 });
 
-Route::get('register', 'Auth\RegisterController@index');
-Route::post('register', 'Auth\RegisterController@create');
+//Route::get('register', 'Auth\RegisterController@index');
+//Route::post('register', 'Auth\RegisterController@create');
 
 Route::get('/home',	function()
 {
@@ -36,3 +36,10 @@ Route::get('/home',	function()
 });
 
 Route::resource('profiles','ProfileController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

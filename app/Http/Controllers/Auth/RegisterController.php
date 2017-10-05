@@ -68,19 +68,18 @@ class RegisterController extends Controller
      /**
     * Handle a registration request for the application.
     *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
+    * @param  array  $data
+    * @return App\User;
     */
-    protected function create(Request $request)
+    protected function create(array  $data)
     {
-        $data = $request->all();
-        User::create([
+       
+        return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
 
-        return "RegistroExitoso";
     }
 
 
