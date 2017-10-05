@@ -9,5 +9,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
-   protected $fillable = ['user_id','primer_nombre','segundo_nombre','primer_apellido','segundo_apellido','cedula','numero_telefono','numero_celular','hobby'];
+   protected $fillable = ['user_id','first_name','second_name','first_surname','second_surname','cedula','number_phone','number_cellphone','hobby'];
 }

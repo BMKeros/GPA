@@ -22,27 +22,27 @@
           <p>{{ \Session::get('success') }}</p>
       </div><br />
       @endif
-      <form method="post" action="{{url('register')}}">
+      <form method="post" action="{{url('profiles')}}">
       {{csrf_field()}}
 
         <div class="row">
           <div class="col-md-4"></div>
           <div class="form-group col-md-4">
-            <label for="name">Nombres:</label>
-            <input type="text" class="form-control" name="primer_nombre">
-            <input type="text" class="form-control" name="segundo_nombre">
-            <input type="text" class="form-control" name="primer_apellido">
-            <input type="text" class="form-control" name="segundo_apellido">
+            <label for="name">:D:</label>
+            <input type="text" class="form-control" name="first_name" placeholder="primer nombre">
+            <input type="text" class="form-control" name="second_name" placeholder="segundo nombre">
+            <input type="text" class="form-control" name="first_surname" placeholder="primer apellido">
+            <input type="text" class="form-control" name="second_surname" placeholder="segundo apellido">
           </div>
         </div>
         <div class="row">
           <div class="col-md-4"></div>
             <div class="form-group col-md-4">
-              <label for="price">Otros:</label>
-              <input type="text" class="form-control" name="cedula">
-              <input type="text" class="form-control" name="numero_telefono">
-              <input type="text" class="form-control" name="numero_celular">
-              <input type="text" class="form-control" name="hobby">
+              <label for="price">:p:</label>
+              <input type="text" class="form-control" name="cedula" placeholder="cedula">
+              <input type="text" class="form-control" name="number_phone" placeholder="numero telefonico">
+              <input type="text" class="form-control" name="number_cellphone" placeholder="numero celular">
+              <input type="text" class="form-control" name="hobby" placeholder="hobby">
             </div>
           </div>
         </div>  

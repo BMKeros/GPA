@@ -37,18 +37,17 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        Profile::create([
-          'primer_nombre' => $data['primer_nombre'],
-          'segundo_nombre'=> $data['segundo_nombre'],
-          'primer_apellido' => $data['primer_apellido'],
-          'segundo_apellido'=> $data['segundo_apellido'],
-          'cedula'=> $data['cedula'],
-          'numero_telefono'=> $data['numero_telefono'],
-          'numero_celular'=> $data['numero_celular'],
-          'hobby'=> $data['hobby'],
+        return Profile::create([
+            'user_id' =>  \Auth::user()->id,
+            'first_name' => $data['first_name'],
+            'second_name'=> $data['second_name'],
+            'first_surname' => $data['first_surname'],
+            'second_surname'=> $data['second_surname'],
+            'cedula'=> $data['cedula'],
+            'number_phone'=> $data['number_phone'],
+            'number_cellphone'=> $data['number_cellphone'],
+            'hobby'=> $data['hobby'],
           ]);
-  
-        return back()->with('success', 'Profile has been added');
 
     }
 

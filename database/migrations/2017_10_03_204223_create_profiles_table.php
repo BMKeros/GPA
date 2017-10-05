@@ -17,13 +17,13 @@ class CreateProfilesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->increments('id');
-            $table->string('primer_nombre');
-            $table->string('segundo_nombre');
-            $table->string('primer_apellido');
-            $table->string('segundo_apellido');
+            $table->string('first_name');
+            $table->string('second_name');
+            $table->string('first_surname');
+            $table->string('second_surname');
             $table->string('cedula');
-            $table->string('numero_telefono');
-            $table->string('numero_celular');
+            $table->string('number_phone');
+            $table->string('number_cellphone');
             $table->string('hobby');
 
             $table->timestamps();
