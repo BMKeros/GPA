@@ -16,11 +16,11 @@ class RolsTableSeeder extends Seeder
         Rol::insert([
             [
                 'id' => 1,
-                'name' => 'USER'
+                'name' => 'ADMIN'
             ],
             [
                 'id' => 2,
-                'name' => 'ADMIN'
+                'name' => 'USER'
             ],
             [
                 'id' => 3,
