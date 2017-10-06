@@ -26,6 +26,16 @@
 	    ` php artisan db:seed `
 
 - Usuario Root
-	user:		admin
-	email: 		admin@admin.com
-	password:	admin
+	- user: admin
+	- email: admin@bmkeros.org.ve
+	- password:	admin
+
+- Usuario User
+    - user: user
+	- email: user@bmkeros.org.ve
+	- password:	user
+	
+- Usuario Socio
+    - user: socio
+	- email: socio@bmkeros.org.ve
+	- password:	socio
