@@ -5402,4 +5402,5 @@ ul.notifications {
   height: 20px;
   vertical-align: middle;
   margin-top: 10px;
+  font-size: 20px !important;
 }
