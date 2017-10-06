@@ -15,7 +15,8 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+        $profiles = Profile::all()->toArray();
+        return view('/profiles.index', compact('profile'));
     }
 
     /**

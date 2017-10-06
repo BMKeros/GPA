@@ -1,58 +1,103 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Perfil</title>
-    <link rel="stylesheet" href="{{asset('css/app.css')}}">
-  </head>
-  <body>
-    <div class="container">
-      <h2>Rellenar Perfil</h2><br  />
-      @if ($errors->any())
-      <div class="alert alert-danger">
-          <ul>
-              @foreach ($errors->all() as $error)
-                  <li>{{ $error }}</li>
-              @endforeach
-          </ul>
-      </div><br />
-      @endif
-      @if (\Session::has('success'))
-      <div class="alert alert-success">
-          <p>{{ \Session::get('success') }}</p>
-      </div><br />
-      @endif
-      <form method="post" action="{{url('profiles')}}">
-      {{csrf_field()}}
+@extends('layouts.master')
+@section('title')
+Perfil
+@stop
 
-        <div class="row">
-          <div class="col-md-4"></div>
-          <div class="form-group col-md-4">
-            <label for="name">:D:</label>
-            <input type="text" class="form-control" name="first_name" placeholder="primer nombre">
-            <input type="text" class="form-control" name="second_name" placeholder="segundo nombre">
-            <input type="text" class="form-control" name="first_surname" placeholder="primer apellido">
-            <input type="text" class="form-control" name="second_surname" placeholder="segundo apellido">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4"></div>
-            <div class="form-group col-md-4">
-              <label for="price">:p:</label>
-              <input type="text" class="form-control" name="cedula" placeholder="cedula">
-              <input type="text" class="form-control" name="number_phone" placeholder="numero telefonico">
-              <input type="text" class="form-control" name="number_cellphone" placeholder="numero celular">
-              <input type="text" class="form-control" name="hobby" placeholder="hobby">
+
+@section('content')
+
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Perfil</h2>
+                <div class="clearfix"></div>
             </div>
-          </div>
-        </div>  
-        <div class="row">
-          <div class="col-md-4"></div>
-          <div class="form-group col-md-4">
-            <button type="submit" class="btn btn-success" style="margin-left:38px">Crear Perfil</button>
-          </div>
+          <div class="x_content">
+              <br />
+              <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="{{url('user/profile')}}">
+              {{csrf_field()}}
+
+                  <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Primer Nombre <span class="required">*</span>
+                      </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="first_name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="second-name">Segundo Nombre <span class="required">*</span>
+                        </label>
+                    
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="second-name" required="required" class="form-control col-md-7 col-xs-12" name="second_name">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-surname">Primer Apellido <span class="required">*</span>
+                      </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="first-surname" required="required" class="form-control col-md-7 col-xs-12" name="first_surname">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="second-surname">Segundo Apellido <span class="required">*</span>
+                        </label>
+                    
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="second-surname" required="required" class="form-control col-md-7 col-xs-12" name="second_surname">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cedula">Cedula <span class="required">*</span>
+                      </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="cedula" required="required" class="form-control col-md-7 col-xs-12" name="cedula">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number-phone">Numero Telefonico <span class="required">*</span>
+                        </label>
+                    
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="number-phone" required="required" class="form-control col-md-7 col-xs-12" name="number_phone">
+                    </div>
+                  </div>
+
+                   <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number-cellphone">Numero Celular <span class="required">*</span>
+                      </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="number-cellphone" required="required" class="form-control col-md-7 col-xs-12" name="number_cellphone">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="hobby">Hobby <span class="required">*</span>
+                        </label>
+                    
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="hobby" required="required" class="form-control col-md-7 col-xs-12" name="hobby">
+                    </div>
+                  </div>
+
+                    
+                  
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                          <button type="submit" class="btn btn-primary">Cancel</button>
+                          <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
         </div>
-      </form>
     </div>
-  </body>
-</html>
+</div>
+
+  
+@stop

@@ -25,6 +25,6 @@ Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 })->name('admin.dashboard');
 
-Route::resource('profiles', 'ProfileController');
+Route::resource('user/profile', 'ProfileController');
 
 Auth::routes();

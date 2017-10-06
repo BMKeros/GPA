@@ -14,7 +14,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
                         <li>
-                            <a href="javascript:;">  Profile</a>
+                            <a href="profile/create">  Profile</a>
                         </li>
                         <li>
                             <a href="javascript:;">
