@@ -10,7 +10,7 @@
 @section('menu')
 
 	<li>
-		<a href="#"> <i class="fa fa-users"></i> Usuarios</a>
+		<a href="{{ route('users.index') }}"> <i class="fa fa-users"></i> Usuarios</a>
 		<ul class="nav child_menu" style="display: none">
 			<li>
 				<a href="index.html">Dashboard</a>
