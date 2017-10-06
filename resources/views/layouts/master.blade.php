@@ -22,9 +22,14 @@
 
 		<script src="{{ asset('plugins/bootstrap.min.js') }}"></script>
 
+		<script src="{{ asset('plugins/nprogress.js') }}"></script>
+
 		<script src="{{ asset('plugins/bootstrap-progressbar.min.js')}}"></script>
 
 		<script src="{{ asset('plugins/icheck.min.js') }}"></script>
+
+		<script src="{{ asset('plugins/jquery.nicescroll.min.js') }}"></script>
+		
 
 		<script src="{{ asset('js/custom.js') }}"></script>
 
