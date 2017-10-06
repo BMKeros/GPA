@@ -27,4 +27,6 @@ Route::get('/admin/dashboard', function () {
 
 Route::resource('user/profile', 'ProfileController');
 
+Route::resource('admin/users', 'AdministrationUserController');
+
 Auth::routes();
