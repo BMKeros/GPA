@@ -41,7 +41,7 @@
 
                     <div>
                         <input type="password" class="form-control" placeholder="Repita la contraseña" required=""
-                               name="password_confirmed"/>
+                               name="password_confirmation"/>
                     </div>
 
                     <div>
