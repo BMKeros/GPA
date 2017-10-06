@@ -1,8 +1,9 @@
 @extends('layouts.master')
+
 @section('title')
-Dashboard
+	Dashboard
 @stop
-@include('layouts.head')
+
 
 {{-- items for sidenavbar --}}
 
