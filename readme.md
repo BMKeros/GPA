@@ -14,5 +14,18 @@
 
     1) Renombrar el archivo .env.example por .env y reemplazar las variables de configuracion de base de datos y otros
 
-- Cuando se cree una nueva migracion se debe ejecutar 
-    ` composer dump-autoload `
+- Configuracion de Desarrollo
+
+	1) Ejecutar las migraciones
+	    ` php artisan migrate `
+
+	2) Reconocer los seeders
+	    ` composer dump-autoload `
+
+	3) Precargar la base de datos a traves de los seeders
+	    ` php artisan db:seed `
+
+- Usuario Root
+	user:		admin
+	email: 		admin@admin.com
+	password:	admin
