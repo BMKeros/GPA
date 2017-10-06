@@ -2,57 +2,70 @@
 <html lang="en">
 
 @section('title')
-Registro
+    Registro
 @stop
 @include('layouts.head')
 
 <body style="background:#F7F7F7;">
-    
-    <div class="">
-        <a class="hiddenanchor" id="toregister"></a>
-    
-        <div id="wrapper">
-            <div class="animate form">
-                <section class="login_content">
-                    <form method="POST" action="{{ route('register') }}"">
+
+<div class="">
+    <a class="hiddenanchor" id="toregister"></a>
+
+    <div id="wrapper">
+        <div class="animate form">
+            <section class="login_content">
+                <form method="POST" action="{{ route('register') }}">
                     {{csrf_field()}}
-                        <h1>Registro</h1>
-                        <div>
-                            <input type="text" class="form-control" placeholder="Nombre de Usuario" required="" name="name" />
-                        </div>
-                        <div>
-                            <input type="email" class="form-control" placeholder="Correo" required="" name="email"/>
-                        </div>
-                        <div>
-                            <input type="password" class="form-control" placeholder="Contraseña" required="" name="password" />
-                        </div>
-                        
-                        <div>
-                            <input type="password" class="form-control" placeholder="Repita la contraseña" required="" name="password_confirmation" />
-                        </div>
+                    <h1>Registro</h1>
 
-                        <div>
-                            <button type="submit" class="btn btn-default submit" >Registrar</button>
-                    
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
-                        <div class="clearfix"></div>
+                    @endif
+                    <div>
+                        <input type="text" class="form-control" placeholder="Nombre de Usuario" required=""
+                               name="name"/>
+                    </div>
+                    <div>
+                        <input type="email" class="form-control" placeholder="Correo" required="" name="email"/>
+                    </div>
+                    <div>
+                        <input type="password" class="form-control" placeholder="Contraseña" required=""
+                               name="password"/>
+                    </div>
 
-                        <div class="separator">
+                    <div>
+                        <input type="password" class="form-control" placeholder="Repita la contraseña" required=""
+                               name="password_confirmed"/>
+                    </div>
 
-                            <p class="change_link">Ya eres miembro ?
+                    <div>
+                        <button type="submit" class="btn btn-default submit">Registrar</button>
+
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="separator">
+
+                        <p class="change_link">Ya eres miembro ?
                             <a href="/login" class="to_register"> Entrar </a>
-                            </p>
-                            <div class="clearfix"></div>
-                            <br />
-                            <div>
-                                <p>©2017 Todos lo derechos reservados.</p>
-                            </div>
+                        </p>
+                        <div class="clearfix"></div>
+                        <br/>
+                        <div>
+                            <p>©2017 Todos lo derechos reservados.</p>
                         </div>
-                    </form>
-                </section>
-            </div>
+                    </div>
+                </form>
+            </section>
         </div>
     </div>
+</div>
 
 </body>
 

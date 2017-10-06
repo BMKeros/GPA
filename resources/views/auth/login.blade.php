@@ -18,6 +18,16 @@ Login
                     {{csrf_field()}}
 				
                 	<h1>Inicio de seción</h1>
+					@if ($errors->any())
+						<div class="alert alert-danger">
+							<ul>
+								@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+								@endforeach
+							</ul>
+						</div>
+					@endif
+
 					<div>
 						<input id="email" type="email" class="form-control" placeholder="Correo" name="email" required="" />
 					</div>
