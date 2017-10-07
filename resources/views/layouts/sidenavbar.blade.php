@@ -44,7 +44,15 @@
                       <ul class="nav child_menu" style="display: none">
                         <li><a href="{{ route('categories.create') }}">Nueva Categoria</a>
                         </li>
-                        <li><a href="{{ route('categories.index') }}">Ver Categoria</a>
+                        <li><a href="{{ route('categories.index') }}">Ver Categorias</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><a><i class="fa fa-home"></i>Productos <span class="fa fa-chevron-down"></span></a>
+                      <ul class="nav child_menu" style="display: none">
+                        <li><a href="{{ route('products.create') }}">Nuevo Producto</a>
+                        </li>
+                        <li><a href="#">Ver Productos</a>
                         </li>
                       </ul>
                     </li>
