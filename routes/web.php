@@ -31,4 +31,11 @@ Route::resource('admin/users', 'AdministrationUserController');
 
 Route::resource('admin/categories', 'AdministrationCategoriesController');
 
+Route::bind('admin/products', function($slug){
+	return App\Products::where('slug', $slug)->first();
+});
+
+Route::resource('admin/products', 'ProductsController');
+
+
 Auth::routes();
