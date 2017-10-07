@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Products;
+use App\Categories;
+use App\Units;
+
 
 class ProductsController extends Controller
 {
@@ -23,7 +27,9 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Categories::all();
+        $units = Units::all();
+        return view('admin.products.create', compact('categories', 'units'));
     }
 
     /**
@@ -34,7 +40,30 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $units = Units::where('id', $request->units)->first();
+
+        $slug =  $request->name.'-'. $request->brand.'-'. $request->quantity.''.$units->abbreviation;
+
+
+        $image = "imagen/nodisponible";
+        $product = Products::create([
+            'categories_id' => $data['category'],
+            'name' => $data['name'],
+            'description' => $data['description'],
+            'brand' => $data['brand'],
+            'price' => $data['price'],
+            'units_id' => $data['units'],
+            'associated_percentage' => $data['associated_percentage'],
+            'street_percentage' => $data['street_percentage'],
+            'quantity_available' => $data['quantity_available'],
+            'quantity' => $data['quantity'],
+            'slug' => strtolower($slug),
+            'image' => $image,
+        ]);
+    
+        return redirect()->route('categories.index');
     }
 
     /**
