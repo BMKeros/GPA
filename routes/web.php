@@ -29,4 +29,6 @@ Route::resource('user/profile', 'ProfileController');
 
 Route::resource('admin/users', 'AdministrationUserController');
 
+Route::resource('admin/categories', 'AdministrationCategoriesController');
+
 Auth::routes();
