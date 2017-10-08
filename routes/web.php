@@ -15,27 +15,62 @@ Route::get('/', function () {
     return redirect('login');
 });
 
-// Route User
-Route::get('/user/dashboard', function () {
-    return view('user.dashboard');
-})->name('user.dashboard');
 
-// Route Admin
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->name('admin.dashboard');
+// USER ROUTE
+Route::group(['prefix' => 'user'],	function ()	{
 
-Route::resource('user/profile', 'ProfileController');
+	// user view
+	Route::get('/', function () {
+	    return redirect('/user/dashboard');
+	})->name('user.dashboard');
 
-Route::resource('admin/users', 'AdministrationUserController');
+	// user dashboard 
+	Route::get('/dashboard', function () {
+	    return view('user.dashboard');
+	});
 
-Route::resource('admin/categories', 'AdministrationCategoriesController');
+	// profile route
+	Route::resource('/profile', 'ProfileController');
 
-Route::bind('admin/products', function($slug){
-	return App\Products::where('slug', $slug)->first();
+	// cart route
+	// Route::group(['prefix' => 'cart'],	function ()	{
+	// 	Route::get('/', function () {
+	// 		return redirect('/show');
+	// 	});
+
+	// 	Route::get('/show', 'CartController@show');
+
+	// });
+
 });
 
-Route::resource('admin/products', 'ProductsController');
+// ADMIN ROUTE
+Route::group(['prefix' => 'admin'],	function ()	{
 
+	// user view
+	Route::get('/', function () {
+	    return redirect('/admin/dashboard');
+	})->name('admin.dashboard');
 
+	// user dashboard 
+	Route::get('/dashboard', function () {
+	    return view('admin.dashboard');
+	});
+
+	// users route
+	Route::resource('/users', 'AdministrationUserController');
+
+	// category route
+	Route::resource('/categories', 'AdministrationCategoriesController');
+
+	// products route
+	Route::bind('/products', function($slug){
+		return App\Products::where('slug', $slug)->first();
+	});
+
+	Route::resource('admin/products', 'ProductsController');
+
+});
+
+// AUTH ROUTE
 Auth::routes();
