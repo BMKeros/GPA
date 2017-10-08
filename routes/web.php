@@ -47,12 +47,12 @@ Route::group(['prefix' => 'user'],	function ()	{
 // ADMIN ROUTE
 Route::group(['prefix' => 'admin'],	function ()	{
 
-	// user view
+	// admin view
 	Route::get('/', function () {
 	    return redirect('/admin/dashboard');
 	})->name('admin.dashboard');
 
-	// user dashboard 
+	// admin dashboard 
 	Route::get('/dashboard', function () {
 	    return view('admin.dashboard');
 	});
