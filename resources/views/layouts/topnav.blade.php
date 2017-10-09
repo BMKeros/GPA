@@ -42,10 +42,8 @@
                                 $elems = \Session::get('elems');
                             @endphp
 
-                            @isset($elems)
-                                {{ $elems }}
-                            @endisset
-                            
+                            {{ $elems or '0' }}
+                      
                         </span>
                     </a>
                     <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
