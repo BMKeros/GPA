@@ -40,19 +40,14 @@
 
                 @yield('menu')
                 <!--menu list <li><a><i class="fa fa-home"></i> Home</a></li> -->
-                    <li><a><i class="fa fa-home"></i>Categorias <span class="fa fa-chevron-down"></span></a>
-                      <ul class="nav child_menu" style="display: none">
-                        <li><a href="{{ route('categories.create') }}">Nueva Categoria</a>
-                        </li>
-                        <li><a href="{{ route('categories.index') }}">Ver Categorias</a>
-                        </li>
-                      </ul>
-                    </li>
+
                     <li><a><i class="fa fa-home"></i>Productos <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu" style="display: none">
-                        <li><a href="{{ route('products.create') }}">Nuevo Producto</a>
+                       <li><a href="{{ route('categories.index') }}">Categorias</a>
                         </li>
-                        <li><a href="#">Ver Productos</a>
+                        <li><a href="{{ route('products.index') }}">Productos</a>
+                        </li>
+                        <li><a href="{{ route('inventory.index') }}">Inventario</a>
                         </li>
                       </ul>
                     </li>
