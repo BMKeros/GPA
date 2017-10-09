@@ -49,8 +49,13 @@
                         </li>
                         <li><a href="{{ route('inventory.index') }}">Inventario</a>
                         </li>
+
                       </ul>
-                    </li>
+                      <li><a><i class="fa fa-home"></i>Referidos <span class="fa fa-chevron-down"></span></a>
+                      <ul class="nav child_menu" style="display: none">
+                       <li><a href="{{ route('referred.create') }}">Nuevo Referido</a>
+                        </li>
+                      
                 </ul>
 
             </div>
