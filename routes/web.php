@@ -37,8 +37,13 @@ Route::group(['prefix' => 'user'],	function ()	{
 	// profile route
 	Route::resource('/profile', 'ProfileController');
 
+<<<<<<< Updated upstream
 	// referred route
 	Route::resource('/referred', 'ReferredController');
+=======
+	// catalogue route
+	Route::resource('/catalogue', 'CatalogueController');
+>>>>>>> Stashed changes
 
 	//cart route
 	Route::group(['prefix' => 'cart'],	function ()	{
@@ -85,6 +90,7 @@ Route::group(['prefix' => 'admin'],	function ()	{
 
 	Route::resource('/products', 'AdministrationProductsController');
 
+	//inventory route
 	Route::resource('/inventory', 'AdministrationInventoryController');
 
 });
