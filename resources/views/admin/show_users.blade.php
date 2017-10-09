@@ -25,18 +25,22 @@
 						    <div class="well profile_view">
 						        <div class="col-sm-12">
 						          	<h4 class="brief">
-						          		<i>{{ $user->profile->first_name }} {{ $user->profile->first_surname }}</i>
+										@if($user->profile == null)
+											<i>Perfil no completado</i>
+										@else
+											<i>{{ $user->profile->first_name }} {{ $user->profile->first_surname }}</i>
+						          		@endif
 						          	</h4>
 						          	<div class="left col-xs-12">
 						            	<ul class="list-unstyled">
 						              		<li>
-						              			<i class="fa fa-phone"></i> {{ $user->profile->number_phone }}
+						              			<i class="fa fa-phone"></i> {{ $user->profile->number_phone or  'No encontrado'}}
 						              		</li>
 						              		<li>
-						              			<i class="fa fa-envelope"></i> {{ $user->email}}
+						              			<i class="fa fa-envelope"></i> {{ $user->email or  'No encontrado'}}
 						              		</li>
 						            		<li>
-						            			<i class="fa fa-child"></i> {{ $user->profile->hobby }}
+						            			<i class="fa fa-child"></i> {{ $user->profile->hobby or  'No encontrado'}}
 						            		</li>
 						            	</ul>
 						          	</div>
