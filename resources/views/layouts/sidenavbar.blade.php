@@ -55,7 +55,7 @@
                             </li>
 
                         </ul>
-                    <li><a><i class="fa fa-users"></i>Referidos <span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-venus-mars"></i>Referidos <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none">
                             <li><a href="{{ route('referred.create') }}">Nuevo Referido</a>
                             </li>
