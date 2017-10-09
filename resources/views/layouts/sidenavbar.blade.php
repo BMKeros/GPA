@@ -24,7 +24,7 @@
 
             <div class="profile_info">
 
-                <span>Bienvenido,</span>
+                <span>Bienvenido</span>
 
                 <h2>{{ ucfirst(Auth::user()->name) }}</h2>
 
@@ -39,34 +39,32 @@
 
             <div class="menu_section">
 
-                <h3 style="margin-left: 0px">{{ Auth::user()->role->name }}</h3>
+                <!-- <h3 style="margin-left: 0px">{{ Auth::user()->role->name }}</h3> -->
+                <br/>
+                <br/>
+                <br/>
                 <ul class="nav side-menu">
 
                 @yield('menu')
                 <!--menu list <li><a><i class="fa fa-home"></i> Home</a></li> -->
 
-                    <li><a><i class="fa fa-home"></i>Productos <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu" style="display: none">
-                            <li><a href="{{ route('categories.index') }}">Categorias</a>
-                            </li>
-                            <li><a href="{{ route('products.index') }}">Productos</a>
-                            </li>
-                            <li><a href="{{ route('inventory.index') }}">Inventario</a>
-                            </li>
+                <li><a href="{{ route('user.dashboard') }}"><i class="fa fa-dashboard"></i>Dashboard</span></a>
+                <li><a><i class="fa fa-list-ul"></i>Productos <span class="fa fa-chevron-down"></span></a>
+                    
+                <ul class="nav child_menu" style="display: none">
+                    <li><a href="{{ route('categories.index') }}">Categorias</a></li>
+                    <li><a href="{{ route('products.index') }}">Productos</a></li>
+                    <li><a href="{{ route('inventory.index') }}">Inventario</a></li>
+                </ul>
 
-                        </ul>
-                    <li><a><i class="fa fa-users"></i>Referidos <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu" style="display: none">
-                            <li><a href="{{ route('referred.create') }}">Nuevo Referido</a>
-                            </li>
-                            <li><a href="{{ route('referred.index') }}">Mis Referidos</a>
-                            </li>
-
-
-                        </ul>
-
+                <li><a><i class="fa fa-users"></i>Referidos <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu" style="display: none">
+                    <li><a href="{{ route('referred.create') }}">Nuevo Referido</a>
+                    </li>
+                    <li><a href="{{ route('referred.index') }}">Mis Referidos</a>
+                    </li>
+                </ul>
             </div>
-
         </div>
     </div>
 </div>
