@@ -14,7 +14,8 @@ class ReferredController extends Controller
      */
     public function index()
     {
-        //
+        $referreds = Referred::all()->toArray();
+        return view('referred.index', compact('referreds'));
     }
 
     /**
