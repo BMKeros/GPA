@@ -14,20 +14,14 @@
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
                         <li>
-                            <a href="javascript:;">  Profile</a>
+                            <a href="{{ url('user/profile/create') }}"> Perfil</a>
                         </li>
                         <li>
-                            <a href="javascript:;">
-                                <span class="badge bg-red pull-right">50%</span>
-                                <span>Settings</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">Help</a>
+                            <a href="javascript:;">Ajustes</a>
                         </li>
                         <li>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="fa fa-sign-out pull-right">  </i> Log Out
+                                <i class="fa fa-sign-out pull-right">  </i> Salir
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}
                             </form>
@@ -37,70 +31,52 @@
 
                 <li role="presentation" class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-envelope-o"></i>
-                        <span class="badge bg-green">6</span>
+                        <i class="fa fa-shopping-cart cart"></i>
+                        <span class="badge bg-green">
+                            @php($a = 0)
+                            @isset($cart)
+                                
+                                @foreach($cart as $item)
+                                    {{ ! $a = number_format($item->sum('quantity')) }}
+                                @endforeach
+                            @endisset
+                            
+                            {{ $a }}
+                        </span>
                     </a>
                     <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
-                        <li>
-                            <a>
-                                <span class="image">
-                                    <img src="{{ asset('images/user.png')}}" alt="Profile Image" />
-                                </span>
-                                <span>
-                                    <span>John Smith</span>
-                                    <span class="time">3 mins ago</span>
-                                </span>
-                                <span class="message">
-                                    Film festivals used to be do-or-die moments for movie makers. They were where...
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <span class="image">
-                                    <img src="{{ asset('images/user.png')}}" alt="Profile Image" />
-                                </span>
-                                <span>
-                                    <span>John Smith</span>
-                                    <span class="time">3 mins ago</span>
-                                </span>
-                                <span class="message">
-                                    Film festivals used to be do-or-die moments for movie makers. They were where...
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <span class="image">
-                                    <img src="{{ asset('images/user.png')}}" alt="Profile Image" />
-                                </span>
-                                <span>
-                                    <span>John Smith</span>
-                                    <span class="time">3 mins ago</span>
-                                </span>
-                                <span class="message">
-                                    Film festivals used to be do-or-die moments for movie makers. They were where...
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <span class="image">
-                                    <img src="{{ asset('images/user.png')}}" alt="Profile Image" />
-                                </span>
-                                <span>
-                                    <span>John Smith</span>
-                                    <span class="time">3 mins ago</span>
-                                </span>
-                                <span class="message">
-                                    Film festivals used to be do-or-die moments for movie makers. They were where...
-                                </span>
-                            </a>
-                      </li>
+                        
+                        @isset($cart)
+                            @if(count($cart)>0)     
+                                @foreach($cart as $item)              
+                                    <li>
+                                        <a>
+                                            <span class="image">
+                                                <img src="{{ asset('images/user.png')}}" alt="Profile Image" />
+                                            </span>
+                                            <span>
+                                                <span>{{ $item->quantity." ".$item->name }}</span>
+                                                <span class="time">hace 3 min</span>
+                                            </span>
+                                            <span class="message">
+                                                 agregado al carrito
+                                            </span>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            @else
+                                <li>
+                                    <span class="message">
+                                        No tiene ningun producto agregado al carrito
+                                    </span>
+                                </li>
+                            @endif
+                        @endisset
+                        
                         <li>
                             <div class="text-center">
-                                <a href="#">
-                                    <strong>See All Alerts</strong>
+                                <a href="{{ url('user/cart/show') }}">
+                                    <strong>Mostrar carrito</strong>
                                     <i class="fa fa-angle-right"></i>
                                 </a>
                             </div>

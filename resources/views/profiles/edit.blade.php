@@ -6,18 +6,20 @@
 
 @section('content')
 
-    <div class="clearfix"></div>
-    <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel">
-                <div class="x_title">
-                    <h2>Perfil</h2>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                    <br/>
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post"
-                          action="{{url('user/profile')}}">
+ <div class="container">
+      <h2>Editar Perfil</h2><br  />
+      @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div><br />
+      @endif
+      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post"
+                          action="{{action('ProfileController@update', $profile['id'])}}">
+                          <input name="_method" type="hidden" value="PATCH">
                         {{csrf_field()}}
 
                         <div class="form-group">
@@ -26,7 +28,7 @@
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <input type="text" id="first-name" required="required"
-                                       class="form-control col-md-7 col-xs-12" name="first_name">
+                                       class="form-control col-md-7 col-xs-12" name="first_name" value="{{$profile->first_name}}">
                             </div>
                         </div>
                         <div class="form-group">
@@ -36,7 +38,7 @@
 
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <input type="text" id="second-name" required="required"
-                                       class="form-control col-md-7 col-xs-12" name="second_name">
+                                       class="form-control col-md-7 col-xs-12" name="second_name" value="{{$profile->second_name}}">
                             </div>
                         </div>
 
@@ -46,7 +48,7 @@
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <input type="text" id="first-surname" required="required"
-                                       class="form-control col-md-7 col-xs-12" name="first_surname">
+                                       class="form-control col-md-7 col-xs-12" name="first_surname" value="{{$profile->first_surname}}">
                             </div>
                         </div>
                         <div class="form-group">
@@ -56,7 +58,7 @@
 
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <input type="text" id="second-surname" required="required"
-                                       class="form-control col-md-7 col-xs-12" name="second_surname">
+                                       class="form-control col-md-7 col-xs-12" name="second_surname" value="{{$profile->second_surname}}">
                             </div>
                         </div>
 
@@ -66,7 +68,7 @@
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <input type="text" id="cedula" required="required"
-                                       class="form-control col-md-7 col-xs-12" name="cedula">
+                                       class="form-control col-md-7 col-xs-12" name="cedula" value="{{$profile->cedula}}">
                             </div>
                         </div>
                         <div class="form-group">
@@ -76,7 +78,7 @@
 
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <input type="text" id="number-phone" required="required"
-                                       class="form-control col-md-7 col-xs-12" name="number_phone">
+                                       class="form-control col-md-7 col-xs-12" name="number_phone" value="{{$profile->number_phone}}">
                             </div>
                         </div>
 
@@ -86,7 +88,7 @@
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <input type="text" id="number-cellphone" required="required"
-                                       class="form-control col-md-7 col-xs-12" name="number_cellphone">
+                                       class="form-control col-md-7 col-xs-12" name="number_cellphone" value="{{$profile->number_cellphone}}">
                             </div>
                         </div>
                         <div class="form-group">
@@ -96,23 +98,29 @@
 
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <input type="text" id="hobby" required="required"
-                                       class="form-control col-md-7 col-xs-12" name="hobby">
+                                       class="form-control col-md-7 col-xs-12" name="hobby" value="{{$profile->hobby}}">
                             </div>
                         </div>
 
-                        <div class="ln_solid"></div>
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                <a href="{{url('user/dashboard')}}" class="btn btn-primary">Atras</a>
-                                <button type="submit" class="btn btn-success">Guardar</button>
+                                <a href="{{action('ProfileController@show', $profile['id'])}}" class="btn btn-primary">Atras</a>	
+                                <button type="submit" class="btn btn-success">Actualizar</button>
                             </div>
                         </div>
 
-                    </form>
-                </div>
-            </div>
+                        </form>
+
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
-    </div>
+    @endif
 
 
 @stop
