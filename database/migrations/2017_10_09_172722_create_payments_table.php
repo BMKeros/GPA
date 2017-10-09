@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReferredsTable extends Migration
+class CreatePaymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,9 @@ class CreateReferredsTable extends Migration
      */
     public function up()
     {
-        Schema::create('referreds', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+        Schema::create('payments', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('last_name');
-            $table->string('phone_number');
-            $table->string('relationship');
-
-
             $table->timestamps();
         });
     }
@@ -34,6 +27,6 @@ class CreateReferredsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('referreds');
+        Schema::dropIfExists('payments');
     }
 }

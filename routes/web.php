@@ -15,18 +15,75 @@ Route::get('/', function () {
     return redirect('login');
 });
 
-// Route User
-Route::get('/user/dashboard', function () {
-    return view('user.dashboard');
-})->name('user.dashboard');
+// products route
+Route::bind('product', function($slug){
+	return App\Products::where('slug', $slug)->firstOrFail();
+});
 
-// Route Admin
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->name('admin.dashboard');
 
-Route::resource('user/profile', 'ProfileController');
+// USER ROUTE
+Route::group(['prefix' => 'user'],	function ()	{
 
-Route::resource('admin/users', 'AdministrationUserController');
+	// user view
+	Route::get('/', function () {
+	    return redirect('/user/dashboard');
+	})->name('user.dashboard');
 
+	// user dashboard 
+	Route::get('/dashboard', function () {
+	    return view('user.dashboard');
+	});
+
+	// profile route
+	Route::resource('/profile', 'ProfileController');
+
+	// referred route
+	Route::resource('/referred', 'ReferredController');
+
+	//cart route
+	Route::group(['prefix' => 'cart'],	function ()	{
+
+		// cart view
+		Route::get('/', function () {
+			return redirect('/user/cart/show');
+		});
+
+		// show cart route
+		Route::get('/show', 'CartController@show');
+
+		// add cart route
+		Route::get('/add/{product}', 'CartController@add');
+
+	});
+
+});
+
+// ADMIN ROUTE
+Route::group(['prefix' => 'admin'],	function ()	{
+
+	// admin view
+	Route::get('/', function () {
+	    return redirect('/admin/dashboard');
+	})->name('admin.dashboard');
+
+	// admin dashboard 
+	Route::get('/dashboard', function () {
+	    return view('admin.dashboard');
+	});
+
+	// users route
+	Route::resource('/users', 'AdministrationUserController');
+
+	// category route
+	Route::resource('/categories', 'AdministrationCategoriesController');
+
+	// products route
+	Route::resource('/products', 'AdministrationProductsController');
+
+	// inventory route
+	Route::resource('/inventory', 'AdministrationInventoryController');
+
+});
+
+// AUTH ROUTE
 Auth::routes();

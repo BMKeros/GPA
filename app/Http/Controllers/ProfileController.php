@@ -15,7 +15,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+       //;
     }
 
     /**
@@ -71,7 +71,8 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        //
+        $profile = Profile::find($id);
+        return view('profiles.edit',compact('profile'));
     }
 
     /**
@@ -83,7 +84,27 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $profile = Profile::find($id);
+        $this->validate(request(), [
+            'first_name' => 'required',
+            'second_name'=> 'required',
+            'first_surname' => 'required',
+            'second_surname'=> 'required',
+            'cedula'=> 'required',
+            'number_phone'=> 'required',
+            'number_cellphone'=> 'required',
+            'hobby'=> 'required',
+        ]);
+        $profile->first_name = $request->get('first_name');
+        $profile->second_name = $request->get('second_name');
+        $profile->first_surname = $request->get('first_surname');
+        $profile->second_surname = $request->get('second_surname');
+        $profile->cedula = $request->get('cedula');
+        $profile->number_phone = $request->get('number_phone');
+        $profile->number_cellphone = $request->get('number_cellphone');
+        $profile->hobby = $request->get('hobby');
+        $profile->save();
+        return redirect()->action('ProfileController@show', $profile['id'])->with('success','Perfil actualizado con exito');
     }
 
     /**

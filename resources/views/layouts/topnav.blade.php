@@ -14,7 +14,11 @@
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
                         <li>
-                            <a href="{{url('user/profile/create')}}"> Perfil</a>
+                        @if(Auth::user()->profile)
+                            <a href="{{ route('profile.show', Auth::user()->profile->id) }}"> Perfil</a>
+                        @else
+                            <a href="{{ route('profile.create') }}"> Perfil</a>
+                        @endif
                         </li>
                         <li>
                             <a href="javascript:;">Ajustes</a>
@@ -32,69 +36,49 @@
                 <li role="presentation" class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-shopping-cart cart"></i>
-                        <span class="badge bg-green">6</span>
+                        <span class="badge bg-green">
+                            @php
+                                $cart = \Session::get('cart');
+                                $elems = \Session::get('elems');
+                            @endphp
+
+                            {{ $elems or '0' }}
+                      
+                        </span>
                     </a>
                     <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
-                        <li>
-                            <a>
-                                <span class="image">
-                                    <img src="{{ asset('images/user.png')}}" alt="Profile Image" />
-                                </span>
-                                <span>
-                                    <span>John Smith</span>
-                                    <span class="time">3 mins ago</span>
-                                </span>
-                                <span class="message">
-                                    Film festivals used to be do-or-die moments for movie makers. They were where...
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <span class="image">
-                                    <img src="{{ asset('images/user.png')}}" alt="Profile Image" />
-                                </span>
-                                <span>
-                                    <span>John Smith</span>
-                                    <span class="time">3 mins ago</span>
-                                </span>
-                                <span class="message">
-                                    Film festivals used to be do-or-die moments for movie makers. They were where...
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <span class="image">
-                                    <img src="{{ asset('images/user.png')}}" alt="Profile Image" />
-                                </span>
-                                <span>
-                                    <span>John Smith</span>
-                                    <span class="time">3 mins ago</span>
-                                </span>
-                                <span class="message">
-                                    Film festivals used to be do-or-die moments for movie makers. They were where...
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <span class="image">
-                                    <img src="{{ asset('images/user.png')}}" alt="Profile Image" />
-                                </span>
-                                <span>
-                                    <span>John Smith</span>
-                                    <span class="time">3 mins ago</span>
-                                </span>
-                                <span class="message">
-                                    Film festivals used to be do-or-die moments for movie makers. They were where...
-                                </span>
-                            </a>
-                      </li>
+                        
+                        @isset($cart)
+                            @if(count($cart)>0)     
+                                @foreach($cart as $item)              
+                                    <li>
+                                        <a style="cursor: pointer;" href="{{ url('user/cart/show')}}">
+                                            <span class="image">
+                                                <img src="{{ asset('images/user.png')}}" alt="Profile Image" />
+                                            </span>
+                                            <span>
+                                                <span>{{ $item->quantity." ".$item->name }}</span>
+                                                <span class="time">hace 3 min</span>
+                                            </span>
+                                            <span class="message">
+                                                 agregado al carrito
+                                            </span>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            @else
+                                <li>
+                                    <span class="message">
+                                        No tiene ningun producto agregado al carrito
+                                    </span>
+                                </li>
+                            @endif
+                        @endisset
+                        
                         <li>
                             <div class="text-center">
-                                <a href="#">
-                                    <strong>See All Alerts</strong>
+                                <a href="{{ url('user/cart/show') }}">
+                                    <strong>Mostrar carrito</strong>
                                     <i class="fa fa-angle-right"></i>
                                 </a>
                             </div>

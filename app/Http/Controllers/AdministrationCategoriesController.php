@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Referred;
+use App\Categories;
 
-class ReferredController extends Controller
+
+class AdministrationCategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,8 @@ class ReferredController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Categories::all();
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -24,7 +26,8 @@ class ReferredController extends Controller
      */
     public function create()
     {
-        return view('/referred.create');
+        $category = null;
+        return view('admin.categories.create', ['category' => $category]);
     }
 
     /**
@@ -35,15 +38,16 @@ class ReferredController extends Controller
      */
     public function store(Request $request)
     {
+       
         $data = $request->all();
-        return Referred::create([
-            'user_id' =>  \Auth::user()->id,
-            'name' => $data['name'],
-            'last_name'=> $data['last_name'],
-            'phone_number' => $data['phone_number'],
-            'relationship'=> $data['relationship'],
-            ]);
 
+        $categories = Categories::create([
+            'name' => $data['name'],
+            'description' => $data['description'],
+            'slug' => strtolower($data['name']),
+        ]);
+    
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -65,7 +69,9 @@ class ReferredController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Categories::findOrFail($id);
+
+        return view('admin.categories.create', ['category' => $category]);
     }
 
     /**
@@ -77,7 +83,15 @@ class ReferredController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = Categories::findOrFail($id);
+        $category->name = $request->name;
+        $category->description = $request->description;
+        $category->slug = strtolower($request->description);
+        $category->save();
+
+        return redirect()->route('categories.index');
+
+
     }
 
     /**
@@ -88,6 +102,11 @@ class ReferredController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Categories::findOrFail($id);
+
+        $category->delete();
+
+        
+        return redirect()->route('categories.index');
     }
 }

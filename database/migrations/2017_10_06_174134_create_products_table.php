@@ -27,10 +27,10 @@ class CreateProductsTable extends Migration
             $table->decimal('price');
             $table->decimal('associated_percentage');
             $table->decimal('street_percentage');
-            $table->integer('product_limit');
+            $table->integer('product_limit')->nullable();
             $table->integer('quantity_available');
             $table->integer('quantity');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
