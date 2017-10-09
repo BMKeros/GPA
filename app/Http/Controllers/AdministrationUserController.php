@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Profile;
+use App\User;
 
 use Illuminate\Http\Request;
 
@@ -15,8 +16,8 @@ class AdministrationUserController extends Controller
      */
     public function index()
     {
-        $profiles = Profile::all()->toArray();
-        return view('admin.show_users', compact('profiles'));
+        $users = User::all();
+        return view('admin.show_users', ['users' => $users]);
     }
 
     /**
@@ -59,7 +60,9 @@ class AdministrationUserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('admin.edit_users', ['user' => $user]);
+
     }
 
     /**
