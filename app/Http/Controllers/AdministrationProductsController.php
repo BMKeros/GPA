@@ -8,7 +8,7 @@ use App\Categories;
 use App\Units;
 
 
-class ProductsController extends Controller
+class AdministrationProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,12 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        $products = Products::all();
+        $products->each(function($products){
+            $products->categories;
+            $products->units;
+        });
+        return view('admin.products.index', compact('products'));
     }
 
     /**
@@ -42,12 +47,21 @@ class ProductsController extends Controller
     {
         $data = $request->all();
 
+
         $units = Units::where('id', $request->units)->first();
 
         $slug =  $request->name.'-'. $request->brand.'-'. $request->quantity.''.$units->abbreviation;
 
+        $imageName = "image/nodisponible.jpg";
 
-        $image = "imagen/nodisponible";
+        if(isset($request->image)){
+            $image = $request->image;
+            $imageName = 'product_'. time() . '.' . $image->getClientOriginalExtension();
+            $path = public_path() . '/images/products';
+            $image->move($path, $imageName);
+
+        }
+
         $product = Products::create([
             'categories_id' => $data['category'],
             'name' => $data['name'],
@@ -60,10 +74,11 @@ class ProductsController extends Controller
             'quantity_available' => $data['quantity_available'],
             'quantity' => $data['quantity'],
             'slug' => strtolower($slug),
-            'image' => $image,
+            'image' => $imageName,
         ]);
+
     
-        return redirect()->route('categories.index');
+        return redirect()->route('admin.products.index');
     }
 
     /**
@@ -72,9 +87,12 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        //$product = Products::findOrFail($id);
+        $product = Products::where('slug', $slug)->first(); 
+
+        return view('admin.products.show', ['product' => $product ]);
     }
 
     /**
@@ -108,6 +126,11 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Products::findOrFail($id);
+
+        $product->delete();
+
+        
+        return redirect()->route('products.index');
     }
 }

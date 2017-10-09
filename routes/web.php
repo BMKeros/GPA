@@ -75,7 +75,14 @@ Route::group(['prefix' => 'admin'],	function ()	{
 	Route::resource('/categories', 'AdministrationCategoriesController');
 
 	// products route
-	Route::resource('products', 'ProductsController');
+
+	Route::bind('/products', function($slug){
+		return App\Products::where('slug', $slug)->first();
+	});
+
+	Route::resource('/products', 'AdministrationProductsController');
+
+	Route::resource('/inventory', 'AdministrationInventoryController');
 
 });
 

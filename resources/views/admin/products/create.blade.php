@@ -15,7 +15,7 @@ new product
             </div>
         	<div class="x_content">
             	<br />
-            	<form id="demo-form2" method="POST" action="{{route('products.store')}}" data-parsley-validate class="form-horizontal form-label-left"> {{csrf_field()}}
+            	<form id="demo-form2" method="POST" action="{{route('products.store')}}" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data"> {{csrf_field()}}
 
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Categoria<span class="required">*</span></label>
