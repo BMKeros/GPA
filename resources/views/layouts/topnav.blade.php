@@ -14,7 +14,11 @@
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
                         <li>
-                            <a href="{{ url('user/profile/create') }}"> Perfil</a>
+                        @if(Auth::user()->profile)
+                            <a href="{{ route('profile.show', Auth::user()->profile->id) }}"> Perfil</a>
+                        @else
+                            <a href="{{ route('profile.create') }}"> Perfil</a>
+                        @endif
                         </li>
                         <li>
                             <a href="javascript:;">Ajustes</a>
