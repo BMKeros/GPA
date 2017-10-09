@@ -14,8 +14,6 @@ class CartController extends Controller
      */
 	public function __construct()
 	{
-        $this->middleware('auth');
-
         if (!\Session::has('cart')) \Session::put('cart', []);
         if (!\Session::has('elems')) \Session::put('elems', []);
 		// \Session::forget('cart');
