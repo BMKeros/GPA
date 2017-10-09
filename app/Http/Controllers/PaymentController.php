@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PymentController extends Controller
+class PaymentController extends Controller
 {
     /**
      * Display a listing of the resource.

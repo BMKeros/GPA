@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Pyment;
+use App\Payment;
 
 
-class PymentTableSeeder extends Seeder
+class PaymentTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -44,6 +44,6 @@ class PymentTableSeeder extends Seeder
             ],
         ];
 
-        Pyment::insert($data);
+        Payment::insert($data);
     }
 }
