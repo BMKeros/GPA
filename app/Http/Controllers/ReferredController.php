@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Referred;
 
 class ReferredController extends Controller
 {
@@ -23,7 +24,7 @@ class ReferredController extends Controller
      */
     public function create()
     {
-        //
+        return view('/referred.create');
     }
 
     /**
@@ -34,7 +35,15 @@ class ReferredController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        return Referred::create([
+            'user_id' =>  \Auth::user()->id,
+            'name' => $data['name'],
+            'last_name'=> $data['last_name'],
+            'phone_number' => $data['phone_number'],
+            'relationship'=> $data['relationship'],
+            ]);
+
     }
 
     /**
