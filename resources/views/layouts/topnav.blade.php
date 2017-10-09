@@ -14,7 +14,11 @@
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
                         <li>
-                            <a href="{{ url('user/profile/create') }}"> Perfil</a>
+                        @if(Auth::user()->profile)
+                            <a href="{{ route('profile.show', Auth::user()->profile->id) }}"> Perfil</a>
+                        @else
+                            <a href="{{ route('profile.create') }}"> Perfil</a>
+                        @endif
                         </li>
                         <li>
                             <a href="javascript:;">Ajustes</a>
@@ -33,15 +37,15 @@
                     <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-shopping-cart cart"></i>
                         <span class="badge bg-green">
-                            @php($a = 0)
-                            @isset($cart)
-                                
-                                @foreach($cart as $item)
-                                    {{ ! $a = number_format($item->sum('quantity')) }}
-                                @endforeach
+                            @php
+                                $cart = \Session::get('cart');
+                                $elems = \Session::get('elems');
+                            @endphp
+
+                            @isset($elems)
+                                {{ $elems }}
                             @endisset
                             
-                            {{ $a }}
                         </span>
                     </a>
                     <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
@@ -50,7 +54,7 @@
                             @if(count($cart)>0)     
                                 @foreach($cart as $item)              
                                     <li>
-                                        <a>
+                                        <a style="cursor: pointer;" href="{{ url('user/cart/show')}}">
                                             <span class="image">
                                                 <img src="{{ asset('images/user.png')}}" alt="Profile Image" />
                                             </span>

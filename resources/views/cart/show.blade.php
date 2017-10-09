@@ -78,6 +78,10 @@
                                 </thead>
 
                                 <tbody>
+                                    @php
+                                        $cart = \Session::get('cart');
+                                    @endphp
+
                                     @foreach($cart as $item)
                                         <tr>
                                             <td><img src="{{ $item->image }}" alt=""></td>
