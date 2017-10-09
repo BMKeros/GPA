@@ -68,7 +68,10 @@ Route::group(['prefix' => 'admin'],	function ()	{
 		return App\Products::where('slug', $slug)->first();
 	});
 
-	Route::resource('admin/products', 'ProductsController');
+	Route::resource('/products', 'AdministrationProductsController');
+
+	Route::resource('/inventory', 'AdministrationInventoryController');
+
 
 });
 
