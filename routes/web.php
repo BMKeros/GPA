@@ -37,6 +37,9 @@ Route::group(['prefix' => 'user'],	function ()	{
 	// profile route
 	Route::resource('/profile', 'ProfileController');
 
+	// referred route
+	Route::resource('/referred', 'ReferredController');
+
 	//cart route
 	Route::group(['prefix' => 'cart'],	function ()	{
 
