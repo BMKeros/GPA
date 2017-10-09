@@ -78,7 +78,7 @@ class AdministrationProductsController extends Controller
         ]);
 
     
-        return redirect()->route('admin.products.index');
+        return redirect()->route('products.index');
     }
 
     /**
