@@ -15,6 +15,11 @@ Route::get('/', function () {
     return redirect('login');
 });
 
+// products route
+Route::bind('product', function($slug){
+	return App\Products::where('slug', $slug)->first();
+});
+
 
 // USER ROUTE
 Route::group(['prefix' => 'user'],	function ()	{
@@ -32,15 +37,21 @@ Route::group(['prefix' => 'user'],	function ()	{
 	// profile route
 	Route::resource('/profile', 'ProfileController');
 
-	// cart route
-	// Route::group(['prefix' => 'cart'],	function ()	{
-	// 	Route::get('/', function () {
-	// 		return redirect('/show');
-	// 	});
+	//cart route
+	Route::group(['prefix' => 'cart'],	function ()	{
 
-	// 	Route::get('/show', 'CartController@show');
+		// cart view
+		Route::get('/', function () {
+			return redirect('/user/cart/show');
+		});
 
-	// });
+		// show cart route
+		Route::get('/show', 'CartController@show');
+
+		// add cart route
+		Route::get('/add/{product}', 'CartController@add');
+
+	});
 
 });
 
@@ -64,11 +75,7 @@ Route::group(['prefix' => 'admin'],	function ()	{
 	Route::resource('/categories', 'AdministrationCategoriesController');
 
 	// products route
-	Route::bind('/products', function($slug){
-		return App\Products::where('slug', $slug)->first();
-	});
-
-	Route::resource('admin/products', 'ProductsController');
+	Route::resource('products', 'ProductsController');
 
 });
 
