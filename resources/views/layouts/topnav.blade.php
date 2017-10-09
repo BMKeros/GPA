@@ -48,7 +48,6 @@
                     </a>
                     <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
                         
-                        @isset($cart)
                             @if(count($cart)>0)     
                                 @foreach($cart as $item)              
                                     <li>
@@ -73,7 +72,6 @@
                                     </span>
                                 </li>
                             @endif
-                        @endisset
                         
                         <li>
                             <div class="text-center">
