@@ -14,7 +14,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
                         <li>
-                            <a href="{{url('user/profile/create')}}"> Perfil</a>
+                            <a href="{{ url('user/profile/create') }}"> Perfil</a>
                         </li>
                         <li>
                             <a href="javascript:;">Ajustes</a>
@@ -32,7 +32,17 @@
                 <li role="presentation" class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-shopping-cart cart"></i>
-                        <span class="badge bg-green">6</span>
+                        <span class="badge bg-green">
+                            @php($a = 0)
+                            @isset($cart)
+                                
+                                @foreach($cart as $item)
+                                    {{ ! $a = number_format($item->sum('quantity')) }}
+                                @endforeach
+                            @endisset
+                            
+                            {{ $a }}
+                        </span>
                     </a>
                     <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
                         <li>
@@ -94,7 +104,7 @@
                         <li>
                             <div class="text-center">
                                 <a href="#">
-                                    <strong>See All Alerts</strong>
+                                    <strong>Mostrar todos</strong>
                                     <i class="fa fa-angle-right"></i>
                                 </a>
                             </div>
