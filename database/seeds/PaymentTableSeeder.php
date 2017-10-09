@@ -16,31 +16,24 @@ class PaymentTableSeeder extends Seeder
         $data = [
             [
                 'name' => 'Transferencia',
-
             ],
             [
                 'name' => 'Targeta de Credito',
-
             ],
             [
                 'name' => 'Targeta de Debito',
-
             ],
             [
                 'name' => 'Cheques',
-
             ],
             [
                 'name' => 'Efectivo',
-
             ],
             [
                 'name' => 'Paypal',
-
             ],
             [
                 'name' => 'Bitcoins',
-
             ],
         ];
 
