@@ -37,12 +37,9 @@
         <!-- sidebar menu -->
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
-            <div class="menu_section">
+            <div class="menu_section" style="margin-top:30%;">
 
             <!-- <h3 style="margin-left: 0px">{{ Auth::user()->role->name }}</h3> -->
-                <br/>
-                <br/>
-                <br/>
                 <ul class="nav side-menu">
                     @yield('menu')
                 </ul>
