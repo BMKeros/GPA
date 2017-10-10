@@ -50,12 +50,15 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="relationship">Relacion <span class="required">*</span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="relationship">Relacion<span class="required">*</span>
                             </label>
 
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="relationship" required="required"
-                                       class="form-control col-md-7 col-xs-12" name="relationship">
+                                <select name="relationship_id" class="select2_single form-control" tabindex="-1">
+                                  <option value="1">Familiar</option>
+                                  <option value="2">Amigo</option>
+                                  <option value="3">Vecino</option>
+                                </select>
                             </div>
                         </div>
 
