@@ -1,5 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master_user')
 @section('title')
-Dashboard
+    Dashboard
 @stop
-@include('layouts.head')

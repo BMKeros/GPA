@@ -23,8 +23,9 @@ class ReferredController extends Controller
      */
     public function index()
     {
-        $referreds = Referred::all()->toArray();
+        $referreds = Referred::where('user_id', \Auth::id())->get()->toArray();
         return view('referred.index', compact('referreds'));
+
     }
 
     /**
