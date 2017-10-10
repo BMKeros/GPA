@@ -58,13 +58,13 @@ Catalogo
                             </ul>
                         </div>
                         <div class="clearfix"></div>
-            
+
                         @foreach($products as $product)
                         <div class="col-md-3">
                             <p>Producto: {{$product->name}}  </p>
                             <div class="thumbnail" style="height: 5%; padding: 0;">
                                 <div class="image view view-first">
-                                    <img style="width: 100%; display: block;" src="{{ asset('images/products/').'/'.$product->image }}" alt="image" />
+                                    <img style="width: 100px; display: block; margin: 8% 30%" src="{{ asset('images/products/').'/'.$product->image }}" alt="image" />
                                     <div class="mask">
                                         <p>Producto {{$product->name}}</p>
                                         <div class="tools tools-bottom">
@@ -74,7 +74,7 @@ Catalogo
                                     </div>
                                 </div>
                                 <div class="product_price" style="margin: 0; padding: 0;">
-                                    
+
                                     <h4>Marca: {{$product->brand}}</h4>
                                     <h4>Cantidad: {{$product->quantity}}{{$product->unit->abbreviation}}  </h4>
                                     <h4 class="price">Precio: {{$product->price}}Bs</h4>
