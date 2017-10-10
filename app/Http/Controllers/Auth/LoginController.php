@@ -22,6 +22,29 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+    
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $cart = Cart::all();
+        $units = $cart->sum('quantity');
+
+        $cart->each(function ($cart) {
+            $cart->user;
+            $cart->product;
+        });
+
+
+        \Session::put('cart', $cart);
+        \Session::put('units', $units);
+
+        $this->middleware('guest')->except('logout');
+    }
+
 
     /**
      * Where to redirect users after login.
@@ -35,28 +58,6 @@ class LoginController extends Controller
         else{
             return '/user/dashboard';
         }
-    }
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $cart = Cart::all();
-        $units = $cart->sum('quantity');
-
-        $cart->each(function($cart){
-            $cart->user;
-            $cart->product;
-        });
-        
-
-        \Session::put('cart', $cart);
-        \Session::put('units', $units);
-
-        $this->middleware('guest')->except('logout');
     }
 
     public function login(Request $request)
@@ -91,12 +92,12 @@ class LoginController extends Controller
         if (Auth::attempt($request->only($login_type, 'password'))) {
             return redirect()->intended($this->redirectPath());
         }
- 
+
         // Volver y mostrar errores
         return redirect()->back()
             ->withInput()
             ->withErrors([
-                'login' => 'These credentials do not match our records.',
+                'login' => __('auth.failed'),
             ]);
     }
 }
