@@ -27,10 +27,10 @@
       @foreach($referreds as $referred)
        
           <tr>
-            <td>{{$referred['name']}}</td>
-            <td>{{$referred['last_name']}}</td>
-            <td>{{$referred['phone_number']}}</td>
-            <td>{{$referred['relationship']}}</td>
+            <td>{{ $referred->name }}</td>
+            <td>{{$referred->last_name}}</td>
+            <td>{{$referred->phone_number}}</td>
+            <td>{{$referred->relationship->name}}</td>
         
           </tr>
         
