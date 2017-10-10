@@ -15,7 +15,7 @@ class CartController extends Controller
 	public function __construct()
 	{
         if (!\Session::has('cart')) \Session::put('cart', []);
-        if (!\Session::has('elems')) \Session::put('elems', []);
+        if (!\Session::has('units')) \Session::put('units', []);
 		// \Session::forget('cart');
 	}
 
