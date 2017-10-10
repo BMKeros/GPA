@@ -1,5 +1,4 @@
 @extends('layouts.master')
-@include('layouts.head')
 
 @section('menu')
     <li><a href="{{ route('user.dashboard') }}"><i class="fa fa-dashboard"></i>Dashboard</a>
