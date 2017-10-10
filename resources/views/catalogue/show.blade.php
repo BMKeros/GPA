@@ -15,6 +15,7 @@
                 	<h2>Producto {{$product->name}} </h2>
                 	<div class="clearfix"></div>
                	</div>
+
                 <div class="x_content">
 
                     <div class="col-md-7 col-sm-7 col-xs-12">
@@ -54,9 +55,11 @@
                      		</div>
                     	</div>
                         <div class="">
-                            <button type="button" class="btn btn-default btn-lg">Agregar al carrito</button>
+                            <a href="{{ route('cart.add', [$product->slug]) }}">
+                                <button type="button" class="btn btn-default btn-lg" >Agregar al carrito</button>
+                            </a>
                         </div>
-                  	</div>
+                  	</div>   
                 </div>
             </div>
         </div>
