@@ -29,7 +29,7 @@ Login
 					@endif
 
 					<div>
-						<input id="email" type="email" class="form-control" placeholder="Correo" name="email" required="" />
+						<input id="email" type="text" class="form-control" placeholder="Correo" name="login" required="" />
 					</div>
 					<div>
 						<input id="password" type="password" class="form-control" placeholder="Contraseña" name="password" required="" />

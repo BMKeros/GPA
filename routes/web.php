@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 // products route
 Route::bind('product', function($slug){
-	return App\Products::where('slug', $slug)->firstOrFail();
+	return App\Product::where('slug', $slug)->firstOrFail();
 });
 
 
@@ -37,8 +37,12 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
 	// profile route
 	Route::resource('/profile', 'ProfileController');
 
+
 	// referred route
 	Route::resource('/referred', 'ReferredController');
+	
+	// catalogue route
+	Route::resource('/catalogue', 'CatalogueController');
 
 	//cart route
 	Route::group(['prefix' => 'cart'],	function ()	{
@@ -75,12 +79,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 	Route::resource('/users', 'AdministrationUserController');
 
 	// category route
-	Route::resource('/categories', 'AdministrationCategoriesController');
+	Route::resource('/categories', 'AdministrationCategoryController');
 
 	// products route
-	Route::resource('/products', 'AdministrationProductsController');
+	Route::resource('/products', 'AdministrationProductController');
 
-	// inventory route
 	Route::resource('/inventory', 'AdministrationInventoryController');
 
 });

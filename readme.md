@@ -1,33 +1,40 @@
-GPA
-Gestión de Productos Alimenticios
+# GPA
+#### Gestión de Productos Alimenticios
 
-Sobre GPA
+### **Sobre GPA**
 
-GPA es un un sistema que se enfocara en la gestion de los productos alimenticios, mediante una plataforma web amigable.
 
-Configuracion del entorno
+-----
 
-Renombrar el archivo .env.example por .env y reemplazar las variables de configuracion de base de datos y otros
-Configuracion de Desarrollo
+#### GPA es un un sistema que se enfocara en la gestion de los productos alimenticios, mediante una plataforma web amigable. 
 
-Ejecutar las migraciones php artisan migrate
 
-Reconocer los seeders composer dump-autoload
+- Configuracion del entorno
 
-Precargar la base de datos a traves de los seeders php artisan db:seed
+    1) Renombrar el archivo .env.example por .env y reemplazar las variables de configuracion de base de datos y otros
 
-Usuario Root
+- Configuracion de Desarrollo
 
-user: admin
-email: admin@bmkeros.org.ve
-password:  admin
-Usuario User
+	1) Ejecutar las migraciones
+	    ` php artisan migrate `
 
-user: user
-email: user@bmkeros.org.ve
-password:  user
-Usuario Socio
+	2) Reconocer los seeders
+	    ` composer dump-autoload `
 
-user: socio
-email: socio@bmkeros.org.ve
-password:  socio
+	3) Precargar la base de datos a traves de los seeders
+	    ` php artisan db:seed `
+
+- Usuario Root
+	- user: admin
+	- email: admin@bmkeros.org.ve
+	- password:	admin
+
+- Usuario User
+    - user: user
+	- email: user@bmkeros.org.ve
+	- password:	user
+	
+- Usuario Socio
+    - user: socio
+	- email: socio@bmkeros.org.ve
+	- password:	socio

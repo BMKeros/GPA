@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master_admin')
 
 @section('title')
     Add Inventory
@@ -25,7 +25,7 @@
                             <select class="select2_single form-control" tabindex="-1" name="product">
                                 <option value="0" selected>--Seleccione--</option>
                             @foreach($products as $product)
-                                <option value="{{ $product->id }}">{{ $product->name }} {{ $product->brand }} {{ $product->quantity }} {{ $product->units->abbreviation }}</option>
+                                <option value="{{ $product->id }}">{{ $product->name }} {{ $product->brand }} {{ $product->quantity }} {{ $product->unit->abbreviation }}</option>
                             @endforeach
 
                             </select>

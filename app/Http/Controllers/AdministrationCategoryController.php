@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Categories;
+use App\Category;
 
 
-class AdministrationCategoriesController extends Controller
+class AdministrationCategoryController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -25,7 +25,7 @@ class AdministrationCategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Categories::all();
+        $categories = Category::all();
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -51,7 +51,7 @@ class AdministrationCategoriesController extends Controller
        
         $data = $request->all();
 
-        $categories = Categories::create([
+        $categories = Category::create([
             'name' => $data['name'],
             'description' => $data['description'],
             'slug' => strtolower($data['name']),
@@ -79,7 +79,7 @@ class AdministrationCategoriesController extends Controller
      */
     public function edit($id)
     {
-        $category = Categories::findOrFail($id);
+        $category = Category::findOrFail($id);
 
         return view('admin.categories.create', ['category' => $category]);
     }
@@ -93,7 +93,7 @@ class AdministrationCategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category = Categories::findOrFail($id);
+        $category = Category::findOrFail($id);
         $category->name = $request->name;
         $category->description = $request->description;
         $category->slug = strtolower($request->description);
@@ -112,7 +112,7 @@ class AdministrationCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        $category = Categories::findOrFail($id);
+        $category = Category::findOrFail($id);
 
         $category->delete();
 

@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master_admin')
 
 @section('title')
 	Dashboard
@@ -25,18 +25,24 @@
 						    <div class="well profile_view">
 						        <div class="col-sm-12">
 						          	<h4 class="brief">
-						          		<i>{{ $user->profile->first_name }} {{ $user->profile->first_surname }}</i>
+
+										@if($user->profile == null)
+											<i>Peril no completado</i>
+									  	@else
+											<i>{{ $user->profile->first_name }} {{ $user->profile->first_surname }}</i>
+									  	@endif
+				
 						          	</h4>
 						          	<div class="left col-xs-12">
 						            	<ul class="list-unstyled">
 						              		<li>
-						              			<i class="fa fa-phone"></i> {{ $user->profile->number_phone }}
+						              			<i class="fa fa-phone"></i> {{ $user->profile->number_phone or 'No proporcionado'}}
 						              		</li>
 						              		<li>
 						              			<i class="fa fa-envelope"></i> {{ $user->email}}
 						              		</li>
 						            		<li>
-						            			<i class="fa fa-child"></i> {{ $user->profile->hobby }}
+						            			<i class="fa fa-child"></i> {{ $user->profile->hobby or 'No proporcionado'}}
 						            		</li>
 						            	</ul>
 						          	</div>

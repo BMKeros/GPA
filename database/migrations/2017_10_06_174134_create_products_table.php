@@ -13,12 +13,12 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('product', function (Blueprint $table) {
 
-            $table->integer('categories_id')->unsigned();
-            $table->foreign('categories_id')->references('id')->on('categories');
-            $table->integer('units_id')->unsigned();
-            $table->foreign('units_id')->references('id')->on('units');
+            $table->integer('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('category');
+            $table->integer('unit_id')->unsigned();
+            $table->foreign('unit_id')->references('id')->on('unit');
             $table->increments('id');
             $table->string('name', 100);
             $table->string('slug', 100);
@@ -42,7 +42,7 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('product');
 
     }
 }
