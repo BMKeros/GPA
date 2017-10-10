@@ -17,12 +17,12 @@ Route::get('/', function () {
 
 // products route
 Route::bind('product', function($slug){
-	return App\Products::where('slug', $slug)->first();
+	return App\Products::where('slug', $slug)->firstOrFail();
 });
 
 
 // USER ROUTE
-Route::group(['prefix' => 'user'],	function ()	{
+Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
 
 	// user view
 	Route::get('/', function () {
@@ -32,7 +32,7 @@ Route::group(['prefix' => 'user'],	function ()	{
 	// user dashboard 
 	Route::get('/dashboard', function () {
 	    return view('user.dashboard');
-	});
+    })->middleware('auth');
 
 	// profile route
 	Route::resource('/profile', 'ProfileController');
@@ -63,7 +63,7 @@ Route::group(['prefix' => 'user'],	function ()	{
 });
 
 // ADMIN ROUTE
-Route::group(['prefix' => 'admin'],	function ()	{
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
 	// admin view
 	Route::get('/', function () {
@@ -73,7 +73,7 @@ Route::group(['prefix' => 'admin'],	function ()	{
 	// admin dashboard 
 	Route::get('/dashboard', function () {
 	    return view('admin.dashboard');
-	});
+    })->middleware('auth');
 
 	// users route
 	Route::resource('/users', 'AdministrationUserController');
@@ -82,14 +82,13 @@ Route::group(['prefix' => 'admin'],	function ()	{
 	Route::resource('/categories', 'AdministrationCategoriesController');
 
 	// products route
-
-	Route::bind('/products', function($slug){
-		return App\Products::where('slug', $slug)->first();
-	});
-
 	Route::resource('/products', 'AdministrationProductsController');
 
+<<<<<<< HEAD
 	//inventory route
+=======
+	// inventory route
+>>>>>>> 592103dac8c2a531aa52776158543f542edd3192
 	Route::resource('/inventory', 'AdministrationInventoryController');
 
 });

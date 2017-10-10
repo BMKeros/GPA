@@ -8,13 +8,23 @@ use App\Referred;
 class ReferredController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $referreds = Referred::all()->toArray();
+        return view('referred.index', compact('referreds'));
     }
 
     /**

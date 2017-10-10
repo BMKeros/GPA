@@ -8,71 +8,75 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li class="">
-                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
+                       aria-expanded="false">
                         <img src="{{ asset('images/user.png')}}" alt=""> {{ ucfirst(Auth::user()->name) }}
                         <span class=" fa fa-angle-down"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
                         <li>
-                            <a href="{{ url('user/profile/create') }}"> Perfil</a>
+                            @if(Auth::user()->profile)
+                                <a href="{{ route('profile.show', Auth::user()->profile->id) }}"> Perfil</a>
+                            @else
+                                <a href="{{ route('profile.create') }}"> Perfil</a>
+                            @endif
                         </li>
                         <li>
                             <a href="javascript:;">Ajustes</a>
                         </li>
                         <li>
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="fa fa-sign-out pull-right">  </i> Salir
+                            <a href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="fa fa-sign-out pull-right"> </i> Salir
                             </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                  style="display: none;">{{ csrf_field() }}
                             </form>
                         </li>
                     </ul>
                 </li>
 
                 <li role="presentation" class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown"
+                       aria-expanded="false">
                         <i class="fa fa-shopping-cart cart"></i>
                         <span class="badge bg-green">
-                            @php($a = 0)
-                            @isset($cart)
-                                
-                                @foreach($cart as $item)
-                                    {{ ! $a = number_format($item->sum('quantity')) }}
-                                @endforeach
-                            @endisset
-                            
-                            {{ $a }}
+                            @php
+                                $cart = \Session::get('cart');
+                                $elems = \Session::get('elems');
+                            @endphp
+
+                            {{ $elems or '0' }}
+                      
                         </span>
                     </a>
                     <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
-                        
-                        @isset($cart)
-                            @if(count($cart)>0)     
-                                @foreach($cart as $item)              
-                                    <li>
-                                        <a>
+
+                        @if(count($cart)>0)
+                            @foreach($cart as $item)
+                                <li>
+                                    <a style="cursor: pointer;" href="{{ url('user/cart/show')}}">
                                             <span class="image">
-                                                <img src="{{ asset('images/user.png')}}" alt="Profile Image" />
+                                                <img src="{{ asset('images/user.png')}}" alt="Profile Image"/>
                                             </span>
-                                            <span>
-                                                <span>{{ $item->quantity." ".$item->name }}</span>
+                                        <span>
+                                                <span>{{ $item->quantity." ".$item->product->name }}</span>
                                                 <span class="time">hace 3 min</span>
                                             </span>
-                                            <span class="message">
+                                        <span class="message">
                                                  agregado al carrito
                                             </span>
-                                        </a>
-                                    </li>
-                                @endforeach
-                            @else
-                                <li>
-                                    <span class="message">
-                                        No tiene ningun producto agregado al carrito
-                                    </span>
+                                    </a>
                                 </li>
-                            @endif
-                        @endisset
-                        
+                            @endforeach
+                        @else
+                            <li>
+                                <span class="message">
+                                    No tiene ningun producto agregado al carrito
+                                </span>
+                            </li>
+                        @endif
+
                         <li>
                             <div class="text-center">
                                 <a href="{{ url('user/cart/show') }}">
@@ -87,4 +91,4 @@
         </nav>
     </div>
 </div>
-      <!-- /top navigation -->
+<!-- /top navigation -->

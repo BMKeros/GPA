@@ -2,12 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Products;
 use App\Cart;
 
 class CartController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+	public function __construct()
+	{
+        if (!\Session::has('cart')) \Session::put('cart', []);
+        if (!\Session::has('elems')) \Session::put('elems', []);
+		// \Session::forget('cart');
+	}
 
     // Show cart
     public function show()
@@ -15,7 +25,19 @@ class CartController extends Controller
 
     	$cart = Cart::all();
 
-    	return view('cart.show', compact('cart'));
+    	$cart->each(function($cart){
+    	    $cart->user;
+    	    $cart->product;
+    	});
+
+    	// $cart = \Session::get('cart');
+    	$elems = $cart->sum('quantity');
+
+    	\Session::put('cart', $cart);
+    	\Session::put('elems', $elems);
+
+
+    	return view('cart.show');
     }
 
     // Add cart
@@ -24,10 +46,8 @@ class CartController extends Controller
 
     	$product = Cart::create([
     	    'user_id' => \Auth::user()->id,
-    	    'name' => $product->name,
-    	    'price' => $product->price,
+    	    'product_id' => $product->id,
     	    'quantity' => $product->quantity = 1,
-    	    'image' => $product->image,
     	]);
 
     	return redirect('/user/cart/show');
