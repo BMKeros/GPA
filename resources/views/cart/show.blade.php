@@ -6,6 +6,15 @@
 
 @section('content')
 
+@php
+    $cart = \Session::get('cart');
+    $user = "";
+    $subtotal = 0;
+    $porciento = 0;
+    $porcentaje = 0;
+    $total = 0;
+@endphp
+
     <div class="clearfix"></div>
     <div class="row">
         <div class="col-md-12">
@@ -27,10 +36,9 @@
 
                     <div class="row invoice-info">
                         <div class="col-sm-4 invoice-col">
-                            From
-
+                            De
                             <address>
-                                <strong>Iron Admin, Inc.</strong><br />
+                                <strong>A.C Bmkeros R.L</strong><br />
                                 795 Freedom Ave, Suite 600<br />
                                 New York, CA 94107<br />
                                 Phone: 1 (804) 123-9876<br />
@@ -39,10 +47,16 @@
                         </div><!-- /.col -->
 
                         <div class="col-sm-4 invoice-col">
-                            To
+                            Para
+
+                            @foreach($cart as $item)
+                                @php
+                                    $user = $item->user->name;
+                                @endphp
+                            @endforeach
 
                             <address>
-                                <strong>John Doe</strong><br />
+                                <strong>{{ $user }}</strong><br />
                                 795 Freedom Ave, Suite 600<br />
                                 New York, CA 94107<br />
                                 Phone: 1 (804) 123-9876<br />
@@ -51,7 +65,7 @@
                         </div><!-- /.col -->
 
                         <div class="col-sm-4 invoice-col">
-                            <b>Invoice #007612</b><br />
+                            <b>Pedido #007612</b><br />
                             <br />
                             <b>Order ID:</b> 4F3S8J<br />
                             <b>Payment Due:</b> 2/22/2014<br />
@@ -78,25 +92,29 @@
                                 </thead>
 
                                 <tbody>
-                                    @php
-                                        $cart = \Session::get('cart');
-                                    @endphp
 
-                                    @foreach($cart as $item)
-                                        <tr>
-                                            <td><img src="{{ $item->image }}" alt=""></td>
+                                    @if(count($cart)>0)
+                                        @foreach($cart as $item)
+                                            <tr>
+                                                <td><img src="{{ $item->product->image }}" alt=""></td>
 
-                                            <td>{{ $item->name }}</td>
+                                                <td>{{ $item->product->name }}</td>
 
-                                            <td>{{ number_format($item->price,2) }}</td>
+                                                <td>{{ number_format($item->product->price,2) }}</td>
 
-                                            <td>{{ $item->quantity }}</td>
+                                                <td>{{ $item->quantity }}</td>
 
-                                            <td>{{ number_format($item->price * $item->quantity,2) }}</td>
-                                        </tr>
-                                    @endforeach
+                                                <td>{{ number_format($item->product->price * $item->quantity,2) }}</td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                 </tbody>
                             </table>
+                                @if(count($cart)<1)
+                                    <p style="text-align: center;">
+                                        No tiene ningun producto agregado al carrito
+                                    </p>
+                                @endif
                         </div><!-- /.col -->
                     </div><!-- /.row -->
 
@@ -123,29 +141,35 @@
                             <div class="table-responsive">
                                 <table class="table">
                                     <tbody>
-                                        <tr>
-                                            <th style="width:50%">Subtotal:</th>
+                                            @foreach($cart as $item)
+                                                @php
+                                                    $subtotal += $item->product->price * $item->quantity;
+                                                    $porciento = $item->product->street_percentage;
+                                                    $porcentaje = $subtotal * number_format($porciento)/100;
+                                                    $total = number_format($subtotal + $porcentaje,2);
 
-                                            <td>$250.30</td>
-                                        </tr>
+                                                @endphp
+                                            @endforeach
 
-                                        <tr>
-                                            <th>Tax (9.3%)</th>
+                                            <tr>
+                                                <th style="width:50%">Subtotal:</th>
+                                            
 
-                                            <td>$10.34</td>
-                                        </tr>
+                                            <td>{{ number_format($subtotal,2) }}</td>
+                                            </tr>
 
-                                        <tr>
-                                            <th>Shipping:</th>
+                                            <tr>
+                                                <th>Porcentaje {{ number_format($porciento) }}%</th>
 
-                                            <td>$5.80</td>
-                                        </tr>
+                                                <td>{{ number_format($porcentaje,2) }}</td>
+                                            </tr>
 
-                                        <tr>
-                                            <th>Total:</th>
+                                            <tr>
+                                                <th>Total:</th>
 
-                                            <td>$265.24</td>
-                                        </tr>
+                                                <td>{{ $total }}</td>
+                                            </tr>
+                                        
                                     </tbody>
                                 </table>
                             </div>
