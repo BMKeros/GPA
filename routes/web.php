@@ -53,10 +53,10 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
 		});
 
 		// show cart route
-		Route::get('/show', 'CartController@show');
+		Route::get('/show', 'CartController@show')->name('cart.show');
 
 		// add cart route
-		Route::get('/add/{product}', 'CartController@add');
+		Route::get('/add/{product}', 'CartController@add')->name('cart.add');
 
 	});
 
