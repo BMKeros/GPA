@@ -43,10 +43,10 @@
                         <span class="badge bg-green">
                             @php
                                 $cart = \Session::get('cart');
-                                $elems = \Session::get('elems');
+                                $units = \Session::get('units');
                             @endphp
 
-                            {{ $elems or '0' }}
+                            {{ $units or '0' }}
                       
                         </span>
                     </a>
