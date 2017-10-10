@@ -2,7 +2,7 @@
 
 
 @section('title')
-Categories
+Categorias
 @stop
 
 @section('head')
