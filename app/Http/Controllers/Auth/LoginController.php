@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Cart;
 
 class LoginController extends Controller
 {
@@ -41,6 +42,18 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        $cart = Cart::all();
+        $units = $cart->sum('quantity');
+
+        $cart->each(function($cart){
+            $cart->user;
+            $cart->product;
+        });
+        
+
+        \Session::put('cart', $cart);
+        \Session::put('units', $units);
+
         $this->middleware('guest')->except('logout');
     }
 }

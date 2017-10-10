@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Products;
+use App\Product;
 use App\Cart;
 
 class CartController extends Controller
@@ -24,24 +24,25 @@ class CartController extends Controller
     {
 
     	$cart = Cart::all();
+    	// $cart = \Session::get('cart');
 
     	$cart->each(function($cart){
     	    $cart->user;
     	    $cart->product;
     	});
 
-    	// $cart = \Session::get('cart');
-    	$elems = $cart->sum('quantity');
+    	
+    	$units = $cart->sum('quantity');
 
     	\Session::put('cart', $cart);
-    	\Session::put('elems', $elems);
+    	\Session::put('units', $units);
 
 
     	return view('cart.show');
     }
 
     // Add cart
-    public function add(Products $product)
+    public function add(Product $product)
     {
 
     	$product = Cart::create([
@@ -50,6 +51,18 @@ class CartController extends Controller
     	    'quantity' => $product->quantity = 1,
     	]);
 
-    	return redirect('/user/cart/show');
+    	$cart = Cart::all();
+    	$units = $cart->sum('quantity');
+
+    	$cart->each(function($cart){
+    	    $cart->user;
+    	    $cart->product;
+    	});
+    	
+
+    	\Session::put('cart', $cart);
+    	\Session::put('units', $units);
+
+    	return redirect('/user/catalogue');
     }
 }
