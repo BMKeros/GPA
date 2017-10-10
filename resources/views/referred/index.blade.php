@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    Perfil
+    Referidos
 @stop
 
 
@@ -25,13 +25,15 @@
     </thead>
     <tbody>
       @foreach($referreds as $referred)
-      <tr>
-        <td>{{$referred['name']}}</td>
-        <td>{{$referred['last_name']}}</td>
-        <td>{{$referred['phone_number']}}</td>
-        <td>{{$referred['relationship']}}</td>
+       
+          <tr>
+            <td>{{$referred['name']}}</td>
+            <td>{{$referred['last_name']}}</td>
+            <td>{{$referred['phone_number']}}</td>
+            <td>{{$referred['relationship']}}</td>
         
-      </tr>
+          </tr>
+        
       @endforeach
     </tbody>
   </table>
