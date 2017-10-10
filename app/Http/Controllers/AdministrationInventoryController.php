@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Products;
-use App\Categories;
-use App\Units;
+use App\Product;
+use App\Category;
+use App\Unit;
 
 class AdministrationInventoryController extends Controller
 {
@@ -25,7 +25,7 @@ class AdministrationInventoryController extends Controller
 
     public function create()
     {
-        $products = Products::all();
+        $products = Product::all();
         return view('admin.inventory.create', compact('products'));
     }
 

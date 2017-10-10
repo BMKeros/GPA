@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Units;
+use App\Unit;
 
 class UnitsTableSeeder extends Seeder
 {
@@ -43,6 +43,6 @@ class UnitsTableSeeder extends Seeder
             ["name" => 'Sacos', "abbreviation" => 'sac']
         ];
 
-        Units::insert($fields);
+        Unit::insert($fields);
     }
 }
