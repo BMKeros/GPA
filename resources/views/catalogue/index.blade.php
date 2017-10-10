@@ -1,8 +1,8 @@
-@extends('layouts.master')
+@extends('layouts.master_user')
 
 
 @section('title')
-Catalogue
+Catalogo
 @stop
 
 
