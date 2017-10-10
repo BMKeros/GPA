@@ -49,8 +49,11 @@
                 <!--menu list <li><a><i class="fa fa-home"></i> Home</a></li> -->
 
                 <li><a href="{{ route('user.dashboard') }}"><i class="fa fa-dashboard"></i>Dashboard</span></a>
+
+                <li><a href="{{ route('catalogue.index') }}"><i class="fa fa-briefcase"></i> Catalogo</a></li>
+
                 <li><a><i class="fa fa-list-ul"></i>Productos <span class="fa fa-chevron-down"></span></a>
-                    
+
                 <ul class="nav child_menu" style="display: none">
                     <li><a href="{{ route('categories.index') }}">Categorias</a></li>
                     <li><a href="{{ route('products.index') }}">Productos</a></li>
