@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master_user')
 
 
 @section('title')
@@ -54,8 +54,7 @@
                      		</div>
                     	</div>
                         <div class="">
-                            <button type="button" class="btn btn-default btn-lg">Add to Cart</button>
-                            <button type="button" class="btn btn-default btn-lg">Add to Wishlist</button>
+                            <button type="button" class="btn btn-default btn-lg">Agregar al carrito</button>
                         </div>
                   	</div>
                 </div>

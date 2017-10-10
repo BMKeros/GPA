@@ -1,17 +1,6 @@
 @extends('layouts.master_admin')
-
 @section('title')
 	Dashboard
-@stop
-{{-- items for sidenavbar --}}
-
-@section('menu')
-
-	<li>
-		<a href="{{ route('users.index') }}"> <i class="fa fa-users"></i> Usuarios</a>
-		
-	</li>
-
 @stop
 
 @section('content')
@@ -47,7 +36,8 @@
 						            	</ul>
 						          	</div>
 						        </div>
-						        <div class="col-xs-12 bottom text-center">
+								<div>j</div>
+						        <div class="col-xs-12 bottom text-center" >
 						          	<div class="col-xs-12 col-sm-6 emphasis">
 						            	<p class="ratings">
 											
