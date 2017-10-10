@@ -60,7 +60,7 @@
                                                 <img src="{{ asset('images/user.png')}}" alt="Profile Image"/>
                                             </span>
                                         <span>
-                                                <span>{{ $item->quantity." ".$item->name }}</span>
+                                                <span>{{ $item->quantity." ".$item->product->name }}</span>
                                                 <span class="time">hace 3 min</span>
                                             </span>
                                         <span class="message">
@@ -71,9 +71,9 @@
                             @endforeach
                         @else
                             <li>
-                                    <span class="message">
-                                        No tiene ningun producto agregado al carrito
-                                    </span>
+                                <span class="message">
+                                    No tiene ningun producto agregado al carrito
+                                </span>
                             </li>
                         @endif
 
