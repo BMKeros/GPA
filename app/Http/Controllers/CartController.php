@@ -23,12 +23,19 @@ class CartController extends Controller
     public function show()
     {
 
-    	$cartDB = Cart::all();
-    	$cart = \Session::get('cart');
-    	$a = $cartDB->sum('quantity');
+    	$cart = Cart::all();
 
-    	\Session::put('cart', $cartDB);
-    	\Session::put('elems', $a);
+    	$cart->each(function($cart){
+    	    $cart->user;
+    	    $cart->product;
+    	});
+
+    	// $cart = \Session::get('cart');
+    	$elems = $cart->sum('quantity');
+
+    	\Session::put('cart', $cart);
+    	\Session::put('elems', $elems);
+
 
     	return view('cart.show');
     }
@@ -36,22 +43,11 @@ class CartController extends Controller
     // Add cart
     public function add(Products $product)
     {
-    	$data = [
-    	    'user_id' => \Auth::user()->id,
-    	    'name' => $product->name,
-    	    'price' => $product->price,
-    	    'quantity' => $product->quantity = 1,
-    	    'image' => $product->image,
-    	];
-
-    	\Session::put('cart', $data);
 
     	$product = Cart::create([
     	    'user_id' => \Auth::user()->id,
-    	    'name' => $product->name,
-    	    'price' => $product->price,
+    	    'product_id' => $product->id,
     	    'quantity' => $product->quantity = 1,
-    	    'image' => $product->image,
     	]);
 
     	return redirect('/user/cart/show');
