@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master_user')
 @section('title')
     Referidos
 @stop
