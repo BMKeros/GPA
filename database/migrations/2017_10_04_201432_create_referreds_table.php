@@ -20,8 +20,6 @@ class CreateReferredsTable extends Migration
             $table->string('name');
             $table->string('last_name');
             $table->string('phone_number');
-            $table->string('relationship');
-
 
             $table->timestamps();
         });
