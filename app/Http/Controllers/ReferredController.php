@@ -23,8 +23,9 @@ class ReferredController extends Controller
      */
     public function index()
     {
-        $referreds = Referred::all()->toArray();
+        $referreds = Referred::where('user_id', \Auth::id())->get()->toArray();
         return view('referred.index', compact('referreds'));
+
     }
 
     /**
@@ -46,13 +47,14 @@ class ReferredController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        return Referred::create([
+        Referred::create([
             'user_id' =>  \Auth::user()->id,
             'name' => $data['name'],
             'last_name'=> $data['last_name'],
             'phone_number' => $data['phone_number'],
             'relationship'=> $data['relationship'],
             ]);
+        return redirect()->route('referred.index')->with('success','Referido Registrado con exito');
 
     }
 

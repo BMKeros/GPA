@@ -43,16 +43,16 @@
                         <span class="badge bg-green">
                             @php
                                 $cart = \Session::get('cart');
-                                $elems = \Session::get('elems');
+                                $units = \Session::get('units');
                             @endphp
 
-                            {{ $elems or '0' }}
+                            {{ $units or '0' }}
                       
                         </span>
                     </a>
                     <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
 
-                        @if(count($cart)>0)
+                        @if(count($cart)>1)
                             @foreach($cart as $item)
                                 <li>
                                     <a style="cursor: pointer;" href="{{ url('user/cart/show')}}">

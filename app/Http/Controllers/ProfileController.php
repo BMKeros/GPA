@@ -46,7 +46,7 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        return Profile::create([
+        Profile::create([
             'user_id' =>  \Auth::user()->id,
             'first_name' => $data['first_name'],
             'second_name'=> $data['second_name'],
@@ -57,7 +57,7 @@ class ProfileController extends Controller
             'number_cellphone'=> $data['number_cellphone'],
             'hobby'=> $data['hobby'],
           ]);
-
+        return redirect()->route('profile.show',\Auth::user()->profile->id)->with('success','Perfil Registrado con exito');
     }
 
     /**
