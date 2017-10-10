@@ -1,10 +1,12 @@
 @extends('layouts.master')
-@include('layouts.head')
 
 @section('menu')
     <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i>Dashboard</a>
-
     <li>
+        <a href="{{ route('users.index') }}"> <i class="fa fa-users"></i> Usuarios</a>
+    </li>
+    <li>
+	
         <a>
             <i class="fa fa-list-ul"></i>Productos <span class="fa fa-chevron-down"></span>
         </a>
