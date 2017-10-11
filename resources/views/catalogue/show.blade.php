@@ -48,7 +48,7 @@
                         </div>
                     	<div class="">
                       		<div class="product_price">
-                        		<h3 class="price" style="font-size:20px; color: #266BB9;"><b>Precio: {{ number_format($product->price) }} Bs<b></h3>
+                        		<h3 class="price" style="font-size:20px; color: #266BB9;"><b>Precio: {{ number_format($product->price,2) }} Bs<b></h3>
                         		<span class="price-tax">Asociado: {{ number_format($product->associated_percentage) }}%</span><br>
                         		<span class="price-tax">Calle: {{ number_format($product->street_percentage) }}%</span>
                         		<br>
