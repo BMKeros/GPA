@@ -64,7 +64,7 @@ Catalogo
                             <p>Producto: {{$product->name}}  </p>
                             <div class="thumbnail" style="height: 5%; padding: 0;">
                                 <div class="image view view-first">
-                                    <img style="width: 100px; display: block; margin: 8% 30%" src="{{ asset('images/products/').'/'.$product->image }}" alt="image" />
+                                    <img style="width: 80%; height: 100%; margin: auto;" src="{{ asset('images/products/').'/'.$product->image }}" alt="image" />
                                     <div class="mask">
                                         <p>Producto {{$product->name}}</p>
                                         <div class="tools tools-bottom">
