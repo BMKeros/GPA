@@ -12,7 +12,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               	<div class="x_title">
-                	<h2>Producto {{$product->name}} </h2>
+                	<h2>Producto </h2>
                 	<div class="clearfix"></div>
                	</div>
 
@@ -29,7 +29,7 @@
 
                   	<div class="col-md-5 col-sm-5 col-xs-12" style="border:0px solid #e5e5e5;">
 
-                    	<h3 class="prod_title">{{$product->name}} Marca  {{$product->brand}} </h3>
+                    	<h3 class="prod_title">{{ ucwords($product->name) }} {{ ucwords($product->brand) }} </h3>
 
                     	<div class="">
                       		<h2>Categoria : {{$product->category->name}}</h2>
@@ -48,9 +48,9 @@
                         </div>
                     	<div class="">
                       		<div class="product_price">
-                        		<h3 class="price" style="font-size:20px; color: #266BB9;"><b>Precio {{$product->price}} Bs<b></h3>
-                        		<span class="price-tax">asociado % {{$product->associated_percentage}}</span><br>
-                        		<span class="price-tax">calle % {{$product->street_percentage}}</span>
+                        		<h3 class="price" style="font-size:20px; color: #266BB9;"><b>Precio: {{ number_format($product->price) }} Bs<b></h3>
+                        		<span class="price-tax">Asociado: {{ number_format($product->associated_percentage) }}%</span><br>
+                        		<span class="price-tax">Calle: {{ number_format($product->street_percentage) }}%</span>
                         		<br>
                      		</div>
                     	</div>
