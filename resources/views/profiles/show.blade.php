@@ -20,37 +20,12 @@
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
-                    <div class="x_title">
-                
-                        <ul class="nav navbar-right panel_toolbox">
-                            <li>
-                                <a href="#"><i class="fa fa-chevron-up"></i></a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="#">Settings 1</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Settings 2</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-close"></i>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                    </div>
                     <div class="x_content">
                         <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
                             <div class="profile_img">
                                 <div id="crop-avatar">
-                                    <div class="avatar-view" title="Change the avatar">
-                                        <img src="{{ asset('images/user.png') }}" alt="Avatar">
+                                    <div class="avatar-view" title="Change the avatar" style="width: 100%;height: 100%;">
+                                        <img src="{{ asset('images/user.png') }}"  alt="Avatar">
                                     </div>
                                     <h3>{{ $profile->first_name }} {{ $profile->first_surname }}</h3>
                                     <a href="{{ route('profile.edit', $profile->id) }}" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Editar perfil</a>
@@ -71,7 +46,7 @@
                                         <h2><b>Primer apellido:</b></h2>
                                         <h2><b>Segundo apellido:</b></h2>
                                     </div>
-                                    <div class="col-md-4 col-sm-4 col-xs-12" style="margin-left: -25px;">
+                                    <div class="col-md-4 col-sm-4 col-xs-12" style="margin-left: -13%;">
                                         <h2>{{ $profile->first_name }}</h2>
                                         <h2>{{ $profile->second_name }}</h2>
                                         <h2>{{ $profile->first_surname }}</h2>
@@ -85,7 +60,7 @@
                                         <h2><b>Numero telefono:</b></h2>
                                         <h2><b>Hobby:</b></h2>
                                     </div>
-                                    <div class="col-md-4 col-sm-4 col-xs-12" style="margin-left: -25px;">
+                                    <div class="col-md-4 col-sm-4 col-xs-12" style="margin-left: -13%;">
                                         <h2>{{ $profile->cedula }}</h2>
                                         <h2>{{ $profile->number_phone }}</h2>
                                         <h2>{{ $profile->number_cellphone }}</h2>
