@@ -17,7 +17,7 @@
                 <div class="x_content">
                     <br/>
                     <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post"
-                          action="{{url('user/profile')}}">
+                          action="{{route('profile.store')}}">
                         {{csrf_field()}}
 
                         <div class="form-group">
