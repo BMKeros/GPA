@@ -50,7 +50,7 @@
                       
                         </span>
                     </a>
-                    <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu" style="max-height: 225px; !important; overflow: auto !important;">
+                    <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu" style="max-height: 280px; !important; overflow: auto !important;">
 
                         @if(count($cart)>0)
                             @foreach($cart as $item)
