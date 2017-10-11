@@ -50,7 +50,7 @@
                       
                         </span>
                     </a>
-                    <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
+                    <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu" style="max-height: 225px; !important; overflow: auto !important;">
 
                         @if(count($cart)>0)
                             @foreach($cart as $item)
@@ -60,7 +60,7 @@
                                                 <img src="{{ asset('images/user.png')}}" alt="Profile Image"/>
                                             </span>
                                         <span>
-                                                <span>{{ $item->quantity." ".$item->name }}</span>
+                                                <span>{{ $item->quantity." ".$item->product->name." ".$item->product->brand }}</span>
                                                 <span class="time">hace 3 min</span>
                                             </span>
                                         <span class="message">
