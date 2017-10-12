@@ -1,4 +1,7 @@
-@extends('layouts.master')
+@if(\Auth::user()->role->id !== 1)
+    @extends('layouts.master_user')
+@endif
+
 @section('title')
     Perfil
 @stop
