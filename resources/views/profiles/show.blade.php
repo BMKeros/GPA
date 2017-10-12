@@ -1,4 +1,8 @@
-@extends('layouts.master') {{--Verificar esta linea--}}
+
+@if(\Auth::user()->role->id !== 1)
+    @extends('layouts.master_user')
+@endif
+
 @section('title')
     Perfil
 @stop
@@ -27,7 +31,7 @@
                                     <div class="avatar-view" title="Change the avatar" style="width: 100%;height: 100%;">
                                         <img src="{{ asset('images/user.png') }}"  alt="Avatar">
                                     </div>
-                                    <h3>{{ $profile->first_name }} {{ $profile->first_surname }}</h3>
+                                    <h3>{{ ucwords($profile->first_name) }} {{ ucwords($profile->first_surname) }}</h3>
                                     <a href="{{ route('profile.edit', $profile->id) }}" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Editar perfil</a>
                                 </div>
                             </div>
