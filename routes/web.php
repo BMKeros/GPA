@@ -34,9 +34,7 @@ Route::group(['prefix' => 'client', 'middleware' => ['auth']], function () {
 	    return view('user.dashboard');
     })->middleware('auth');
 
-	// profile route
-	Route::resource('/profile', 'ProfileController');
-
+	
 
 	// referred route
 	Route::resource('/referred', 'ReferredController');
@@ -94,10 +92,6 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
 	
 	// profile route
 	Route::resource('/profile', 'ProfileController');
-
-
-	// referred route
-	Route::resource('/referred', 'ReferredController');
 	
 });
 
