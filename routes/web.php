@@ -22,11 +22,11 @@ Route::bind('product', function($slug){
 
 
 // USER ROUTE
-Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'client', 'middleware' => ['auth']], function () {
 
 	// user view
 	Route::get('/', function () {
-	    return redirect('/user/dashboard');
+	    return redirect('/client/dashboard');
 	})->name('user.dashboard');
 
 	// user dashboard 
