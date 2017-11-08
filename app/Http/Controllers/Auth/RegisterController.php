@@ -42,7 +42,7 @@ class RegisterController extends Controller
         if (\Auth::user()->role->id == 1) {
             return '/admin/dashboard';
         } else {
-            return '/user/dashboard';
+            return '/client/dashboard';
         }
     }
 
