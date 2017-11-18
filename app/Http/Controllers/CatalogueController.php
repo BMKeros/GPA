@@ -4,19 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Inventory;
 
 class CatalogueController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
-        return view('catalogue.index', compact('products'));
+        $inventory = Inventory::where('status_id', 1)->get();
+
+        return view('catalogue.index', compact('inventory'));
     }
 
     public function show($product)
     {
-    	$product = Product::where('slug', $product)->firstOrFail();
+    	$inventory = Inventory::where('slug', $product)->firstOrFail();
 
-        return view('catalogue.show', ['product' => $product ]);
+        return view('catalogue.show', ['inventory' => $inventory ]);
     }
 }
