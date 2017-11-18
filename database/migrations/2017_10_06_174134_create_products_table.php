@@ -17,8 +17,7 @@ class CreateProductsTable extends Migration
 
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('category');
-            $table->integer('unit_id')->unsigned();
-            $table->foreign('unit_id')->references('id')->on('unit');
+
             $table->increments('id');
             $table->string('name', 100);
             $table->string('slug', 100);
@@ -28,8 +27,6 @@ class CreateProductsTable extends Migration
             $table->decimal('associated_percentage');
             $table->decimal('street_percentage');
             $table->integer('product_limit')->nullable();
-            $table->integer('quantity_available');
-            $table->integer('quantity');
             $table->string('image')->nullable();
             $table->timestamps();
         });
