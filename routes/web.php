@@ -19,6 +19,9 @@ Route::get('/', function () {
 Route::bind('product', function($slug){
 	return App\Product::where('slug', $slug)->firstOrFail();
 });
+Route::bind('inventory', function($slug){
+	return App\Inventory::where('slug', $slug)->firstOrFail();
+});
 
 
 // USER ROUTE
