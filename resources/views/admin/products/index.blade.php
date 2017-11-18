@@ -26,8 +26,6 @@ Productos
                         	<th>Marca</th>
                         	<th>Categoria</th>
                         	<th>Precio</th>
-                        	<th>Cantidad</th>
-
                         	<th>Accion</th>
 
                       	</tr>
@@ -40,13 +38,12 @@ Productos
 								<td>{{ $product->brand }}</td>
 								<td>{{ $product->category->name }}</td>
 								<td>{{ $product->price }}</td>
-								<td>{{ $product->quantity }}</td>
 
                         		<td style="width: 30%;">
 
 
 		                        	<a href="{{route('products.show',[$product->slug])}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Ver </a>
-		                        	<a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Editar </a>
+		                        	<a href="{{route('products.edit', [$product->slug])}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Editar </a>
 		                       		<form style="display: inline;" action="{{route('products.destroy', [$product->slug])}}" method="POST">{{csrf_field()}}
 		                        		<input type="hidden" name="_method" value="Delete">
 		                         		<button onClick="return confirm('Eliminar registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Eliminar
