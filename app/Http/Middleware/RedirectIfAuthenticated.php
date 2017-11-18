@@ -21,7 +21,7 @@ class RedirectIfAuthenticated
             if (Auth::user()->role->id == 1) {
                 return redirect('/admin/dashboard');
             }
-            return redirect('/user/dashboard');
+            return redirect('/client/dashboard');
         }
 
         return $next($request);

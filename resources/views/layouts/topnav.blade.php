@@ -55,7 +55,7 @@
                         @if(count($cart)>0)
                             @foreach($cart as $item)
                                 <li>
-                                    <a style="cursor: pointer;" href="{{ url('user/cart/show')}}">
+                                    <a style="cursor: pointer;" href="{{route('cart.show')}}">
                                             <span class="image">
                                                 <img src="{{ asset('images/user.png')}}" alt="Profile Image"/>
                                             </span>
@@ -79,7 +79,7 @@
 
                         <li>
                             <div class="text-center">
-                                <a href="{{ url('user/cart/show') }}">
+                                <a href="{{route('cart.show')}}">
                                     <strong>Mostrar carrito</strong>
                                     <i class="fa fa-angle-right"></i>
                                 </a>

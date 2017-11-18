@@ -56,7 +56,7 @@ class LoginController extends Controller
             return '/admin/dashboard';
         }
         else{
-            return '/user/dashboard';
+            return '/client/dashboard';
         }
     }
 

@@ -44,7 +44,17 @@
 						            	</p>
 						          	</div>
 						          	<div class="col-xs-12 col-sm-6 emphasis">
-						            	<a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-user"></i> Ver perfil</a>
+
+						          		@if($user->profile == null)
+						          		
+						          			Sin Perfil
+						          		
+						          		@else
+
+						          			<a href="{{ route('profile.show', $user->profile->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-user"></i> Ver perfil</a>
+
+						          		@endif
+						       
 						          	</div>
 						        </div>
 						    </div>

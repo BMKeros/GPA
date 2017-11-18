@@ -24,12 +24,12 @@ Route::bind('inventory', function($slug){
 });
 
 
-// USER ROUTE
-Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
+// CLIENT ROUTE
+Route::group(['prefix' => 'client', 'middleware' => ['auth']], function () {
 
 	// user view
 	Route::get('/', function () {
-	    return redirect('/user/dashboard');
+	    return redirect('/client/dashboard');
 	})->name('user.dashboard');
 
 	// user dashboard 
@@ -37,9 +37,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
 	    return view('user.dashboard');
     })->middleware('auth');
 
-	// profile route
-	Route::resource('/profile', 'ProfileController');
-
+	
 
 	// referred route
 	Route::resource('/referred', 'ReferredController');
@@ -52,7 +50,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
 
 		// cart view
 		Route::get('/', function () {
-			return redirect('/user/cart/show');
+			return redirect('/client/cart/show');
 		});
 
 		// show cart route
@@ -90,6 +88,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 	Route::resource('/inventory', 'AdministrationInventoryController');
 
 });
+
+// USER ROUTE
+Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
+
+	
+	// profile route
+	Route::resource('/profile', 'ProfileController');
+	
+});
+
+
+
 
 // AUTH ROUTE
 Auth::routes();

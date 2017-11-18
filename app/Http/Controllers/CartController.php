@@ -63,6 +63,6 @@ class CartController extends Controller
     	\Session::put('cart', $cart);
     	\Session::put('units', $units);
 
-    	return redirect('/user/catalogue');
+    	return redirect('/client/catalogue');
     }
 }

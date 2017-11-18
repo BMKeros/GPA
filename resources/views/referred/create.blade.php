@@ -17,7 +17,7 @@
                 <div class="x_content">
                     <br/>
                     <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post"
-                          action="{{url('user/referred')}}">
+                          action="{{route('referred.store')}}">
                         {{csrf_field()}}
 
                         <div class="form-group">
@@ -72,7 +72,7 @@
                         <div class="ln_solid"></div>
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                <a href="{{url('user/dashboard')}}" class="btn btn-primary">Atras</a>
+                                <a href="{{url('client/dashboard')}}" class="btn btn-primary">Atras</a>
                                 <button type="submit" class="btn btn-success">Guardar</button>
                             </div>
                         </div>
