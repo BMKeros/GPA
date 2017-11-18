@@ -19,7 +19,7 @@ Catalogo
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for...">
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
+                        <button class="btn btn-default" type="button"></button>
                     </span>
                 </div>
             </div>
@@ -59,14 +59,14 @@ Catalogo
                         </div>
                         <div class="clearfix"></div>
 
-                        @foreach($products as $product)
+                        @foreach($inventory as $product)
                         <div class="col-md-3">
-                            <p>Producto: {{ ucwords($product->name) }}  </p>
+                            <p>Producto: {{ ucwords($product->product->name) }}  </p>
                             <div class="thumbnail" style="height: 5%; padding: 0;">
                                 <div class="image view view-first">
-                                    <img style="width: 80%; height: 100%; margin: auto;" src="{{ asset('images/products/').'/'.$product->image }}" alt="image" />
+                                    <img style="width: 80%; height: 100%; margin: auto;" src="{{ asset('images/products/').'/'.$product->product->image }}" alt="image" />
                                     <div class="mask">
-                                        <p>Producto {{ ucwords($product->name) }}</p>
+                                        <p>Producto {{ ucwords($product->product->name) }}</p>
                                         <div class="tools tools-bottom">
                                             <a href="{{ route('catalogue.show',[$product->slug]) }}"><i class="fa fa-eye"></i></a>
                                             <a href="{{ route('cart.add',[$product->slug]) }}"><i class="fa fa-shopping-cart cart" style="margin-top:0; margin-bottom: 3px;"></i></a>
@@ -75,9 +75,9 @@ Catalogo
                                 </div>
                                 <div class="product_price" style="margin: 0; padding: 0;">
 
-                                    <h4>Marca: {{$product->brand}}</h4>
-                                    <h4>Cantidad: {{$product->quantity}}{{$product->unit->abbreviation}}  </h4>
-                                    <h4 class="price">Precio: {{ number_format($product->price,2) }}Bs</h4>
+                                    <h4>Marca: {{$product->product->brand}}</h4>
+                                    <h4>Cantidad: {{$product->quantity_available}}{{$product->unit->abbreviation}}  </h4>
+                                    <h4 class="price">Precio: {{ number_format($product->product->price,2) }}Bs</h4>
                                 </div>
 
                             </div>
