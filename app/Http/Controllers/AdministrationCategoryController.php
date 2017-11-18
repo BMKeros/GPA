@@ -96,7 +96,7 @@ class AdministrationCategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->name = $request->name;
         $category->description = $request->description;
-        $category->slug = strtolower($request->description);
+        $category->slug = strtolower($request->name);
         $category->save();
 
         return redirect()->route('categories.index');
