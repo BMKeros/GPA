@@ -8,6 +8,8 @@
 	<div class="row">
         <div class="col-md-12">
          	<div class="x_panel">
+         		<h2>Usuarios</h2>
+         		<a href="{{ route('products.create') }}" class="btn btn-info btn-md"><i class="fa fa-plus"></i>   Registrar Nuevo Usuario </a>
             	<div class="x_content">
 					@foreach($users as $user)
 						<div class="col-md-4 col-sm-4 col-xs-12 animated fadeInDown">
@@ -16,7 +18,7 @@
 						          	<h4 class="brief">
 
 										@if($user->profile == null)
-											<i>Peril no completado</i>
+											<i>Perfil no completado</i>
 									  	@else
 											<i>{{ $user->profile->first_name }} {{ $user->profile->first_surname }}</i>
 									  	@endif
@@ -38,20 +40,20 @@
 						        </div>
 								<div>j</div>
 						        <div class="col-xs-12 bottom text-center" >
-						          	<div class="col-xs-12 col-sm-6 emphasis">
-						            	<p class="ratings">
-											
-						            	</p>
-						          	</div>
-						          	<div class="col-xs-12 col-sm-6 emphasis">
+						          	<div class="col-xs-12">
 
 						          		@if($user->profile == null)
 						          		
 						          			Sin Perfil
 						          		
 						          		@else
-
-						          			<a href="{{ route('profile.show', $user->profile->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-user"></i> Ver perfil</a>
+											
+											<a href="{{ route('profile.show', $user->profile->id) }}" class="btn btn-primary btn-xs pull-right"><i class="fa fa-user"></i> Ver perfil</a>
+										
+										
+											<a href="{{ route('profile.edit', $user->profile->id) }}" class="btn btn-primary btn-xs pull-right"><i class="fa fa-edit"></i> Editar perfil</a>
+											
+						          			
 
 						          		@endif
 						       
