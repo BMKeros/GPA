@@ -1,5 +1,5 @@
 
-@if(\Auth::user()->role->id !== 1)
+@if(\Auth::user()->hasRole('USER') || \Auth::user()->hasRole('SOCIO'))
     @extends('layouts.master_user')
 @endif
 
