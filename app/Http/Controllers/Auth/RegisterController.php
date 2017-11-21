@@ -39,7 +39,7 @@ class RegisterController extends Controller
      */
     protected function redirectTo()
     {
-        if (\Auth::user()->role->id == 1) {
+        if (\Auth::user()->hasRole('ADMIN')) {
             return '/admin/dashboard';
         } else {
             return '/client/dashboard';
@@ -81,11 +81,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'role_id' => 2,
         ]);
+        $user->attachRole(2);
+        return $user;
+    
     }
 }
