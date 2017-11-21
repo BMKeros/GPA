@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
-use App\Unit;
+
 
 
 class AdministrationProductController extends Controller
@@ -29,16 +29,16 @@ class AdministrationProductController extends Controller
         $products = Product::all();
         $products->each(function($products){
             $products->category;
-            $products->unit;
         });
         return view('admin.products.index', compact('products'));
     }
 
     public function create()
     {
+        $product = null;
         $categories = Category::all();
-        $units = Unit::all();
-        return view('admin.products.create', compact('categories', 'units'));
+        return view('admin.products.create', ['product' => $product
+            ], compact('categories'));
     }
 
     /**
@@ -51,11 +51,7 @@ class AdministrationProductController extends Controller
     {
         $data = $request->all();
 
-
-        $units = Unit::where('id', $request->units)->first();
-
-        $slug =  $request->name.'-'. $request->brand.'-'. $request->quantity.''.$units->abbreviation;
-
+        $slug =  $request->name.'-'. $request->brand;
         $imageName = "image/nodisponible.jpg";
 
         if(isset($request->image)){
@@ -72,11 +68,8 @@ class AdministrationProductController extends Controller
             'description' => $data['description'],
             'brand' => $data['brand'],
             'price' => $data['price'],
-            'unit_id' => $data['units'],
             'associated_percentage' => $data['associated_percentage'],
             'street_percentage' => $data['street_percentage'],
-            'quantity_available' => $data['quantity_available'],
-            'quantity' => $data['quantity'],
             'slug' => strtolower($slug),
             'image' => $imageName,
         ]);
@@ -102,9 +95,14 @@ class AdministrationProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+
+        $categories = Category::all();
+        
+
+        return view('admin.products.create', ['product' => $product
+            ], compact('categories'));
     }
 
     /**
@@ -114,9 +112,29 @@ class AdministrationProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        //
+
+        $product->name = $request->name;
+        $product->brand = $request->brand;
+        $product->category_id = $request->category;
+        $product->price = $request->price;
+        $product->description = $request->description;
+        $product->associated_percentage = $request->associated_percentage;
+        $product->street_percentage = $request->street_percentage;
+
+        if(isset($request->image)){
+            $image = $request->image;
+            $imageName = 'product_'. time() . '.' . $image->getClientOriginalExtension();
+            $path = public_path() . '/images/products';
+            $image->move($path, $imageName);
+            $product->image = $imageName;
+        }
+
+        $product->save();
+
+        return redirect()->route('products.index');
+
     }
 
     /**

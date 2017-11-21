@@ -52,7 +52,7 @@
                 	</div>
                     <div class="form-group">
                       	<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-4">
-                        	<button type="submit" class="btn btn-primary">Crear</button>
+                        	<button type="submit" class="btn btn-primary">@if ($category == null) Crear @else Guardar @endif</button>
                       	</div>
 
                     </div>

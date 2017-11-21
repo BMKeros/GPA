@@ -40,14 +40,6 @@
                    		 </div>
 
                     	<div class="">
-                      		<h2>Cantidad: {{$product->quantity}} {{$product->unit->abbreviation}}</h2>
-                    	</div>
-
-                    	<div class="">
-                      		<h2>Cantidad disponible: {{$product->quantity_available}}</h2>
-                    	</div>
-
-                    	<div class="">
                       		<div class="product_price">
                         		<h1 class="price">Precio {{$product->price}}</h1>
                         		<span class="price-tax">asociado % {{$product->associated_percentage}}</span><br>

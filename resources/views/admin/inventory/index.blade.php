@@ -24,19 +24,33 @@ Inventory
                       	<tr>
                         	<th>Nombre</th>
                         	<th>Marca</th>
-                        	<th>Categoria</th>
-                        	<th>Precio</th>
-                        	<th>Existencia</th>
+                        	<th>Cantidad Disponible</th>
                             <th>Status</th>
-
-
                         	<th>Accion</th>
 
                       	</tr>
                     	</thead>
                     	<tbody>
 
+                            @foreach($inventory as $product)
+                            <tr>
+                                <td>{{ $product->product->name }}</td>
+                                <td>{{ $product->product->brand }}</td>
+                                <td>{{ $product->quantity_available }} {{$product->unit->name}}</td>
+                                <td>{{ $product->status->name }}</td>
 
+                                <td style="width: 30%;">
+
+                                    <a href="{{route('inventory.edit', [$product->slug])}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Editar </a>
+                                    <form style="display: inline;" action="{{route('inventory.destroy', [$product->slug])}}" method="POST">{{csrf_field()}}
+                                        <input type="hidden" name="_method" value="Delete">
+                                        <button onClick="return confirm('Eliminar registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Eliminar
+                                            
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
                     	</tbody>
                     </table>
 
