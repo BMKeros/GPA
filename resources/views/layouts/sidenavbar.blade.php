@@ -3,7 +3,7 @@
     <div class="left_col scroll-view">
 
         <div class="navbar nav_title" style="border: 0;">
-            @if(Auth::user()->role->id === 1)
+            @if(\Auth::user()->hasRole('ADMIN'))
                 <a href="{{ route('admin.dashboard') }}" class="site_title"><i class="fa fa-paw"></i>
                     <span>GPA</span></a>
             @else
@@ -39,7 +39,7 @@
 
             <div class="menu_section" style="margin-top:30%;">
 
-            <!-- <h3 style="margin-left: 0px">{{ Auth::user()->role->name }}</h3> -->
+         
                 <ul class="nav side-menu">
                     @yield('menu')
                 </ul>
