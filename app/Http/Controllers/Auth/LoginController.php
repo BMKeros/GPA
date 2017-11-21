@@ -52,7 +52,7 @@ class LoginController extends Controller
      * @var string
      */
     protected function redirectTo(){
-        if (\Auth::user()->role->id == 1){
+        if (\Auth::user()->hasRole('ADMIN')){
             return '/admin/dashboard';
         }
         else{
