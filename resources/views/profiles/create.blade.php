@@ -1,4 +1,4 @@
-@extends('layouts.master_user')
+@extends(\Auth::user()->hasRole('ADMIN') ? 'layouts.master_admin' :'layouts.master_user')
 @section('title')
     Perfil
 @stop
