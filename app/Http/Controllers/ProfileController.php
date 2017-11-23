@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Profile;
-
+use App\Role;
+use App\User;
 
 class ProfileController extends Controller
 {
@@ -81,7 +82,8 @@ class ProfileController extends Controller
     public function edit($id)
     {
         $profile = Profile::find($id);
-        return view('profiles.edit',compact('profile'));
+        $roles = Role::all();
+        return view('profiles.edit',['profile' => $profile,'roles' => $roles]);
     }
 
     /**
@@ -94,6 +96,7 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
         $profile = Profile::find($id);
+
         $this->validate(request(), [
             'first_name' => 'required',
             'second_name'=> 'required',
@@ -112,7 +115,10 @@ class ProfileController extends Controller
         $profile->number_phone = $request->get('number_phone');
         $profile->number_cellphone = $request->get('number_cellphone');
         $profile->hobby = $request->get('hobby');
+        $profile->user->roles()->sync([(int) $request->get('rol')]);
         $profile->save();
+
+
         return redirect()->action('ProfileController@show', $profile['id'])->with('success','Perfil actualizado con exito');
     }
 
