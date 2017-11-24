@@ -36,7 +36,7 @@ class AdministrationUserController extends Controller
      */
     public function create()
     {
-        //
+        return view('/admin.create_user');
     }
 
     /**
@@ -47,7 +47,15 @@ class AdministrationUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
+        $user->attachRole(2);
+        return redirect()->route('users.index');
     }
 
     /**
