@@ -119,7 +119,11 @@ class AdministrationUserController extends Controller
 
             $user->save();
 
-        } else {
+        }
+        if($request->get('rol') !== 0){
+            $user->roles()->sync([(int) $request->get('rol')]);
+        } 
+        else {
 
             $user->password = bcrypt($request->get('password'));
             $user->save();
@@ -127,7 +131,7 @@ class AdministrationUserController extends Controller
         }
         
         return redirect()->route('users.index')->with('success','Datos del usuario actualizados');
-
+        
     }
 
     /**
