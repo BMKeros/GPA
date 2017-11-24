@@ -33,9 +33,17 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('/profiles.create');
+        if($request->has('user')){
+            $user_id = $request->input('user');
+        }
+        else{
+            $user_id = \Auth::user()->id;
+        }
+
+        $roles = Role::all();
+        return view('/profiles.create',['roles' => $roles, 'user_id' => $user_id ]);
     }
 
     /**
@@ -48,7 +56,7 @@ class ProfileController extends Controller
     {
         $data = $request->all();
         Profile::create([
-            'user_id' =>  \Auth::user()->id,
+            'user_id' =>  $data['user_id'],
             'first_name' => $data['first_name'],
             'second_name'=> $data['second_name'],
             'first_surname' => $data['first_surname'],
@@ -57,7 +65,8 @@ class ProfileController extends Controller
             'number_phone'=> $data['number_phone'],
             'number_cellphone'=> $data['number_cellphone'],
             'hobby'=> $data['hobby'],
-          ]);
+        ]);
+
         return redirect()->route('profile.show',\Auth::user()->profile->id)->with('success','Perfil Registrado con exito');
     }
 
@@ -115,11 +124,14 @@ class ProfileController extends Controller
         $profile->number_phone = $request->get('number_phone');
         $profile->number_cellphone = $request->get('number_cellphone');
         $profile->hobby = $request->get('hobby');
-        $profile->user->roles()->sync([(int) $request->get('rol')]);
         $profile->save();
 
-
-        return redirect()->action('ProfileController@show', $profile['id'])->with('success','Perfil actualizado con exito');
+        if(\Auth::user()->hasRole('ADMIN')){
+            return redirect('admin.show_users');
+        } else {
+            return redirect()->action('ProfileController@show', $profile['id'])->with('success','Perfil actualizado con exito');
+        }
+        
     }
 
     /**
