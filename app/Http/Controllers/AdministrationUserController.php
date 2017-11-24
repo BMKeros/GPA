@@ -108,28 +108,23 @@ class AdministrationUserController extends Controller
         $this->validate(request(), [
             'name' => 'required',
             'email'=> 'required',
-            'rol'  => 'required',
             
         ]);
 
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         
-        if($request->get('password') === ''){
-
-            $user->save();
-
-        }
-        if($request->get('rol') !== 0){
-            $user->roles()->sync([(int) $request->get('rol')]);
-        } 
-        else {
-
+        if($request->get('password') !== ''){
             $user->password = bcrypt($request->get('password'));
-            $user->save();
-
         }
         
+        if($request->get('rol') != 0){
+            $user->roles()->sync([(int) $request->get('rol')]);
+        } 
+        
+        
+        $user->save();
+
         return redirect()->route('users.index')->with('success','Datos del usuario actualizados');
         
     }
