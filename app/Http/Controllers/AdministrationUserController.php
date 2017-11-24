@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Profile;
 use App\User;
+use App\Role;
 
 use Illuminate\Http\Request;
 
@@ -36,7 +37,8 @@ class AdministrationUserController extends Controller
      */
     public function create()
     {
-        return view('/admin.create_user');
+        $roles = Role::all();
+        return view('/admin.create_user',['roles' => $roles]);
     }
 
     /**
@@ -54,7 +56,7 @@ class AdministrationUserController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
-        $user->attachRole(2);
+        $user->roles()->sync([(int) $data['rol']]);
         return redirect()->route('users.index');
     }
 
@@ -78,7 +80,8 @@ class AdministrationUserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('admin.edit_users', ['user' => $user]);
+        $roles = Role::all();
+        return view('admin.edit_users', ['user' => $user, 'roles' => $roles]);
 
     }
 
