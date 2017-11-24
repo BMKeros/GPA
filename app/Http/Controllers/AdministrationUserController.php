@@ -29,6 +29,15 @@ class AdministrationUserController extends Controller
         $users = User::all();
         return view('admin.show_users', ['users' => $users]);
     }
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+            'password_confirmation' => 'required',
+        ]);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -94,7 +103,31 @@ class AdministrationUserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        
+        $this->validate(request(), [
+            'name' => 'required',
+            'email'=> 'required',
+            'rol'  => 'required',
+            
+        ]);
+
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        
+        if($request->get('password') === ''){
+
+            $user->save();
+
+        } else {
+
+            $user->password = bcrypt($request->get('password'));
+            $user->save();
+
+        }
+        
+        return redirect()->route('users.index')->with('success','Datos del usuario actualizados');
+
     }
 
     /**
