@@ -9,7 +9,7 @@
         <div class="col-md-12">
          	<div class="x_panel">
          		<h2>Usuarios</h2>
-         		<a href="{{ route('products.create') }}" class="btn btn-info btn-md"><i class="fa fa-plus"></i>   Registrar Nuevo Usuario </a>
+         		<a href="{{ route('users.create') }}" class="btn btn-info btn-md"><i class="fa fa-plus"></i>   Registrar Nuevo Usuario </a>
             	<div class="x_content">
 					@foreach($users as $user)
 						<div class="col-md-4 col-sm-4 col-xs-12 animated fadeInDown">
@@ -44,7 +44,7 @@
 
 						          		@if($user->profile == null)
 						          		
-						          			Sin Perfil
+						          			<a href="{{ route('profile.create', ['user'=>$user->id]) }}" class="btn btn-primary btn-xs pull-right"><i class="fa fa-edit"></i> Crear perfil</a>
 						          		
 						          		@else
 											
