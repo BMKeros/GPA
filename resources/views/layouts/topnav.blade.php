@@ -15,10 +15,12 @@
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
                         <li>
-                            @if(Auth::user()->profile)
-                                <a href="{{ route('profile.show', Auth::user()->profile->id) }}"> Perfil</a>
-                            @else
-                                <a href="{{ route('profile.create') }}"> Perfil</a>
+                            @if(\Auth::user()->hasRole('ADMIN') != true)
+                                @if(Auth::user()->profile)
+                                    <a href="{{ route('profile.show', Auth::user()->profile->id) }}"> Perfil</a>
+                                @else
+                                    <a href="{{ route('profile.create') }}"> Perfil</a>
+                                @endif
                             @endif
                         </li>
                         <li>
