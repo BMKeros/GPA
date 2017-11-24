@@ -67,6 +67,17 @@
                                         class="form-control col-md-7 col-xs-12" name="password_confirmation">
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Rol<span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-9 col-xs-12">
+                                        <select class="select2_single form-control" tabindex="-1" name="rol">
+                                            <option value="0" selected> -- Seleccione --</option>
+                                            @foreach($roles as $rol)
+                                                <option value="{{ $rol->id }}">{{ $rol->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                                 
                                 <div class="form-group">
                                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
