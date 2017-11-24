@@ -1,6 +1,6 @@
 @extends('layouts.master_admin')
 @section('title')
-	Dashboard
+	Usuarios
 @stop
 
 @section('content')
@@ -19,8 +19,10 @@
 
 										@if($user->profile == null)
 											<i>Perfil no completado</i>
+											<a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-primary btn-xs pull-right"><i class="fa fa-edit"></i> Editar</a>
 									  	@else
-											<i>{{ $user->profile->first_name }} {{ $user->profile->first_surname }}</i>
+											<i>{{ $user->profile->first_name }} {{ $user->profile->first_surname }}
+											<a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-primary btn-xs pull-right"><i class="fa fa-edit"></i> Editar</a></i>
 									  	@endif
 				
 						          	</h4>
@@ -43,9 +45,9 @@
 						          	<div class="col-xs-12">
 
 						          		@if($user->profile == null)
-						          		
-						          			<a href="{{ route('profile.create', ['user'=>$user->id]) }}" class="btn btn-primary btn-xs pull-right"><i class="fa fa-edit"></i> Crear perfil</a>
-						          		
+						          			@if($user->hasRole('ADMIN') != 1)
+						          				<a href="{{ route('profile.create', ['user'=>$user->id]) }}" class="btn btn-primary btn-xs pull-right"><i class="fa fa-edit"></i> Crear perfil</a>
+						          			@endif
 						          		@else
 											
 											<a href="{{ route('profile.show', $user->profile->id) }}" class="btn btn-primary btn-xs pull-right"><i class="fa fa-user"></i> Ver perfil</a>
