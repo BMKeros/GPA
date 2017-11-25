@@ -19,7 +19,11 @@
 
 										@if($user->profile == null)
 											<i>Perfil no completado</i>
+
+
+
 											<a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-primary btn-xs pull-right"><i class="fa fa-edit"></i> Editar</a>
+
 									  	@else
 											<i>{{ $user->profile->first_name }} {{ $user->profile->first_surname }}
 											<a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-primary btn-xs pull-right"><i class="fa fa-edit"></i> Editar</a></i>
@@ -44,9 +48,19 @@
 						        <div class="col-xs-12 bottom text-center" >
 						          	<div class="col-xs-12">
 
+										{{--< --a href="{{ route('users.destroy', ['user' => $user->id]) }}" class="btn btn-danger btn-xs pull-right"><i class="fa fa-trash-o"></i> Eliminar</a>
+										--}}
+
+										<form action="{{route('users.destroy', [$user])}}" method="POST">{{csrf_field()}}
+	                        				<input type="hidden" name="_method" value="Delete">
+	                         				<button class="btn btn-danger btn-xs pull-right"><i class="fa fa-trash-o"></i> Eliminar
+    									
+    										</button>
+
 						          		@if($user->profile == null)
 						          			@if($user->hasRole('ADMIN') != 1)
-						          				<a href="{{ route('profile.create', ['user'=>$user->id]) }}" class="btn btn-primary btn-xs pull-right"><i class="fa fa-edit"></i> Crear perfil</a>
+						          				<a href="{{ route('profile.create', $user->id) }}" class="btn btn-primary btn-xs pull-right"><i class="fa fa-edit"></i> Crear perfil</a>
+
 						          			@endif
 						          		@else
 											
@@ -59,6 +73,7 @@
 
 						          		@endif
 						       
+		                        		</form>
 						          	</div>
 						        </div>
 						    </div>
