@@ -13,12 +13,13 @@ class StatusTableSeeder extends Seeder
      */
     public function run()
     {
-        $data = [
-            ["name" => 'Disponible'],
-            ["name" => 'No Disponible']
-
-        ];
-
-        Status::insert($data);
+        Status::insert([
+            [
+                "name" => 'Disponible'
+            ],
+            [
+                "name" => 'No Disponible'
+            ],
+        ]);
     }
 }

@@ -13,7 +13,7 @@ class PaymentTableSeeder extends Seeder
      */
     public function run()
     {
-        $data = [
+        Payment::insert([
             [
                 'name' => 'Transferencia',
             ],
@@ -35,8 +35,6 @@ class PaymentTableSeeder extends Seeder
             [
                 'name' => 'Bitcoins',
             ],
-        ];
-
-        Payment::insert($data);
+        ]);
     }
 }

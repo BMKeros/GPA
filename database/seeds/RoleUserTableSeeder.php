@@ -12,7 +12,7 @@ class RoleUserTableSeeder extends Seeder
      */
     public function run()
     {
-        $data = [
+        DB::table('role_user')->insert([
             [   
                 'user_id' => 1,
                 'role_id' => 1,
@@ -25,7 +25,6 @@ class RoleUserTableSeeder extends Seeder
                 'user_id' => 3,
                 'role_id' => 3,
             ],
-        ];
-        DB::table('role_user')->insert($data);
+        ]);
     }
 }

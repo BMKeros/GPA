@@ -13,7 +13,7 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        $data = [
+        User::insert([
             [   
                 'id' => 1,
                 'name' => 'admin',
@@ -32,8 +32,6 @@ class UserTableSeeder extends Seeder
                 'email' => 'socio@bmkeros.org.ve',
                 'password' => bcrypt('socio'),
             ],
-        ];
-
-        User::insert($data);
+        ]);
     }
 }
