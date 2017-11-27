@@ -29,16 +29,6 @@ class AdministrationUserController extends Controller
         $users = User::all();
         return view('admin.show_users', ['users' => $users]);
     }
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'password_confirmation' => 'required',
-        ]);
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -140,8 +130,8 @@ class AdministrationUserController extends Controller
 
     	$user = User::findOrFail($id);
 
+        $user->profile->delete();
         $user->delete();
-
         
         return redirect()->route('users.index');
     }
