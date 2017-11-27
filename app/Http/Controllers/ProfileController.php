@@ -35,6 +35,7 @@ class ProfileController extends Controller
      */
     public function create(Request $request)
     {
+        
         if($request->has('user')){
             $user_id = $request->input('user');
         }
@@ -67,7 +68,11 @@ class ProfileController extends Controller
             'hobby'=> $data['hobby'],
         ]);
 
-        return redirect()->route('profile.show',\Auth::user()->profile->id)->with('success','Perfil Registrado con exito');
+        if(\Auth::user()->hasRole('ADMIN')){
+            return redirect()->route('users.index')->with('success','Perfil Registrado con exito');
+        }else{
+            return redirect()->route('profile.show',$data['user_id'])->with('success','Perfil Registrado con exito');
+        }
     }
 
     /**
@@ -127,7 +132,7 @@ class ProfileController extends Controller
         $profile->save();
 
         if(\Auth::user()->hasRole('ADMIN')){
-            return redirect('admin.show_users');
+            return redirect()->route('users.index')->with('success', 'Perfil actualizado con exito');
         } else {
             return redirect()->action('ProfileController@show', $profile['id'])->with('success','Perfil actualizado con exito');
         }
