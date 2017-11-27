@@ -15,14 +15,8 @@
 
 - Configuracion de Desarrollo
 
-	1) Ejecutar las migraciones
-	    ` php artisan migrate `
-
-	2) Reconocer los seeders
-	    ` composer dump-autoload `
-
-	3) Precargar la base de datos a traves de los seeders
-	    ` php artisan db:seed `
+	* Ejecutar
+	    `sh init-db.sh `
 
 - Usuario Root
 	- user: admin
