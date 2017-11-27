@@ -24,6 +24,11 @@
                             @endif
                         </li>
                         <li>
+                        
+                            @if(\Auth::user()->hasRole('ADMIN'))
+                                <a href="{{ route('users.edit', Auth::user()->id)}}">Editar</a>
+                            @endif
+                            
                             <a href="javascript:;">Ajustes</a>
                         </li>
                         <li>
