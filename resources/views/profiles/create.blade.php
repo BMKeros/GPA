@@ -104,7 +104,12 @@
                         <div class="ln_solid"></div>
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                            @if(\Auth::user()->hasRole('ADMIN') != 1)
                                 <a href="{{url('user/dashboard')}}" class="btn btn-primary">Atras</a>
+                            @else
+                                <a href="{{route('users.index')}}" class="btn btn-primary">Atras</a>
+                            @endif
+                                
                                 <button type="submit" class="btn btn-success">Guardar</button>
                             </div>
                         </div>
