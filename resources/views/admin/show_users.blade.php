@@ -4,6 +4,12 @@
 @stop
 
 @section('content')
+@if (\Session::has('success'))
+    <div class="alert alert-success">
+        <p>{{ \Session::get('success') }}</p>
+    </div>
+    <br />
+@endif
 
 	<div class="row">
         <div class="col-md-12">
@@ -56,7 +62,7 @@
 
 							          		@if($user->profile == null)
 							          			@if($user->hasRole('ADMIN') != 1)
-							          				<a href="{{ route('profile.create', $user->id) }}" class="btn btn-primary btn-xs pull-right"><i class="fa fa-edit"></i> Crear perfil</a>
+							          				<a href="{{ route('profile.create', ['user' => $user->id]) }}" class="btn btn-primary btn-xs pull-right"><i class="fa fa-edit"></i> Crear perfil</a>
 
 							          			@endif
 							          		@else
