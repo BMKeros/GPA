@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Profile;
 use App\User;
 use App\Role;
-
 use Illuminate\Http\Request;
+use Validator;
 
 class AdministrationUserController extends Controller
 {
@@ -29,9 +28,10 @@ class AdministrationUserController extends Controller
         $users = User::all();
         return view('admin.show_users', ['users' => $users]);
     }
+
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        return \Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
@@ -47,7 +47,7 @@ class AdministrationUserController extends Controller
     public function create()
     {
         $roles = Role::all();
-        return view('/admin.create_user',['roles' => $roles]);
+        return view('/admin.create_user', ['roles' => $roles]);
     }
 
     /**
@@ -60,12 +60,24 @@ class AdministrationUserController extends Controller
     {
         $data = $request->all();
 
+        $validator = Validator::make($data, [
+            'email' => 'unique:users'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('users.create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
-        $user->roles()->sync([(int) $data['rol']]);
+
+        $user->roles()->sync([(int)$data['rol']]);
+
         return redirect()->route('users.index');
     }
 
@@ -104,29 +116,29 @@ class AdministrationUserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-        
+
         $this->validate(request(), [
             'name' => 'required',
-            'email'=> 'required',
-            
+            'email' => 'required',
+
         ]);
 
         $user->name = $request->get('name');
         $user->email = $request->get('email');
-        
-        if($request->get('password') !== ''){
+
+        if ($request->get('password') !== '') {
             $user->password = bcrypt($request->get('password'));
         }
-        
-        if($request->get('rol') != 0){
-            $user->roles()->sync([(int) $request->get('rol')]);
-        } 
-        
-        
+
+        if ($request->get('rol') != 0) {
+            $user->roles()->sync([(int)$request->get('rol')]);
+        }
+
+
         $user->save();
 
-        return redirect()->route('users.index')->with('success','Datos del usuario actualizados');
-        
+        return redirect()->route('users.index')->with('success', 'Datos del usuario actualizados');
+
     }
 
     /**
@@ -138,11 +150,11 @@ class AdministrationUserController extends Controller
     public function destroy($id)
     {
 
-    	$user = User::findOrFail($id);
+        $user = User::findOrFail($id);
 
         $user->delete();
 
-        
+
         return redirect()->route('users.index');
     }
 }
