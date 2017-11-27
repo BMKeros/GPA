@@ -68,6 +68,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <a href="{{route('users.index')}}" class="btn btn-primary">Atras</a>
                                 <button type="submit" class="btn btn-success">Guardar</button>
                             </div>
                         </div>
