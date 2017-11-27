@@ -28,7 +28,7 @@
                         <div class="x_content">
                             <br/>
                             <form id="demo-form2" data-parsley-validate class=" form-horizontal form-label-left" method="post"
-                            action="{{action('ProfileController@update', $profile['id'])}}">
+                            action="{{route('profile.update', $profile['id'])}}">
                                 <input name="_method" type="hidden" value="PATCH">
                                 {{csrf_field()}}
 
