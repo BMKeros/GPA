@@ -1,7 +1,4 @@
-
-@if(\Auth::user()->hasRole('USER') || \Auth::user()->hasRole('SOCIO'))
-    @extends('layouts.master_user')
-@endif
+@extends(\Auth::user()->hasRole('ADMIN') ? ' layouts.master_admin' : 'layouts.master_user')
 
 @section('title')
     Perfil
