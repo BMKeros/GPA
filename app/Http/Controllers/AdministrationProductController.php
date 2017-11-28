@@ -58,6 +58,9 @@ class AdministrationProductController extends Controller
             $image = $request->image;
             $imageName = 'product_'. time() . '.' . $image->getClientOriginalExtension();
             $path = public_path() . '/images/products';
+            if ( !File::exists($path) ) { 
+                File::makeDirectory($path); 
+            } 
             $image->move($path, $imageName);
 
         }
