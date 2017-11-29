@@ -93,8 +93,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:ADMIN']], function () 
 
 //ERROR ROUTE
 Route::get('/error-403', function () {
-	    return view('layouts.page_403');
-	})->name('error.403');
+	return view('layouts.page_403');
+})->name('error.403');
+
+Route::get('/error-404', function () {
+	return view('layouts.page_404');
+})->name('error.404');
 
 // AUTH ROUTE
 Auth::routes();
