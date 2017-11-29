@@ -25,7 +25,7 @@ Route::bind('inventory', function($slug){
 
 
 // CLIENT ROUTE
-Route::group(['prefix' => 'client', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'client', 'middleware' => ['role:USER|SOCIO']], function () {
 
 	// user view
 	Route::get('/', function () {
@@ -39,6 +39,9 @@ Route::group(['prefix' => 'client', 'middleware' => ['auth']], function () {
 
 	// referred route
 	Route::resource('/referred', 'ReferredController');
+
+	// profile route
+	Route::resource('/profile', 'ProfileController');
 	
 	// catalogue route
 	Route::resource('/catalogue', 'CatalogueController');
@@ -57,12 +60,13 @@ Route::group(['prefix' => 'client', 'middleware' => ['auth']], function () {
 		// add cart route
 		Route::get('/add/{product}', 'CartController@add')->name('cart.add');
 
+	
 	});
 
 });
 
 // ADMIN ROUTE
-Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['role:ADMIN']], function () {
 
 	// admin view
 	Route::get('/', function () {
@@ -85,14 +89,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
 	Route::resource('/inventory', 'AdministrationInventoryController');
 
-});
-
-// USER ROUTE
-Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
-
-	// profile route
-	Route::resource('/profile', 'ProfileController');
-	
 });
 
 // AUTH ROUTE
