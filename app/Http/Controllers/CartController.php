@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\Cart;
+use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
@@ -42,8 +43,20 @@ class CartController extends Controller
     }
 
     // Add cart
-    public function add(Product $product)
+    public function add(Request $request, Product $product)
     {
+    	if ($request->has('view')){
+    		$view = $request->input('view');
+
+    		if ($view == 'catalogue'){
+	    		return redirect()->route('catalogue.index');	
+    			
+    		}
+    		else{
+	    		return redirect()->route('catalogue.show',[$product->slug]);	
+    			
+    		}
+    	}
 
     	$product = Cart::create([
     	    'user_id' => \Auth::user()->id,
@@ -63,6 +76,7 @@ class CartController extends Controller
     	\Session::put('cart', $cart);
     	\Session::put('units', $units);
 
-    	return redirect('/client/catalogue');
+
+
     }
 }
