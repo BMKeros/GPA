@@ -56,7 +56,7 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        Profile::create([
+        $profile=Profile::create([
             'user_id' =>  $data['user_id'],
             'first_name' => $data['first_name'],
             'second_name'=> $data['second_name'],
@@ -71,7 +71,7 @@ class ProfileController extends Controller
         if(\Auth::user()->hasRole('ADMIN')){
             return redirect()->route('users.index')->with('success','Perfil Registrado con exito');
         }else{
-            return redirect()->route('profile.show',$data['user_id'])->with('success','Perfil Registrado con exito');
+            return redirect()->route('profile.show',$profile['id'])->with('success','Perfil Registrado con exito');
         }
     }
 
