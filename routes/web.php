@@ -91,5 +91,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:ADMIN']], function () 
 
 });
 
+//ERROR ROUTE
+Route::get('/error-403', function () {
+	    return view('layouts.page_403');
+	})->name('error.403');
+
 // AUTH ROUTE
 Auth::routes();
