@@ -72,7 +72,7 @@
                     	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Nombre <span class="required">*</span>
                    		</label>
                 		<div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="name" required="required" class="form-control col-md-7 col-xs-12" name="name" value="@if ($product == null) {{ old('name') }} @else {{$product->name}} @endif">
+                        <input type="text" id="name" required="required" class="form-control col-md-7 col-xs-12" name="name" @if ($product == null) value="{{old('name')}}" @else value="{{$product->name}}" @endif>
                		 	</div>
                		</div>
                		<div class="form-group">
@@ -80,14 +80,14 @@
                       	</label>
                			
                			<div class="col-md-6 col-sm-6 col-xs-12">
-                    		<input type="text" id="brand" name="brand" required="required" class="form-control col-md-7 col-xs-12" value="@if ($product == null) {{ old('brand') }} @else {{$product->brand}} @endif">
+                    		<input type="text" id="brand" name="brand" required="required" class="form-control col-md-7 col-xs-12" @if ($product == null) value="{{ old('brand')}}" @else value="{{$product->brand}}" @endif>
                 		</div>
                 	</div>
 
                     <div class="form-group">
                         <label for="price" class="control-label col-md-3 col-sm-3 col-xs-12">Precio<span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="price" class="form-control col-md-7 col-xs-12" type="text" name="price" value="@if (is_null($product)) {{ old('price') }} @else {{$product->price}} @endif">
+                            <input id="price" class="form-control col-md-7 col-xs-12" type="text" name="price" @if (is_null($product)) value="{{ old('price') }}"@else value="{{$product->price}}" @endif>
                         </div>
                     </div>
                     <div class="form-group">
