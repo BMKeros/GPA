@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('name', 100);
             $table->string('slug', 100);
             $table->string('brand', 100);
-            $table->string('description', 250);
+            $table->string('description', 250)->nullable();
             $table->decimal('price');
             $table->decimal('associated_percentage');
             $table->decimal('street_percentage');
