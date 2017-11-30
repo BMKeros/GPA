@@ -27,7 +27,7 @@
 
                     	<h3 class="prod_title">Producto {{$product->name}} </h3>
 
-                    	<p>Descripcion del producto : Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth.{{$product->description}}</p>
+                    	<p>Descripcion del producto : {{$product->description}}</p>
                     	<br />
 
 
