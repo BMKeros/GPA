@@ -993,9 +993,9 @@ td span {
   overflow: hidden;
 }
 .error-number {
-  font-size: 90px;
+  font-size: 120px;
   line-height: 90px;
-  margin: 20px 0;
+  margin-top: 15%;
 }
 .col-middle {
   margin-top: 5%;

@@ -39,7 +39,7 @@
 
             <div class="menu_section" style="margin-top:30%;">
 
-         
+
                 <ul class="nav side-menu">
                     @yield('menu')
                 </ul>
