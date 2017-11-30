@@ -54,6 +54,7 @@ class AdministrationCategoryController extends Controller
 
         $validator = Validator::make($data, [
             'name' => 'required|max:30',
+            'description' => 'required',
         ]);
         if ($validator->fails()) {
             return redirect()->back()
@@ -107,6 +108,7 @@ class AdministrationCategoryController extends Controller
 
         $this->validate(request(),[
             'name' => 'required|max:30',
+            'description' => 'required',
         ]);
 
         $category = Category::findOrFail($id);
