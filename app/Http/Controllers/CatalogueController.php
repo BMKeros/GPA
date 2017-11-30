@@ -10,7 +10,7 @@ class CatalogueController extends Controller
 {
     public function index()
     {
-        $inventory = Inventory::where('status_id', 1)->get();
+        $inventory = Inventory::where('status_id', 1)->paginate(12);
 
         return view('catalogue.index', compact('inventory'));
     }
