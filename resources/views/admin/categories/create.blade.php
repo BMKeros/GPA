@@ -49,7 +49,7 @@
                     	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre <span class="required">*</span>
                    		</label>
                 		<div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="name" value="@if ($category == null) {{ old('name') }} @else {{$category->name}} @endif">
+                        <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="name" @if ($category == null) value="{{old('name')}}" @else value="{{$category->name}}" @endif>
                		 	</div>
                		</div>
                		<div class="form-group">
@@ -57,7 +57,7 @@
                       	</label>
                			
                			<div class="col-md-6 col-sm-6 col-xs-12">
-                    		<input type="text" id="last-name" name="description" required="required" class="form-control col-md-7 col-xs-12" value="@if ($category == null) {{ old('description') }} @else {{$category->description}} @endif">
+                    		<input type="text" id="last-name" name="description" required="required" class="form-control col-md-7 col-xs-12" @if ($category == null) value="{{old('description')}}" @else value="{{$category->description}}" @endif>
                 		</div>
                 	</div>
                     <div class="form-group">
