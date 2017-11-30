@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -45,15 +46,19 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if($exception->getStatusCode() == 403) {
-
-            return redirect('/error-403');
+        if($exception instanceof HttpException)
+        {
+            if($exception->getStatusCode() == 403)
+            {
+                return redirect('/error-403');
+            }
 
         }
-        else if($exception instanceof NotFoundHttpException)
+        if($exception instanceof NotFoundHttpException)
         {
             return redirect('/error-404');
         }
+        
         return parent::render($request, $exception);
     }
 
