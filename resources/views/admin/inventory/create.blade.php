@@ -11,6 +11,13 @@
 
 
 @section('content')
+@if (\Session::has('error'))
+<div class="clearfix"></div>
+<div class="alert alert-error">
+    <p>{{ \Session::get('error') }}</p>
+</div>
+@endif
+
 <div class="clearfix"></div>
 @if ($errors->any())
     <div class="alert alert-danger">
