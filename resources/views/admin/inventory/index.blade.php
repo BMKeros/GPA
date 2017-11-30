@@ -12,11 +12,18 @@ Inventory
 @stop
 
 @section('content')
+@if (\Session::has('success'))
+<div class="clearfix"></div>
+<div class="alert alert-success">
+    <p>{{ \Session::get('success') }}</p>
+</div>
+<div class="clearfix"></div>
+@endif
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <h2>Inventario</h2>
-                <a href="{{ route('inventory.create') }}" class="btn btn-info btn-xs"><i class="fa fa-plus"></i>Registrar Nuevo Producto en el Inventario </a>
+                <a href="{{ route('inventory.create') }}" class="btn btn-info btn-md"><i class="fa fa-plus"></i>Registrar Nuevo Producto en el Inventario </a>
                 <div class="x_content">
  
            			<table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
