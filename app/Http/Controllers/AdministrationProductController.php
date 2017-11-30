@@ -97,7 +97,7 @@ class AdministrationProductController extends Controller
         ]);
 
     
-        return redirect()->route('products.index')->with('success', "Producto {$product->name} Marca {$product->brand} Actualizado con exito!");
+        return redirect()->route('products.index')->with('success', "Producto {$product->name} Marca {$product->brand} Creado con exito!");
     }
 
     /**
