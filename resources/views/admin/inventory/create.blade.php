@@ -11,7 +11,17 @@
 
 
 @section('content')
-
+<div class="clearfix"></div>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <strong>Error!</strong>
+        <ul>
+    @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+    @endforeach
+        </ul>
+    </div>
+@endif
 <div class="clearfix"></div>
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -47,8 +57,11 @@
                                     <option value="{{ $product->id }}">{{ $product->name }} {{ $product->brand }}</option>
                                     @endif
                                 @else
+                                    @if (old('product') == $product->id )
+                                    <option selected value="{{ $product->id }}">{{ $product->name }} {{ $product->brand }}</option>
+                                    @else
                                     <option value="{{ $product->id }}">{{ $product->name }} {{ $product->brand }}</option>
-                                    
+                                    @endif
                                 @endif     
 
                             @endforeach
@@ -61,7 +74,7 @@
                         <label for="quantity" class="control-label col-md-3 col-sm-3 col-xs-12">Cantidad<span class="required">*</span>
                         </label>
                         <div class="col-md-3 col-sm-6 col-xs-12">
-                            <input id="quantity" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text" name="quantity" value="@if ($inventory == null) @else {{$inventory->quantity_available}} @endif">
+                            <input id="quantity" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text" name="quantity" @if (is_null($inventory)) value="{{old('quantity')}}" @else value="{{$inventory->quantity_available}}" @endif>
                         </div>
                         <div class="col-md-3 col-sm-9 col-xs-12">
                             <select class="select2_single form-control" tabindex="-1" name="unit" style="text-align: center;">
@@ -74,7 +87,11 @@
                                     <option value="{{ $unit->id }}">{{ $unit->name }}</option>
                                     @endif
                                 @else
+                                    @if (old('unit') == $unit->id )
+                                    <option selected value="{{ $unit->id }}">{{ $unit->name }}</option>
+                                    @else
                                     <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                                    @endif
                                     
                                 @endif    
                             @endforeach
@@ -90,8 +107,17 @@
                             <select class="select2_single form-control" tabindex="-1" name="status">
                             <option value="0" selected>--Seleccione--</option>
                             @if(is_null($inventory))
-                                <option value="1">Disponible</option>
+
+                                @if(old('status') == 1)
+                                <option value="1" selected>Disponible</option>
                                 <option value="2">No Disponible</option>
+                                @elseif(old('status') == 2)
+                                <option value="1">Disponible</option>
+                                <option value="2" selected>No Disponible </option>
+                                @else
+                                <option value="1">Disponible</option>
+                                <option value="2">No Disponible</option> 
+                                @endif                               
                             @else
                                 @if($inventory->status->id == 1)
                                 <option value="1" selected>Disponible</option>
@@ -106,8 +132,8 @@
                     </div>
 
                     <div class="form-group">
-                      	<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-4">
-                        	<button type="submit" class="btn btn-primary">@if (is_null($product)) Crear @else Actualizar @endif</button>
+                      	<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
+                        	<button type="submit" class="btn btn-primary">@if (is_null($inventory)) Crear @else Actualizar @endif</button>
                       	</div>
 
                     </div>
