@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
-
+use File;
+use Validator;
 
 
 class AdministrationProductController extends Controller
@@ -49,7 +50,25 @@ class AdministrationProductController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $data = $request->all();
+
+        $validator = Validator::make($data, [
+            'name' => 'required|max:30',
+            'brand' => 'required|max:30',
+            'category' => 'required|not_in:0',
+            'price' => 'required',
+            'associated_percentage' => 'required',
+            'street_percentage' => 'required',
+
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         $slug =  $request->name.'-'. $request->brand;
         $imageName = "image/nodisponible.jpg";
@@ -78,7 +97,7 @@ class AdministrationProductController extends Controller
         ]);
 
     
-        return redirect()->route('products.index');
+        return redirect()->route('products.index')->with('success', "Producto {$product->name} Marca {$product->brand} Actualizado con exito!");
     }
 
     /**
@@ -118,6 +137,18 @@ class AdministrationProductController extends Controller
     public function update(Request $request, Product $product)
     {
 
+        $this->validate(request(),[
+
+            'name' => 'required|max:30',
+            'brand' => 'required|max:30',
+            'category' => 'required',
+            'price' => 'required|not_in:0',
+            'associated_percentage' => 'required',
+            'street_percentage' => 'required',
+
+        ]);
+
+
         $product->name = $request->name;
         $product->brand = $request->brand;
         $product->category_id = $request->category;
@@ -136,8 +167,8 @@ class AdministrationProductController extends Controller
 
         $product->save();
 
-        return redirect()->route('products.index');
-
+ 
+        return redirect()->route('products.index')->with('success', "Producto {$product->name} Marca {$product->brand} Actualizado con exito!");
     }
 
     /**
