@@ -58,8 +58,19 @@ class AdministrationInventoryController extends Controller
         if (!is_null($product_exist)){
 
             $product_exist->quantity_available = $product_exist->quantity_available + $data['quantity'];
-            $product_exist->save();
-            return redirect()->route('inventory.index')->with('success', "Producto {$product_exist->product->name} Marca {$product_exist->product->brand} Actualizado con exito al inventario!");
+            
+            if($product_exist->unit_id != $data['unit']){
+                
+                return redirect()->back()->with('error', "Este Producto se encuentra registrado con el tipo de unidad: {$product_exist->unit->name}!")->withInput();  
+
+            }
+
+            else{
+                $product_exist->save();
+                return redirect()->route('inventory.index')->with('success', "Producto {$product_exist->product->name} Marca {$product_exist->product->brand} Actualizado con exito al inventario!");  
+            }
+
+           
         }
         else{
             $product = Product::findOrFail($data['product']);
