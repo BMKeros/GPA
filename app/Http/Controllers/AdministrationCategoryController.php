@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use Validator;
 
 
 class AdministrationCategoryController extends Controller
@@ -51,12 +52,22 @@ class AdministrationCategoryController extends Controller
        
         $data = $request->all();
 
+        $validator = Validator::make($data, [
+            'name' => 'required|max:30',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $categories = Category::create([
             'name' => $data['name'],
             'description' => $data['description'],
             'slug' => strtolower($data['name']),
         ]);
-    
+
+        return redirect()->route('categories.index')->with('success', "Categoria {$categories->name}  Creada con exito!");
         return redirect()->route('categories.index');
     }
 
@@ -93,14 +104,18 @@ class AdministrationCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $this->validate(request(),[
+            'name' => 'required|max:30',
+        ]);
+
         $category = Category::findOrFail($id);
         $category->name = $request->name;
         $category->description = $request->description;
         $category->slug = strtolower($request->name);
         $category->save();
 
-        return redirect()->route('categories.index');
-
+        return redirect()->route('categories.index')->with('success', "Categoria {$category->name}  Actualizada con exito!");
 
     }
 
