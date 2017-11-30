@@ -58,10 +58,10 @@ class AdministrationProductController extends Controller
             'name' => 'required|max:30',
             'brand' => 'required|max:30',
             'category' => 'required|not_in:0',
-            'price' => 'required',
-            'associated_percentage' => 'required',
-            'street_percentage' => 'required',
-
+            'price' => 'required|numeric',
+            'associated_percentage' => 'required|numeric',
+            'street_percentage' => 'required|numeric',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         if ($validator->fails()) {
