@@ -51,7 +51,7 @@
                      		</div>
                     	</div>
                         <div class="">
-                            <a href="{{ route('cart.add', [$inventory->slug, 'view' => 'product']) }}">
+                            <a href="{{ route('cart.add', [$inventory->slug]) }}">
                                 <button type="button" class="btn btn-default btn-lg" >Agregar al carrito</button>
                             </a>
                         </div>
