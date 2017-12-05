@@ -105,9 +105,10 @@ class CartController extends Controller
     // Trash cart
     public function trash()
     {
-        // $cart = Cart::all();
-        // $cart->delete();
-
+        $cart = Cart::all()->where("user_id", \Auth::user()->id);
+        foreach ($cart as $item) {
+            $item->delete();
+        }
         return redirect()->route('cart.show');
     }
 
