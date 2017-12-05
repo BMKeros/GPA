@@ -60,6 +60,14 @@ Route::group(['prefix' => 'client', 'middleware' => ['role:USER|SOCIO']], functi
 		// add cart route
 		Route::get('/add/{product}', 'CartController@add')->name('cart.add');
 
+		// del cart route
+		Route::get('/delete/{product}', 'CartController@delete')->name('cart.delete');
+
+		// trash cart route
+		Route::get('/trash', 'CartController@trash')->name('cart.trash');
+
+		// uptate cart route
+		Route::get('/update/{product}/{quantity?}', 'CartController@update')->name('cart.update');
 	
 	});
 
