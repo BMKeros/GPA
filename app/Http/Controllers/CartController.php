@@ -13,70 +13,120 @@ class CartController extends Controller
      *
      * @return void
      */
-	public function __construct()
-	{
+    public function __construct()
+    {
         if (!\Session::has('cart')) \Session::put('cart', []);
         if (!\Session::has('units')) \Session::put('units', []);
-		// \Session::forget('cart');
-	}
+        // \Session::forget('cart');
+    }
 
     // Show cart
     public function show()
     {
 
-    	$cart = Cart::all();
-    	// $cart = \Session::get('cart');
+        $cart = Cart::all();
 
-    	$cart->each(function($cart){
-    	    $cart->user;
-    	    $cart->product;
-    	});
+        $cart->each(function($cart){
+            $cart->user;
+            $cart->product;
+        });
 
-    	
-    	$units = $cart->sum('quantity');
+        
+        $units = count($cart);
 
-    	\Session::put('cart', $cart);
-    	\Session::put('units', $units);
+        \Session::put('cart', $cart);
+        \Session::put('units', $units);
+
+        $total = $this->total();
 
 
-    	return view('cart.show');
+        return view('cart.show', compact('total'));
     }
+
 
     // Add cart
     public function add(Request $request, Product $product)
     {
-    	if ($request->has('view')){
-    		$view = $request->input('view');
 
-    		if ($view == 'catalogue'){
-	    		return redirect()->route('catalogue.index');	
-    			
-    		}
-    		else{
-	    		return redirect()->route('catalogue.show',[$product->slug]);	
-    			
-    		}
-    	}
+        $cart = Cart::where('product_id', '=', $product->id)->first();
 
-    	$product = Cart::create([
-    	    'user_id' => \Auth::user()->id,
-    	    'product_id' => $product->id,
-    	    'quantity' => $product->quantity = 1,
-    	]);
+        if(count($cart)>=1){
 
-    	$cart = Cart::all();
-    	$units = $cart->sum('quantity');
+           return redirect()->route('cart.show');
 
-    	$cart->each(function($cart){
-    	    $cart->user;
-    	    $cart->product;
-    	});
-    	
-
-    	\Session::put('cart', $cart);
-    	\Session::put('units', $units);
+        }else{
+            $product = Cart::create([
+                'user_id' => \Auth::user()->id,
+                'product_id' => $product->id,
+                'quantity' => $product->quantity = 1,
+            ]);         
+        }
 
 
+        $cart = Cart::all();
+        $units = count($cart);
 
+        $cart->each(function($cart){
+            $cart->user;
+            $cart->product;
+        });
+        
+
+        \Session::put('cart', $cart);
+        \Session::put('units', $units);
+
+        return redirect()->route('cart.show');
+
+    }
+
+    // Update item
+    public function update(Product $product, $quantity)
+    {
+
+        $cart=Cart::where('product_id', '=', $product->id)->first();
+
+        $cart->quantity = $quantity;
+        $cart->save();
+ 
+
+        return redirect()->route('cart.show');
+    }
+
+    // Delete item
+    public function delete(Product $product)
+    {
+        $cart=Cart::where('product_id', '=', $product->id)->first();
+        $cart->delete();
+    
+        return redirect()->route('cart.show');
+
+    }
+
+    // Trash cart
+    public function trash()
+    {
+        // $cart = Cart::all();
+        // $cart->delete();
+
+        return redirect()->route('cart.show');
+    }
+
+    // Total
+    private function total()
+    {
+        $cart = Cart::all();
+
+        $cart->each(function($cart){
+            $cart->user;
+            $cart->product;
+        });
+
+        $total = 0;
+
+        foreach($cart as $item){
+            $total += $item->product->price * $item->quantity;
+        }
+
+        return $total;
     }
 }
