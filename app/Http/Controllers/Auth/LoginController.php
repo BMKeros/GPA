@@ -31,7 +31,7 @@ class LoginController extends Controller
     public function __construct()
     {
         $cart = Cart::all();
-        $units = $cart->sum('quantity');
+        $units = count($cart);
 
         $cart->each(function ($cart) {
             $cart->user;
