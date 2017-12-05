@@ -9,6 +9,7 @@ Catalogo
 @section('content')
 
 <div class="">
+    <div class="clearfix"></div>
     <div class="page-title">
         <div class="title_left">
             <h3>Catalogo de Productos</h3>
@@ -49,7 +50,7 @@ Catalogo
                                         <p>Producto {{ ucwords($product->product->name) }}</p>
                                         <div class="tools tools-bottom">
                                             <a href="{{ route('catalogue.show',[$product->slug]) }}"><i class="fa fa-eye"></i></a>
-                                            <a href="{{ route('cart.add',[$product->slug, 'view' => 'catalogue']) }}"><i class="fa fa-shopping-cart cart" style="margin-top:0; margin-bottom: 3px;"></i></a>
+                                            <a href="{{ route('cart.add',[$product->slug]) }}"><i class="fa fa-shopping-cart cart" style="margin-top:0; margin-bottom: 3px;"></i></a>
                                         </div>
                                     </div>
                                 </div>
