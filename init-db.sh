@@ -12,4 +12,4 @@ echo "Ejecutando autollenado de la base de datos"
 php artisan db:seed
 
 echo "Base de datos inicializada"
-echo "Adios"
+echo "Adios, Bmkeros"
