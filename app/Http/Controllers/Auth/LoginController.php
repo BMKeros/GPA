@@ -29,18 +29,9 @@ class LoginController extends Controller
      * @return void
      */
     public function __construct()
-    {
-        $cart = Cart::all();
-        $units = count($cart);
-
-        $cart->each(function ($cart) {
-            $cart->user;
-            $cart->product;
-        });
+    {  
 
 
-        \Session::put('cart', $cart);
-        \Session::put('units', $units);
 
         $this->middleware('guest')->except('logout');
     }
@@ -52,10 +43,23 @@ class LoginController extends Controller
      * @var string
      */
     protected function redirectTo(){
+
         if (\Auth::user()->hasRole('ADMIN')){
             return '/admin/dashboard';
         }
         else{
+            $cart = Cart::all()->where("user_id", \Auth::user()->id);
+            $units = count($cart);
+
+            $cart->each(function ($cart) {
+                $cart->user;
+                $cart->product;
+            });
+
+
+            \Session::put('cart', $cart);
+            \Session::put('units', $units);
+            
             return '/client/dashboard';
         }
     }
