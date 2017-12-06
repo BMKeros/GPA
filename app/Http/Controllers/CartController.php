@@ -24,7 +24,7 @@ class CartController extends Controller
     public function show()
     {
 
-        $cart = Cart::all();
+        $cart = Cart::all()->where("user_id", \Auth::user()->id);
 
         $cart->each(function($cart){
             $cart->user;
@@ -48,11 +48,11 @@ class CartController extends Controller
     public function add(Request $request, Product $product)
     {
 
-        $cart = Cart::where('product_id', '=', $product->id)->first();
+    	$cart = Cart::all()->where("user_id", \Auth::user()->id)->where('product_id', '=', $product->id);
 
-        if(count($cart)>=1){
+        if(count($cart)){
 
-           return redirect()->route('cart.show');
+           	return redirect()->route('cart.show');
 
         }else{
             $product = Cart::create([
@@ -63,7 +63,7 @@ class CartController extends Controller
         }
 
 
-        $cart = Cart::all();
+        $cart = Cart::all()->where("user_id", \Auth::user()->id);
         $units = count($cart);
 
         $cart->each(function($cart){
@@ -83,11 +83,12 @@ class CartController extends Controller
     public function update(Product $product, $quantity)
     {
 
-        $cart=Cart::where('product_id', '=', $product->id)->first();
+        $cart = Cart::all()->where("user_id", \Auth::user()->id)->where('product_id', '=', $product->id);
 
-        $cart->quantity = $quantity;
-        $cart->save();
- 
+        foreach($cart as $item){
+            $item->quantity = $quantity;
+        	$item->save();
+        }
 
         return redirect()->route('cart.show');
     }
@@ -95,9 +96,12 @@ class CartController extends Controller
     // Delete item
     public function delete(Product $product)
     {
-        $cart=Cart::where('product_id', '=', $product->id)->first();
-        $cart->delete();
-    
+        $cart = Cart::all()->where("user_id", \Auth::user()->id)->where('product_id', '=', $product->id);
+        
+        foreach($cart as $item){
+        	$item->delete();
+        }
+
         return redirect()->route('cart.show');
 
     }
@@ -105,8 +109,11 @@ class CartController extends Controller
     // Trash cart
     public function trash()
     {
-        // $cart = Cart::all();
-        // $cart->delete();
+        $cart = Cart::all()->where("user_id", \Auth::user()->id);
+
+        foreach ($cart as $item) {
+            $item->delete();
+        }
 
         return redirect()->route('cart.show');
     }
@@ -114,7 +121,7 @@ class CartController extends Controller
     // Total
     private function total()
     {
-        $cart = Cart::all();
+        $cart = Cart::all()->where("user_id", \Auth::user()->id);
 
         $cart->each(function($cart){
             $cart->user;
