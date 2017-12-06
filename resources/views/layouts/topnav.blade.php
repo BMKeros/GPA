@@ -44,6 +44,56 @@
                 </li>
                 @if(\Auth::user()->hasRole('ADMIN'))
                     {{-- Aqui ira el icono para mostrar las notificaciones --}}
+                    <li role="presentation" class="dropdown">
+                        <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown"
+                           aria-expanded="false">
+                            <i class="fa fa-bell cart"></i>
+                            <span class="badge bg-green">
+
+                                0
+                          
+                            </span>
+                        </a>
+                        <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu" style="max-height: 280px; !important; overflow: auto !important;">
+                            {{--
+                            @if(count($cart)>0)
+                              
+                                @foreach()
+                                    <li>
+                                        <a style="cursor: pointer;" href="{{route('cart.show')}}">
+                                                <span class="image">
+                                                    <img src="{{ asset('images/user.png')}}" alt="Profile Image"/>
+                                                </span>
+                                            <span>
+                                                    <span>{{ $item->quantity." ".$item->product->name." ".$item->product->brand }}</span>
+                                                    <span class="time">hace 3 min</span>
+                                                </span>
+                                            <span class="message">
+                                                     agregado al carrito
+                                                </span>
+                                        </a>
+                                    </li>
+                                @endforeach
+                                
+                            @else
+                                <li>
+                                        <span class="message">
+                                            No hay ninguna solicitud pendiente
+                                        </span>
+                                </li>
+                            @endif
+                            --}}
+
+                            <li>
+                                <div class="text-center">
+                                    <a href="">
+                                        <strong>Mostrar solicitudes</strong>
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
                 @else
                     <li role="presentation" class="dropdown">
                         <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown"
