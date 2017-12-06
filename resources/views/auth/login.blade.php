@@ -38,7 +38,7 @@
                 </div>
                 <div>
                     <button type="submit" class="btn btn-default">Entrar</button>
-                    <a class="reset_pass" href="#">Olvidaste tu contraseña</a>
+                    <a class="reset_pass" href="/password/reset">Olvidaste tu contraseña</a>
                 </div>
                 <div class="clearfix"></div>
                 <div class="separator">
