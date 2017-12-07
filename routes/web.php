@@ -46,6 +46,9 @@ Route::group(['prefix' => 'client', 'middleware' => ['role:USER|SOCIO']], functi
 	// catalogue route
 	Route::resource('/catalogue', 'CatalogueController');
 
+	// order route
+	Route::resource('/order', 'OrderController');
+
 	//cart route
 	Route::group(['prefix' => 'cart'],	function ()	{
 
