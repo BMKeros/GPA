@@ -18,4 +18,5 @@
         </ul>
     </li>
     <li><a href="{{ route('catalogue.index') }}"><i class="fa fa-briefcase"></i>Catalogo</a>
+    <li><a href="{{ route('purchase.index') }}"><i class="fa fa-briefcase"></i>Ordenes</a>
 @endsection
