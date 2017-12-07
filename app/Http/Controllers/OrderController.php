@@ -72,7 +72,7 @@ class OrderController extends Controller
         foreach($cart as $item){
             $order=Order::create([
                 'request_id' =>  $req->id,
-                'product_id' =>  $item->id,
+                'product_id' =>  $item->product->id,
                 'status_id' =>  3,
                 'quantity' =>  $item->quantity,
                 'price' =>  $item->product->price,
