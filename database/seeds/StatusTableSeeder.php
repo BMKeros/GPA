@@ -20,6 +20,15 @@ class StatusTableSeeder extends Seeder
             [
                 "name" => 'No Disponible'
             ],
+            [
+                "name" => 'Pendiente'
+            ],
+            [
+                "name" => 'Aceptado'
+            ],
+            [
+                "name" => 'Rechazado'
+            ],
         ]);
     }
 }
