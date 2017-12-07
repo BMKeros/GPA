@@ -8,9 +8,7 @@
 
     @php
         $cart = \Session::get('cart');
-        $subtotal = 0;
-        $porciento = 0;
-        $porcentaje = 0;
+
     @endphp
 
     <div class="clearfix"></div>
@@ -100,42 +98,17 @@
                                 </table>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
-
-                    <hr>
                     <div class="row">
 
-                        <div class="col-xs-12">
-                            <p class="lead">Detalles de la Compra</p>
-
+                        <div class="col-xs-6 pull-right">
                             <div class="table-responsive">
                                 <table class="table">
                                     <tbody>
-                                            @foreach($cart as $item)
-                                                @php
-                                                    $subtotal += $item->product->price * $item->quantity;
-                                                    $porciento = $item->product->street_percentage;
-                                                    $porcentaje = $subtotal * number_format($porciento)/100;
-
-                                                @endphp
-                                            @endforeach
-
-                                            <tr>
-                                                <th style="width:50%">Subtotal:</th>
-                                            
-
-                                            <td>{{ number_format($subtotal,2) }} Bs</td>
-                                            </tr>
-
-                                            <tr>
-                                                <th>Porcentaje Calle: {{ number_format($porciento) }}%</th>
-
-                                                <td>{{ number_format($porcentaje,2) }} Bs</td>
-                                            </tr>
 
                                             <tr>
                                                 <th>Total:</th>
 
-                                                <td>{{ number_format($total + $porcentaje) }} Bs</td>
+                                                <td>{{ number_format($total) }} Bs</td>
                                             </tr>
                                         
                                     </tbody>
@@ -155,7 +128,9 @@
                     <div class="row text-center">
                         <div class="col-12">
                             @if(count($cart)>0)
+                            <a href="{{ route('order.index')}}">
                                 <button class="btn btn-success pull-right"> Enviar Solicitud de Compra</button>
+                            </a>
                             @endif
                             <a href="{{ route('catalogue.index')}}">
                                 <button class="btn btn-primary pull-right" style="margin-right: 5px;"> Volver</button>
