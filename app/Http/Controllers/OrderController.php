@@ -92,7 +92,9 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        $orders = Order::where('request_id','=', $id)->get();
+
+        return view('order.show',['orders'=> $orders]);
     }
 
     /**
