@@ -16,4 +16,7 @@
             <li><a href="{{ route('inventory.index') }}">Inventario</a></li>
         </ul>
     </li>
+     <li>
+        <a href="{{ route('orders.index') }}"> <i class="fa fa-book"></i> Solicitudes</a>
+    </li>
 @endsection

@@ -18,6 +18,10 @@
 
 	<link href="{{ asset('css/custom.css')}}" rel="stylesheet">
 	
+	<script src="{{ asset('plugins/datatables/jquery.dataTables.min.css')}}"></script>
+	
+	<script src="{{ asset('plugins/datatables/responsive.bootstrap.min.css')}}"></script>
+	
 	<link href="js/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 	
 	<link href="js/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />

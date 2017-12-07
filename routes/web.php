@@ -100,6 +100,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:ADMIN']], function () 
 
 	Route::resource('/inventory', 'AdministrationInventoryController');
 
+	//orders
+	Route::resource('/orders', 'AdministrationOrdersController');
+
 });
 
 //ERROR ROUTE
