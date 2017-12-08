@@ -16,7 +16,13 @@
             <li><a href="{{ route('inventory.index') }}">Inventario</a></li>
         </ul>
     </li>
-     <li>
-        <a href="{{ route('purchase-requests.index') }}"> <i class="fa fa-book"></i> Solicitudes</a>
+    <li>
+        <a>
+            <i class="fa fa-book"></i>Solicitudes<span class="fa fa-chevron-down"></span>
+        </a>
+        <ul class="nav child_menu" style="display: none">
+            <li><a href="{{ route('purchase-requests.index') }}">Solicitudes de compras</a></li>
+            <li><a href="">Solicitudes de abonos</a></li>
+        </ul>
     </li>
 @endsection
