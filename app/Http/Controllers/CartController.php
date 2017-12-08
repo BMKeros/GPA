@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Product;
 use App\Cart;
-use Illuminate\Http\Request;
+use App\Inventory;
 
 class CartController extends Controller
 {
@@ -82,15 +83,27 @@ class CartController extends Controller
     // Update item
     public function update(Product $product, $quantity)
     {
+        $i = Inventory::all();
+        $quantity_available = 0;
+
+        foreach($i as $item){
+            $quantity_available += $item->quantity_available;
+        }
 
         $cart = Cart::all()->where("user_id", \Auth::user()->id)->where('product_id', '=', $product->id);
 
-        foreach($cart as $item){
-            $item->quantity = $quantity;
-        	$item->save();
+        if($quantity > $quantity_available){
+            return redirect()->route('cart.show')->with('error', 'La cantidad que selecciono excede la disponible en el inventario, solo se encuentran disponibles '.$quantity_available.'.');
+        }else{
+
+            foreach($cart as $item){
+                $item->quantity = $quantity;
+            	$item->save();
+            }
+
+            return redirect()->route('cart.show')->with('success', 'Se ha actualizado la cantidad del producto con exito.');
         }
 
-        return redirect()->route('cart.show');
     }
 
     // Delete item
