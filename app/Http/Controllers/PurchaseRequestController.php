@@ -83,8 +83,9 @@ class PurchaseRequestController extends Controller
             $item->delete();
         }
 
-        return redirect()->route('purchase-requests.index');
+        return redirect()->route('purchase-requests.index')->with('success', 'Se ha enviado tu solicitud de compra');
     }
+
 
     /**
      * Display the specified resource.
