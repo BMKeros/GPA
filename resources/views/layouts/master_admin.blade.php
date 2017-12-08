@@ -17,6 +17,6 @@
         </ul>
     </li>
      <li>
-        <a href="{{ route('orders.index') }}"> <i class="fa fa-book"></i> Solicitudes</a>
+        <a href="{{ route('purchase-requests.index') }}"> <i class="fa fa-book"></i> Solicitudes</a>
     </li>
 @endsection
