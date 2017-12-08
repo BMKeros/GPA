@@ -128,7 +128,7 @@
                     <div class="row text-center">
                         <div class="col-12">
                             @if(count($cart)>0)
-                            <a href="{{ route('order.index')}}">
+                            <a href="{{ route('purchase-requests.create')}}">
                                 <button class="btn btn-success pull-right"> Enviar Solicitud de Compra</button>
                             </a>
                             @endif

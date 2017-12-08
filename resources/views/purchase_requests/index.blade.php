@@ -6,14 +6,6 @@
 
 @section('content')
 
-    @php
-        $cart = \Session::get('cart');
-        $subtotal = 0;
-        $porciento = 0;
-        $porcentaje = 0;
-        $total = 0;
-    @endphp
-
     @section('head')
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.css')}}"></script>
     <script src="{{ asset('plugins/datatables/responsive.bootstrap.min.css')}}"></script>
@@ -32,13 +24,13 @@
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
-                <h2>Ordenes</h2>
+                <h2>Solicitudes de Compra</h2>
                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>Status</th>
+                                <th>Estado</th>
                                 <th>Descripción</th>
-                                <th>Accion</th>
+                                <th>Orden</th>
                             </tr>
                             </thead>
                             <tbody>

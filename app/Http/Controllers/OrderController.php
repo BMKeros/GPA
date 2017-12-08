@@ -16,20 +16,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $cart = Cart::all()->where("user_id", \Auth::user()->id);
 
-        $cart->each(function($cart){
-            $cart->user;
-            $cart->product;
-        });
-
-        
-        $units = count($cart);
-
-        \Session::put('cart', $cart);
-        \Session::put('units', $units);
-
-        return view('order.index');
     }
 
     /**
@@ -51,37 +38,7 @@ class OrderController extends Controller
     public function store(Request $request)
     {
 
-        $data = $request->all();
 
-        $purchase_request=PurchaseRequest::create([
-            'user_id' =>  \Auth::user()->id,
-            'referred_id' =>  null,
-            'status_id' =>  3,
-            'description' =>  $data['description'],
-        ]);
-
-        $req = PurchaseRequest::all()->where('user_id', \Auth::user()->id)->last();
-
-        $cart = Cart::all()->where("user_id", \Auth::user()->id);
-
-        $cart->each(function($cart){
-            $cart->user;
-            $cart->product;
-        });
-
-        foreach($cart as $item){
-            $order=Order::create([
-                'request_id' =>  $req->id,
-                'product_id' =>  $item->product->id,
-                'status_id' =>  3,
-                'quantity' =>  $item->quantity,
-                'price' =>  $item->product->price,
-            ]);
-
-            $item->delete();
-        }
-
-        return redirect()->route('cart.show');
     }
 
     /**

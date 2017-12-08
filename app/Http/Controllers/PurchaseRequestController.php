@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\PurchaseRequest;
+use App\Cart;
+use App\Order;
 
 
 class PurchaseRequestController extends Controller
@@ -17,7 +19,20 @@ class PurchaseRequestController extends Controller
     {
         $purchase_requests=PurchaseRequest::where('user_id', \Auth::id())->get();
 
-        return view('purchase.index', ['purchase_requests' => $purchase_requests]);
+        $cart = Cart::all()->where("user_id", \Auth::user()->id);
+
+        $cart->each(function($cart){
+            $cart->user;
+            $cart->product;
+        });
+
+        
+        $units = count($cart);
+
+        \Session::put('cart', $cart);
+        \Session::put('units', $units);
+
+        return view('purchase_requests.index', ['purchase_requests' => $purchase_requests]);
     }
 
     /**
@@ -27,7 +42,7 @@ class PurchaseRequestController extends Controller
      */
     public function create()
     {
-        //
+        return view('purchase_requests.create');
     }
 
     /**
@@ -38,7 +53,37 @@ class PurchaseRequestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $purchase_request=PurchaseRequest::create([
+            'user_id' =>  \Auth::user()->id,
+            'referred_id' =>  null,
+            'status_id' =>  3,
+            'description' =>  $data['description'],
+        ]);
+
+        $req = PurchaseRequest::all()->where('user_id', \Auth::user()->id)->last();
+
+        $cart = Cart::all()->where("user_id", \Auth::user()->id);
+
+        $cart->each(function($cart){
+            $cart->user;
+            $cart->product;
+        });
+
+        foreach($cart as $item){
+            $order=Order::create([
+                'request_id' =>  $req->id,
+                'product_id' =>  $item->product->id,
+                'status_id' =>  3,
+                'quantity' =>  $item->quantity,
+                'price' =>  $item->product->price,
+            ]);
+
+            $item->delete();
+        }
+
+        return redirect()->route('purchase-requests.index');
     }
 
     /**

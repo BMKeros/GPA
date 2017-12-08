@@ -122,7 +122,7 @@
                     </div><!-- /.row -->
 
                     <form id="form-order" data-parsley-validate class="form-horizontal form-label-left" method="post"
-                          action="{{route('order.store')}}">
+                          action="{{route('purchase-requests.store')}}">
                         {{csrf_field()}}
 
                         <div class="row">
