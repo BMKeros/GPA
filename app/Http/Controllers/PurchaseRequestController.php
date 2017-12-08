@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\PurchaseRequest;
+use App\Cart;
 
 
 class PurchaseRequestController extends Controller
@@ -17,7 +18,20 @@ class PurchaseRequestController extends Controller
     {
         $purchase_requests=PurchaseRequest::where('user_id', \Auth::id())->get();
 
-        return view('purchase.index', ['purchase_requests' => $purchase_requests]);
+        $cart = Cart::all()->where("user_id", \Auth::user()->id);
+
+        $cart->each(function($cart){
+            $cart->user;
+            $cart->product;
+        });
+
+        
+        $units = count($cart);
+
+        \Session::put('cart', $cart);
+        \Session::put('units', $units);
+
+        return view('purchase_requests.index', ['purchase_requests' => $purchase_requests]);
     }
 
     /**
