@@ -1,52 +1,126 @@
 @extends('layouts.master_user')
-@section('title')
-    Referidos
-@stop
 
+@section('title') 
+    Ordenes 
+@stop 
 
 @section('content')
 
+    
+
     <div class="clearfix"></div>
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Ordenes</h3>
+        </div>
+
+        
+    </div>
     <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Orden</h2>
+                    <h2>Ordenes</h2>
                     <div class="clearfix"></div>
                 </div>
+
                 <div class="x_content">
-                  <br />
-                  @if (\Session::has('success'))
-                    <div class="alert alert-success">
-                      <p>{{ \Session::get('success') }}</p>
-                    </div><br />
-                   @endif
-                  <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>Precio</th>
-                      <th>Producto</th>
-                      <th>Cantidad</th>
+                    <div class="row">
+                        <div class="col-xs-12 table">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Imagen</th>
 
-                    </tr>
-                  </thead>
-                  <tbody>
+                                        <th>Producto</th>
 
-                        
-                      @foreach($orders as $order)
-                        <tr>
-                          <td>{{ $order->price}}</td>
-                          <td>{{ $order->product->name}}</td>
-                          <td>{{ $order->quantity}}</td>
-                        </tr>  
-                      @endforeach
-                                            
+                                        <th>Precio</th>
+
+                                        <th>Cantidad</th>
+
+                                        <th>Subtotal</th>
+
+                                        <th>Porcentaje</th>
+
+                                        <th>MontoPorcentaje</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
                                     
-                  </tbody>
-                </table>
-              </div>
+                                        @foreach($orders as $order)
+                                            <tr>
+                                                <td><img style="width: 40px; height: 40px;" src="{{ asset('images/products/').'/'.$order->product->image }}" alt=""></td>
+
+                                                <td>{{ $order->product->name}}</td>
+                                                <td>{{ $order->product->price}}</td>
+                                                <td>{{ $order->quantity}}</td>
+                                                <td>{{ $order->getPrecioUnitario()}}</td>
+                                                @if(\Auth::user()->hasRole('SOCIO') == true)
+                                                  <td>{{ $order->product->associated_percentage}}%</td>
+                                                @else
+                                                  <td>{{ $order->product->street_percentage}}%</td>
+                                                @endif
+
+                                                 <td>{{ $order->getPorcentajePrecio()}}</td>
+                                            </tr>
+                                        @endforeach
+                                  
+                                </tbody>
+                            </table>
+                               
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+
+                    <div class="row">
+
+                        <div class="col-xs-12">
+                            <h2>Detalles</h2>
+                            <div class="clearfix"></div>
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                            
+
+                                            <tr>
+                                                <th style="width:50%">Subtotal:</th>
+                                            
+
+                                            <td>{{ $subtotal_ }} Bs</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Porcentaje: </th>
+
+                                                <td>{{ $porcen}} Bs</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Total:</th>
+
+                                                <td>{{ $precio_total }} Bs</td>
+                                            </tr>
+                                        
+                                    </tbody>
+                                </table>
+
+                                
+
+                            </div>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+
+
+
+                                <a href="{{ route('purchase-requests.index')}}">
+                                    <button class="btn btn-primary pull-right" style="margin-right: 5px;"> Volver</button>
+                                </a>
+                            </div>
+                        </div>
+                </div>
             </div>
         </div>
     </div>
-
 @stop
