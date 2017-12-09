@@ -21,4 +21,15 @@ class Order extends Model
         return $this->belongsTo('App\Status');
 
 	}
+	public function getPrecioUnitario(){
+		return $this->price * $this->quantity;
+	}
+
+	public function getPorcentajePrecio(){
+		if (\Auth::user()->hasRole('SOCIO')) {
+            return ($this->getPrecioUnitario())*($this->product->associated_percentage/100);
+        } else {
+            return ($this->getPrecioUnitario())*($this->product->street_percentage/100);
+        }
+	}
 }
