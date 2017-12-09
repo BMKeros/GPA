@@ -7,6 +7,7 @@ use App\PurchaseRequest;
 use App\Order;
 use App\Cart;
 
+
 class OrderController extends Controller
 {
     /**
@@ -48,10 +49,30 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {   
+        $subtotal_= 0;
+        $porcen= 0;
+        $precio_total=0;
         $orders = Order::where('request_id','=', $id)->get();
 
-        return view('order.show',['orders'=> $orders]);
+     
+        
+        foreach ($orders as $order) {
+            $subtotal_ += $order->product->price * $order->quantity;
+            if (\Auth::user()->hasRole('SOCIO')) {
+                $porcen += ($order->getPrecioUnitario()) * ($order->product->associated_percentage/100);
+            }else{
+                $porcen += ($order->getPrecioUnitario()) * ($order->product->street_percentage/100);
+                }
+           
+            $precio_total = $subtotal_ + $porcen;
+  
+        }
+        
+
+        
+
+        return view('order.show',['orders'=> $orders,'subtotal_'=>$subtotal_,'porcen'=>$porcen,'precio_total'=>$precio_total]);
     }
 
     /**
