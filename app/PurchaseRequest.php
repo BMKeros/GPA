@@ -21,7 +21,7 @@ class PurchaseRequest extends Model
 	}
 
 	public function orders(){
-		return $this->hasMany('App\Order');
+		return $this->hasMany('App\Order', 'purchase_request_id', 'id');
 	}
 
 	public function status(){
@@ -33,7 +33,7 @@ class PurchaseRequest extends Model
 		foreach ($this->orders as $order) {
 			$total += $order->get_price_unit();
 		}
-		
+
 		return $total;
 	}
 }
