@@ -112,6 +112,47 @@
                         </div><!-- /.col -->
                     </div><!-- /.row -->
 
+                    <div class="row">
+
+                        <div class="col-xs-12">
+                            <h2>Abonos</h2>
+                            <div class="clearfix"></div>
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                @if($total_payment != 0 )
+                                    <thead> 
+                                        <tr>
+                                            <th>
+                                                Monto
+                                            </th>
+                                            <th>
+                                                Fecha
+                                            </th>
+                                        </tr>
+
+                                    </thead>
+                                @endif
+                                    <tbody>
+
+                                        @foreach($payments as $payment)
+
+                                            <tr>
+                                                <td>{{$payment->quantity}} Bs</td>
+                                                <td>{{$payment->created_at->format('d/m/Y ')}}</td>
+                                            </tr>
+                                        @endforeach
+                                            <tr>
+                                                <th>Total abonado:  {{$total_payment}} Bs de {{ $precio_total }} Bs</th>
+                                            </tr>
+                                    </tbody>
+                                </table>
+
+                                
+
+                            </div>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
 
 
                                 <a href="{{ route('purchase-requests.index')}}">
