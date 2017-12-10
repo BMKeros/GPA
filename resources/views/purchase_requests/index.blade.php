@@ -1,7 +1,7 @@
 @extends('layouts.master_user')
 
 @section('title') 
-    Carrito 
+    Solicitudes 
 @stop 
 
 @section('content')
@@ -42,8 +42,13 @@
 
                                     <td style="width: 30%;">
 
+                                        <a href="{{route('order.show',$purchase_request['id'])}}" class="btn btn-info btn-md" data-toggle="tooltip" title="Ver!"><span class="glyphicon glyphicon-eye-open"></span></a>
 
-                                        <a href="{{route('order.show',$purchase_request['id'])}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Ver </a>
+                                        @if($purchase_request->status->id == 4)
+                                        <a href="{{route('payment.create', ['solicitud' => $purchase_request['id']])}}" class="btn btn-danger btn-md" data-toggle="tooltip" title="Abonar!"> <span class="glyphicon glyphicon-piggy-bank"></span></a>
+                                        @elseif ($purchase_request->status->id == 6)
+                                        <span class="btn btn-danger btn-md" style="cursor: none;">Pagado</span>
+                                        @endif
                                         </form>
                                     </td>
                                 </tr>
@@ -66,7 +71,11 @@
 
 
 
-
+        <script>
+            $(document).ready(function(){
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+        </script>
      
         <script type="text/javascript">
             $(document).ready(function() {
