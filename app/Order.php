@@ -8,7 +8,7 @@ class Order extends Model
 {
     protected $fillable = ['purchase_request_id', 'product_id','status_id','quantity', 'price'];
 
-	public function request(){
+	public function purchase_request(){
         return $this->belongsTo('App\PurchaseRequest');
 
 	}
