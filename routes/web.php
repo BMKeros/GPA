@@ -78,6 +78,8 @@ Route::group(['prefix' => 'client', 'middleware' => ['role:USER|SOCIO']], functi
 	
 	});
 
+//payment route
+	Route::resource('/payment', 'PaymentController');
 });
 
 // ADMIN ROUTE
