@@ -78,7 +78,7 @@ Route::group(['prefix' => 'client', 'middleware' => ['role:USER|SOCIO']], functi
 	
 	});
 
-//payment route
+	//payment route
 	Route::resource('/payment', 'PaymentController');
 });
 
@@ -112,6 +112,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:ADMIN']], function () 
 	//purchase requests
 	Route::resource('/purchase-requests', 'AdministrationPurchaseRequestController');
 
+	//payment route
+	Route::resource('/payment', 'AdministrationPaymentController');
 });
 
 //ERROR ROUTE
