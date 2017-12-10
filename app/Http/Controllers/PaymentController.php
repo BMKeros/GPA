@@ -3,6 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Payment;
+use App\PaymentMethod;
+use App\Order;
+use App\User;
+use Validator;
+use File;
+
+
 
 class PaymentController extends Controller
 {
@@ -21,9 +29,11 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $methods = PaymentMethod::all();
+        $request_id = $request->query();
+        return view('payment.create', ['request_id'=> $request_id ],compact('methods')); 
     }
 
     /**
@@ -34,7 +44,86 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+            'method' => 'required|not_in:0',
+            'mount' => 'required|numeric',
+            'observation' => 'required',
+            'voucher' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        #validacion mount order
+        $orders = Order::where('request_id', '=', $data['request_id'])->get();
+
+        $subtotal_= 0;
+        $porcen= 0;
+        $total_price=0;
+        
+        foreach ($orders as $order) {
+            $subtotal_ += $order->product->price * $order->quantity;
+            if (\Auth::user()->hasRole('SOCIO')) {
+                $porcen += ($order->getPrecioUnitario()) * ($order->product->associated_percentage/100);
+            }else{
+                $porcen += ($order->getPrecioUnitario()) * ($order->product->street_percentage/100);
+                }
+           
+            $total_price = $subtotal_ + $porcen;
+  
+        }
+
+        #verificar si hay  otros abonos aceptados para saber la deuda total
+        $all_payment = Payment::where([['request_id', '=', $data['request_id']], ['status_id', '=', 4]])->get();
+
+        if(isset($all_payment)){
+            $deposit = 0;
+            foreach ($all_payment as $pay) {
+                $deposit += $pay->quantity;
+            }
+            $total_price = $total_price - $deposit;
+        }
+
+        if ($data['mount'] > $total_price){
+
+             return redirect()->back()->with('error', "Este Monto no puede ser mayor a la deuda actual: {$total_price}!")->withInput(); 
+
+        }
+        #Verificar que no haya un bono pendiente
+        $pending_payment = Payment::where([['request_id', '=', $data['request_id']], ['status_id', '=', 3]])->count();
+
+        if ($pending_payment > 0){
+            return redirect()->back()->with('error', "No se puede realizar este abono, hasta que el ADMINISTRADOR no acepte el abono anterior para esta compra!")->withInput(); 
+        }
+
+        #creacion de carpeta para el voucher
+        if(isset($request->voucher)){
+            $voucher = $request->voucher;
+            $voucherName = 'voucher_'. time() . '.' . $voucher->getClientOriginalExtension();
+            $path = public_path() . '/images/vouchers';
+            if ( !File::exists($path) ) { 
+                File::makeDirectory($path); 
+            } 
+            $voucher->move($path, $voucherName);
+
+        }
+
+        $payment = Payment::create([
+            'user_id' =>  \Auth::user()->id,
+            'request_id' => $data['request_id'],
+            'payment_method_id' => $data['method'],
+            'status_id' => 3,
+            'image' => $voucherName,
+            'quantity' => $data['mount'],
+            'description' => $data['observation']
+
+        ]);
+        return redirect()->route('purchase-requests.index');
     }
 
     /**
