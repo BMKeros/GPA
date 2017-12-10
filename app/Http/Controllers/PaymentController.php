@@ -123,7 +123,7 @@ class PaymentController extends Controller
             'description' => $data['observation']
 
         ]);
-        return redirect()->route('purchase-requests.index');
+        return redirect()->route('payment.index')->with('success', "Pago de Abono Enviado con exito al administrador!");
     }
 
     /**
