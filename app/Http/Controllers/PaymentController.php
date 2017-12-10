@@ -10,8 +10,6 @@ use App\User;
 use Validator;
 use File;
 
-
-
 class PaymentController extends Controller
 {
     /**
