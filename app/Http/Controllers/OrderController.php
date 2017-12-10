@@ -83,7 +83,7 @@ class OrderController extends Controller
 
         
 
-        return view('order.show',['orders'=> $orders,'subtotal_'=>$subtotal_,'porcen'=>$porcen,'precio_total'=>$precio_total, 'payments' => $payments, 'total_payment' => $total_payment ]);
+        return view('order.show',['orders'=> $orders,'subtotal_'=>$subtotal_,'porcen'=>$porcen,'precio_total'=>$precio_total, 'payments' => $payments, 'total_payment' => $total_payment, 'request_id' => $id ]);
     }
 
     /**
