@@ -19,8 +19,8 @@ class CreatePaymentTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('status_id')->unsigned();
             $table->foreign('status_id')->references('id')->on('status');
-            $table->integer('request_id')->unsigned();
-            $table->foreign('request_id')->references('id')->on('purchase_requests');
+            $table->integer('purchase_request_id')->unsigned();
+            $table->foreign('purchase_request_id')->references('id')->on('purchase_requests');
 
             $table->integer('payment_method_id')->unsigned();
             $table->foreign('payment_method_id')->references('id')->on('payment_methods');
