@@ -79,7 +79,7 @@ class PaymentController extends Controller
         }
 
         #verificar si hay  otros abonos aceptados para saber la deuda total
-        $all_payment = Payment::where([['request_id', '=', $data['request_id']], ['status_id', '=', 4]])->get();
+        $all_payment = Payment::where([['purchase_request_id', '=', $data['request_id']], ['status_id', '=', 4]])->get();
 
         if(isset($all_payment)){
             $deposit = 0;
@@ -95,7 +95,7 @@ class PaymentController extends Controller
 
         }
         #Verificar que no haya un bono pendiente
-        $pending_payment = Payment::where([['request_id', '=', $data['request_id']], ['status_id', '=', 3]])->count();
+        $pending_payment = Payment::where([['purchase_request_id', '=', $data['request_id']], ['status_id', '=', 3]])->count();
 
         if ($pending_payment > 0){
             return redirect()->back()->with('error', "No se puede realizar este abono, hasta que el ADMINISTRADOR no acepte el abono anterior para esta compra!")->withInput(); 
@@ -115,7 +115,7 @@ class PaymentController extends Controller
 
         $payment = Payment::create([
             'user_id' =>  \Auth::user()->id,
-            'request_id' => $data['request_id'],
+            'purchase_request_id' => $data['request_id'],
             'payment_method_id' => $data['method'],
             'status_id' => 3,
             'image' => $voucherName,
