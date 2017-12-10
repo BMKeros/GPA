@@ -28,19 +28,31 @@
                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>Estado</th>
-                                <th>Descripción</th>
-                                <th>Orden</th>
+                                <th style="text-align: center;">Estado</th>
+                                <th style="text-align: center;">Descripción</th>
+                                <th style="text-align: center;">Fecha</th>
+                                <th style="text-align: center;">Orden</th>
                             </tr>
                             </thead>
                             <tbody>
                        
                                 @foreach($purchase_requests as $purchase_request)
                                 <tr>
-                                    <td>{{ $purchase_request->status->name }}</td>
-                                    <td>{{ $purchase_request->description }}</td>
+                                    <td style="text-align: center;">
+                                    @if ($purchase_request->status->id == 3)
+                                        <span class="btn btn-primary btn-xs" >Pendiente</span>
+                                    @elseif($purchase_request->status->id == 4)
+                                        <span class="btn btn-success btn-xs">Aceptado</span>
+                                    @elseif($purchase_request->status->id == 5)
+                                        <span class="btn btn-danger btn-xs">Rechazado</span>
+                                    @else
+                                        <span class="btn btn-danger btn-xs">Pagado</span>   
+                                    @endif
+                                    </td>
+                                    <td style="text-align: center;">{{ $purchase_request->description }}</td>
 
-                                    <td style="width: 30%;">
+                                    <td style="text-align: center;">{{$purchase_request->created_at->format('d-m-Y') }}</td>
+                                    <td style="width: 30%;text-align: center;" >
 
                                         <a href="{{route('order.show',$purchase_request['id'])}}" class="btn btn-info btn-md" data-toggle="tooltip" title="Ver!"><span class="glyphicon glyphicon-eye-open"></span></a>
 
