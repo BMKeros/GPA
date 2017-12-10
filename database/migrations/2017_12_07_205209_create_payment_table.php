@@ -27,6 +27,7 @@ class CreatePaymentTable extends Migration
 
             $table->string('image')->nullable();
             $table->string('description')->nullable();
+            $table->string('reason_rejected')->nullable();
             $table->decimal('quantity');
 
             $table->timestamps();
