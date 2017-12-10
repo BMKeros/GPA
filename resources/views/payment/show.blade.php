@@ -61,8 +61,17 @@ Abono
                                 <td>
                                     <h2>{{$payment->description}}</h2>
                                 </td>
-
                             </tr>
+                            @if($payment->reason_rejected != null)
+                            <tr>
+                                <th>
+                                    <h2>Razon del Rechazo:</h2>
+                                </th>
+                                <td>
+                                    <h2>{{$payment->reason_rejected}}</h2>
+                                </td>
+                            </tr> 
+                            @endif 
                         </tbody>
 
                     </table>
