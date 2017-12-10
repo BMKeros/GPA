@@ -29,6 +29,9 @@ class StatusTableSeeder extends Seeder
             [
                 "name" => 'Rechazado'
             ],
+            [
+                "name" => 'Pagado'
+            ],
         ]);
     }
 }
