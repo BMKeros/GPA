@@ -1,4 +1,4 @@
-@extends('layouts.master_admin')
+@extends('layouts.master_user')
 @section('title')
 Abonar Pedidos
 @stop
