@@ -22,7 +22,7 @@
         </a>
         <ul class="nav child_menu" style="display: none">
             <li><a href="{{ route('purchase-requests.index') }}">Solicitudes de compras</a></li>
-            <li><a href="">Solicitudes de abonos</a></li>
+            <li><a href="{{ route('payment.index') }}">Solicitudes de abonos</a></li>
         </ul>
     </li>
 @endsection
