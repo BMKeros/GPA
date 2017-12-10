@@ -21,7 +21,9 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        //
+        $payments = Payment::all()->where("user_id", \Auth::user()->id);
+
+        return view('payment.index', ['payments' => $payments]);
     }
 
     /**
@@ -134,7 +136,8 @@ class PaymentController extends Controller
      */
     public function show($id)
     {
-        //
+        $payment = Payment::findOrFail($id);
+        return view('payment.show',['payment' => $payment]);
     }
 
     /**
