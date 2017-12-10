@@ -26,5 +26,8 @@ class Payment extends Model
 
 	}
 
+	public function payment_method(){
+		return $this->belongsTo('App\PaymentMethod');
+	}
 
 }
