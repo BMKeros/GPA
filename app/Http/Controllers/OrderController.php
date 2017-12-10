@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\PurchaseRequest;
 use App\Order;
 use App\Cart;
+use App\Payment;
+
 
 
 class OrderController extends Controller
@@ -67,12 +69,21 @@ class OrderController extends Controller
            
             $precio_total = $subtotal_ + $porcen;
   
+        };
+        
+        #Obtener abonos de una solicitud
+        $payments = Payment::where([['request_id', '=', $id], ['status_id', '=', 4]])->get();
+
+        $total_payment = 0;
+        if (isset($payments)) {
+            foreach ($payments as $payment) {
+               $total_payment += $payment->quantity;
+            }
         }
-        
 
         
 
-        return view('order.show',['orders'=> $orders,'subtotal_'=>$subtotal_,'porcen'=>$porcen,'precio_total'=>$precio_total]);
+        return view('order.show',['orders'=> $orders,'subtotal_'=>$subtotal_,'porcen'=>$porcen,'precio_total'=>$precio_total, 'payments' => $payments, 'total_payment' => $total_payment ]);
     }
 
     /**
