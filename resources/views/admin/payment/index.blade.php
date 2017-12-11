@@ -58,10 +58,10 @@
 
                                     <td style="text-align: center; width: 30%;">
 
-                                        <a href="{{route('payment.show',$payment['id'])}}" class="btn btn-info btn-md" data-toggle="tooltip" title="Ver!" style="margin-left: 5%;"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                        <a href="{{route('admin-payment.show',$payment['id'])}}" class="btn btn-info btn-md" data-toggle="tooltip" title="Ver!" style="margin-left: 5%;"><span class="glyphicon glyphicon-eye-open"></span></a>
 
                                         @if($payment->status->id == 3)
-                                        <form style="display:inline !important;" action="{{route('payment.update', [$payment->id])}}" method="POST">{{csrf_field()}}
+                                        <form style="display:inline !important;" action="{{route('admin-payment.update', [$payment->id])}}" method="POST">{{csrf_field()}}
 
                                             <input name="_method" type="hidden" value="PATCH">
                                                 
@@ -72,7 +72,7 @@
 
                                         </form>
 
-                                        <a href="{{route('payment.edit',$payment['id'])}}" class="btn btn-danger btn-md" data-toggle="tooltip" title="Rechazar!"><span class="glyphicon glyphicon-remove"></span></a>
+                                        <a href="{{route('admin-payment.edit',$payment['id'])}}" class="btn btn-danger btn-md" data-toggle="tooltip" title="Rechazar!"><span class="glyphicon glyphicon-remove"></span></a>
                                         @endif
                                         </form>
                                     </td>
