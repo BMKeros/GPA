@@ -72,7 +72,7 @@ class OrderController extends Controller
         };
         
         #Obtener abonos de una solicitud
-        $payments = Payment::where([['request_id', '=', $id], ['status_id', '=', 4]])->get();
+        $payments = Payment::where([['purchase_request_id', '=', $id], ['status_id', '=', 4]])->get();
 
         $total_payment = 0;
         if (isset($payments)) {
