@@ -18,6 +18,6 @@
         </ul>
     </li>
     <li><a href="{{ route('catalogue.index') }}"><i class="fa fa-briefcase"></i>Catalogo</a>
-    <li><a href="{{ route('purchase-requests.index') }}"><i class="fa fa-briefcase"></i>Solicitudes de Compra</a>
+    <li><a href="{{ route('purchase-requests.index') }}"><i class="fa fa-book"></i>Solicitudes de Compra</a>
     <li><a href="{{ route('payment.index') }}"><i class="fa fa-money"></i>Abonos</a>
 @endsection
