@@ -1,4 +1,4 @@
-@extends('layouts.master_user')
+@extends(\Auth::user()->hasRole('ADMIN') ? ' layouts.master_admin' : 'layouts.master_user')
 
 @section('title') 
     Ordenes 
@@ -6,14 +6,11 @@
 
 @section('content')
 
-    
-
     <div class="clearfix"></div>
     <div class="page-title">
         <div class="title_left">
             <h3>Ordenes</h3>
         </div>
-
         
     </div>
     <div class="row">
@@ -47,7 +44,6 @@
                                 </thead>
 
                                 <tbody>
-
                                     
                                         @foreach($orders as $order)
                                             <tr>
@@ -81,8 +77,7 @@
 
                             <div class="table-responsive">
                                 <table class="table">
-                                    <tbody>
-                                            
+                                    <tbody>  
 
                                             <tr>
                                                 <th style="width:50%">Subtotal:</th>
@@ -153,6 +148,7 @@
                             </div>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
+                @if(\Auth::user()->hasRole('ADMIN') != 1)
                     <div class="row">
 
                         <div class="col-xs-12">
@@ -164,6 +160,7 @@
                                 @endif
                         </div>
                     </div>
+                @endif
                 </div>
             </div>
         </div>
