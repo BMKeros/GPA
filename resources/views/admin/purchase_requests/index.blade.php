@@ -37,7 +37,7 @@
                                     <td>{{ $purchase->description }}</td>
                                     <td style="width: 30%;">
 
-                                        <a style="display:inline-block;float:left;" href="{{ route('order.show', $purchase->id) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Ver </a>
+                                        <a style="display:inline-block;float:left;" href="{{ route('admin-order.show',$purchase['id']) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Ver </a>
                                         @if($purchase->status_id == '3')
                                     
                                             <form style="display:inline-block;float:left;" action="{{route('purchase-requests.update', [$purchase->id])}}" method="POST">
