@@ -60,23 +60,24 @@ class PaymentController extends Controller
         }
 
         #validacion mount order
-        $orders = Order::where('request_id', '=', $data['request_id'])->get();
+        $orders = Order::where('purchase_request_id', '=', $data['request_id'])->get();
 
         $subtotal_= 0;
         $porcen= 0;
         $total_price=0;
         
+
         foreach ($orders as $order) {
             $subtotal_ += $order->product->price * $order->quantity;
             if (\Auth::user()->hasRole('SOCIO')) {
-                $porcen += ($order->getPrecioUnitario()) * ($order->product->associated_percentage/100);
+                $porcen += ($order->get_unit_price()) * ($order->product->associated_percentage/100);
             }else{
-                $porcen += ($order->getPrecioUnitario()) * ($order->product->street_percentage/100);
+                $porcen += ($order->get_unit_price()) * ($order->product->street_percentage/100);
                 }
            
             $total_price = $subtotal_ + $porcen;
   
-        }
+        };
 
         #verificar si hay  otros abonos aceptados para saber la deuda total
         $all_payment = Payment::where([['purchase_request_id', '=', $data['request_id']], ['status_id', '=', 4]])->get();
@@ -91,7 +92,7 @@ class PaymentController extends Controller
 
         if ($data['mount'] > $total_price){
 
-             return redirect()->back()->with('error', "Este Monto no puede ser mayor a la deuda actual: {$total_price}!")->withInput(); 
+            return redirect()->back()->with('error', "Este Monto no puede ser mayor a la deuda actual: {$total_price} Bs!")->withInput(); 
 
         }
         #Verificar que no haya un bono pendiente
