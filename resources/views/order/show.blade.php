@@ -56,14 +56,14 @@
                                                 <td>{{ $order->product->name}}</td>
                                                 <td>{{ $order->product->price}}</td>
                                                 <td>{{ $order->quantity}}</td>
-                                                <td>{{ $order->getPrecioUnitario()}}</td>
+                                                <td>{{ $order->get_unit_price()}}</td>
                                                 @if(\Auth::user()->hasRole('SOCIO') == true)
                                                   <td>{{ $order->product->associated_percentage}}%</td>
                                                 @else
                                                   <td>{{ $order->product->street_percentage}}%</td>
                                                 @endif
 
-                                                 <td>{{ $order->getPorcentajePrecio()}}</td>
+                                                 <td>{{ $order->get_percentage_unit_price()}}</td>
                                             </tr>
                                         @endforeach
                                   
