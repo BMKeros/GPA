@@ -6,30 +6,34 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $fillable = ['purchase_request_id', 'product_id','status_id','quantity', 'price'];
+    protected $fillable = ['purchase_request_id', 'product_id', 'status_id', 'quantity', 'price'];
 
-	public function purchase_request(){
+    public function purchase_request()
+    {
         return $this->belongsTo('App\PurchaseRequest');
+    }
 
-	}
-	public function product(){
+    public function product()
+    {
         return $this->belongsTo('App\Product');
+    }
 
-	}
-
-	public function status(){
+    public function status()
+    {
         return $this->belongsTo('App\Status');
+    }
 
-	}
-	public function get_unit_price(){
-		return $this->price * $this->quantity;
-	}
+    public function get_unit_price()
+    {
+        return $this->price * $this->quantity;
+    }
 
-	public function get_percentage_unit_price(){
-		if (\Auth::user()->hasRole('SOCIO')) {
-            return ($this->get_unit_price())*($this->product->associated_percentage/100);
+    public function get_percentage_unit_price()
+    {
+        if (\Auth::user()->hasRole('SOCIO')) {
+            return ($this->get_unit_price() * ($this->product->get_associated_percentage()));
         } else {
-            return ($this->get_unit_price())*($this->product->street_percentage/100);
+            return ($this->get_unit_price() * ($this->product->get_street_percentage()));
         }
-	}
+    }
 }
