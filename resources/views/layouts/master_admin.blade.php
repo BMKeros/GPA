@@ -21,8 +21,8 @@
             <i class="fa fa-book"></i>Solicitudes<span class="fa fa-chevron-down"></span>
         </a>
         <ul class="nav child_menu" style="display: none">
-            <li><a href="{{ route('purchase-requests.index') }}">Solicitudes de compras</a></li>
-            <li><a href="{{ route('payment.index') }}">Solicitudes de abonos</a></li>
+            <li><a href="{{ route('admin-purchase-requests.index') }}">Solicitudes de compras</a></li>
+            <li><a href="{{ route('admin-payment.index') }}">Solicitudes de abonos</a></li>
         </ul>
     </li>
 @endsection
