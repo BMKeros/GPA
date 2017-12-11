@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Payment;
+use App\Order;
+use App\PurchaseRequest;
+
 
 class AdministrationPaymentController extends Controller
 {
@@ -78,6 +81,45 @@ class AdministrationPaymentController extends Controller
         if($request->accion === 'aceptar'){
             $payment->status_id = 4;
             $payment->save();
+
+            $orders = Order::where('purchase_request_id', '=', $payment->purchase_request->id)->get();
+
+            $subtotal_= 0;
+            $porcen= 0;
+            $total_price=0;
+    
+            foreach ($orders as $order) {
+                $subtotal_ += $order->product->price * $order->quantity;
+                if (\Auth::user()->hasRole('SOCIO')) {
+                    $porcen += ($order->get_unit_price()) * ($order->product->associated_percentage/100);
+                }else{
+                    $porcen += ($order->get_unit_price()) * ($order->product->street_percentage/100);
+                    }
+               
+                $total_price = $subtotal_ + $porcen;
+      
+            };
+            $all_payment = Payment::where([['purchase_request_id', '=', $payment->purchase_request->id], ['status_id', '=', 4]])->get();
+
+            if(isset($all_payment)){
+
+                $deposit = 0;
+                foreach ($all_payment as $pay) {
+                    $deposit += $pay->quantity;
+                }
+            }
+
+            if (isset($deposit)) {
+                if($total_price == $deposit){
+
+                    $purchase = PurchaseRequest::findOrFail($payment->purchase_request->id);
+                    $purchase->status_id = 6;
+                    $purchase->save();
+                    
+                    return redirect()->route('payment.index')->with('success', "El Abono del Usuario: {$payment->user->name} ha sido ACEPTADO. Se ha COMPLETADO EL PAGO para esta compra!.");  
+                }
+                 
+            }
 
             return redirect()->route('payment.index')->with('success', "El Abono del Usuario: {$payment->user->name} ha sido ACEPTADO.");
         }
