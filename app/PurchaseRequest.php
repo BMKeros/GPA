@@ -24,10 +24,6 @@ class PurchaseRequest extends Model
 		return $this->hasMany('App\Order', 'purchase_request_id', 'id');
 	}
 
-	public function status(){
-        return $this->belongsTo('App\Status');
-	}
-
 	public function get_total_amount_purchase(){
 		$total = 0;
 		foreach ($this->orders as $order) {
