@@ -116,12 +116,12 @@ class AdministrationPaymentController extends Controller
                     $purchase->status_id = 6;
                     $purchase->save();
                     
-                    return redirect()->route('payment.index')->with('success', "El Abono del Usuario: {$payment->user->name} ha sido ACEPTADO. Se ha COMPLETADO EL PAGO para esta compra!.");  
+                    return redirect()->route('admin-payment.index')->with('success', "El Abono del Usuario: {$payment->user->name} ha sido ACEPTADO. Se ha COMPLETADO EL PAGO para esta compra!.");  
                 }
                  
             }
 
-            return redirect()->route('payment.index')->with('success', "El Abono del Usuario: {$payment->user->name} ha sido ACEPTADO.");
+            return redirect()->route('admin-payment.index')->with('success', "El Abono del Usuario: {$payment->user->name} ha sido ACEPTADO.");
         }
         else{
 
@@ -134,7 +134,7 @@ class AdministrationPaymentController extends Controller
             $payment->status_id = 5;
             $payment->save();
 
-            return redirect()->route('payment.index')->with('success', "El Abono del Usuario: {$payment->user->name} ha sido RECHAZADO.");
+            return redirect()->route('admin-payment.index')->with('success', "El Abono del Usuario: {$payment->user->name} ha sido RECHAZADO.");
         }
     }
 
