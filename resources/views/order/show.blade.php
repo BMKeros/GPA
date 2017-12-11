@@ -159,7 +159,7 @@
                                 <a href="{{ route('purchase-requests.index')}}">
                                     <button class="btn btn-primary pull-right" style="margin-right: 5px;"> Volver</button>
                                 </a>
-                                @if($total_payment > 0 || $total_payment == $precio_total)
+                                @if($total_payment == 0 || $total_payment != $precio_total)
                                 <a href="{{route('payment.create', ['solicitud' => $request_id ])}}"><button class="btn btn-success pull-right">Abonar</button></a>
                                 @endif
                         </div>
