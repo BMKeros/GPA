@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\PurchaseRequest;
+use App\Payment;
 use App\Order;
 
 class AdministrationOrdersController extends Controller
@@ -47,10 +48,38 @@ class AdministrationOrdersController extends Controller
      */
     public function show($id)
     {
+        $subtotal_= 0;
+        $porcen= 0;
+        $precio_total=0;
         $orders = Order::where('purchase_request_id','=', $id)->get();
 
-        //return view('admin.order.show',['orders' => $orders]);
-        dd($orders);
+     
+        
+        foreach ($orders as $order) {
+            $subtotal_ += $order->product->price * $order->quantity;
+            if (\Auth::user()->hasRole('SOCIO')) {
+                $porcen += ($order->get_unit_price()) * ($order->product->associated_percentage/100);
+            }else{
+                $porcen += ($order->get_unit_price()) * ($order->product->street_percentage/100);
+                }
+           
+            $precio_total = $subtotal_ + $porcen;
+  
+        };
+        
+        #Obtener abonos de una solicitud
+        $payments = Payment::where([['purchase_request_id', '=', $id], ['status_id', '=', 4]])->get();
+
+        $total_payment = 0;
+        if (isset($payments)) {
+            foreach ($payments as $payment) {
+               $total_payment += $payment->quantity;
+            }
+        }
+
+        
+
+        return view('order.show',['orders'=> $orders,'subtotal_'=>$subtotal_,'porcen'=>$porcen,'precio_total'=>$precio_total, 'payments' => $payments, 'total_payment' => $total_payment, 'request_id' => $id ]);
     }
 
     /**
