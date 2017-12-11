@@ -47,7 +47,7 @@ class AdministrationOrdersController extends Controller
      */
     public function show($id)
     {
-        $orders = Order::where('request_id','=', $id)->get();
+        $orders = Order::where('purchase_request_id','=', $id)->get();
 
         //return view('admin.order.show',['orders' => $orders]);
         dd($orders);
