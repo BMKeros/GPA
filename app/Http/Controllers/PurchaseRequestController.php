@@ -73,7 +73,7 @@ class PurchaseRequestController extends Controller
 
         foreach($cart as $item){
             $order=Order::create([
-                'request_id' =>  $req->id,
+                'purchase_request_id' =>  $req->id,
                 'product_id' =>  $item->product->id,
                 'status_id' =>  3,
                 'quantity' =>  $item->quantity,
