@@ -55,16 +55,16 @@ class OrderController extends Controller
         $subtotal_= 0;
         $porcen= 0;
         $precio_total=0;
-        $orders = Order::where('request_id','=', $id)->get();
+        $orders = Order::where('purchase_request_id','=', $id)->get();
 
      
         
         foreach ($orders as $order) {
             $subtotal_ += $order->product->price * $order->quantity;
             if (\Auth::user()->hasRole('SOCIO')) {
-                $porcen += ($order->getPrecioUnitario()) * ($order->product->associated_percentage/100);
+                $porcen += ($order->get_unit_price()) * ($order->product->associated_percentage/100);
             }else{
-                $porcen += ($order->getPrecioUnitario()) * ($order->product->street_percentage/100);
+                $porcen += ($order->get_unit_price()) * ($order->product->street_percentage/100);
                 }
            
             $precio_total = $subtotal_ + $porcen;
