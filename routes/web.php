@@ -107,13 +107,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:ADMIN']], function () 
 	Route::resource('/inventory', 'AdministrationInventoryController');
 
 	//orders
-	Route::resource('/order', 'AdministrationOrdersController');
+	Route::resource('/admin-order', 'AdministrationOrdersController');
 	
 	//purchase requests
-	Route::resource('/purchase-requests', 'AdministrationPurchaseRequestController');
+	Route::resource('/admin-purchase-requests', 'AdministrationPurchaseRequestController');
 
 	//payment route
-	Route::resource('/payment', 'AdministrationPaymentController');
+	Route::resource('/admin-payment', 'AdministrationPaymentController');
 });
 
 //ERROR ROUTE
