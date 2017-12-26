@@ -87,7 +87,7 @@ class AdministrationPurchaseRequestController extends Controller
 
         $purchase->save();
 
-         return redirect()->route('purchase-requests.index')->with('success', 'El estado de la solicitud ha sido actualizado.');
+         return redirect()->route('admin-purchase-requests.index')->with('success', 'El estado de la solicitud ha sido actualizado.');
     }
 
     /**
